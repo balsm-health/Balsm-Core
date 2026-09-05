@@ -1,30 +1,54 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="10.28 9.17 680.45 653.39" width="680.45" height="653.39" role="img" aria-label="Balsm - five identical figures joined in a symmetric ring">
  <!-- Balsm mark, five-fold symmetric variant.
-      Petal outline is the pre-02add880 kidney (rounded cradle, not gear teeth).
-      Five copies rotate about (350.27, 363.854). viewBox is this file's
-      ink bbox: 10.28,9.17 680.45x653.39.
+      Five copies of one petal rotate about (350.27, 363.854). viewBox is
+      this file's ink bbox: 10.28,9.17 680.45x653.39 — dot-driven (ring
+      spans r 128.4..289.5, well inside), so curve edits never change it.
 
-      Leading/trailing are the same curve (trailing = leading ×72° reversed)
-      so the five tile. The outer cradle is a 72°-periodic radial fairing
-      (6 harmonics of r(θ) about the ring centre, refit as 16 cubics), so the
-      ring silhouette is G2 across every seam — tangent break 0.10° and
-      curvature jump 0.0006, down from 55° / 0.12 which read as a nick at
-      each seam. Fairing lifts the seam point 1.34u outward (r 282.86 →
-      284.21); the leading seam absorbs that with a smoothstep radial decay
-      to zero by r 244, so segments inward of the seam are untouched. Ink
-      bbox is dot-driven and unchanged — do not touch viewBox. #ring-clip is
-      five copies of the tile so remaining tucks stay round at mark size —
-      no matching stroke (a stroke fattens at favicon size).
+      BOTH RING EDGES ARE ONE SMOOTH CLOSED CURVE. The outer silhouette and
+      the inner hole are each a single 72°-periodic G2 curve that runs
+      through all five junctions without a break; the colour seams are
+      chords that meet those edges at an angle. Every junction is therefore
+      a clean T: the ring edge passes straight through (180°) and the seam
+      arrives at -42°/-138° on the inside, -84°/-96° on the outside. Those
+      four are the only corners in the outline. Everywhere else the curve is
+      G2 — max curvature jump at a joint is 3e-5, max tangent break 0.004°.
 
-      NOTE: scripts/brand/build-brand-assets.py reads brand/icon.svg, not
-      this file. Do not sync MARK_INK unless this file replaces icon.svg.
+      Do not hand-edit control points. Regenerate instead: one dragged
+      handle reintroduces the curvature sawtooth this was built to remove
+      (RMS d2k/ds2 went 1.05 -> 0.0015, wiggle count 39 -> 11).
+
+      Construction, in order:
+      1. OUTER EDGE. r(theta) about the ring centre, 6 harmonics, exactly
+         72°-periodic; sampled at 20 arclength-uniform knots per petal and
+         fitted as ONE periodic C2 spline over all 360°. Before this the
+         seam was a 55° notch.
+      2. INNER EDGE. Same recipe, 6 harmonics, 22 cubics per petal. Before
+         this the two arms met at a 100° break with a visible hitch — one
+         side arrived nearly straight, the other fell away. Rounding the
+         corner pulls each star tip in 5.3u (r 206.3 -> 201.0); that is the
+         whole visual change and it is intentional. Tip radius is now 26.6u.
+         Because the edge is r(theta) over exactly 72°, theta is strictly
+         monotone, which makes a spur structurally impossible here — the old
+         edge folded back on itself and left a 0.8u detached filament plus a
+         0.077u uncovered wedge.
+      3. SEAM. The leading seam is retargeted onto the new inner edge with a
+         smoothstep radial decay (full at the tip, zero at the outer end) and
+         refitted as a clamped C2 spline.
+      4. TRAILING = rot(reverse(leading), 72), generated, never hand-edited.
+         That plus 4-decimal coordinates keeps the shared seam crack under
+         1e-3u; at 2 decimals it was 8e-3u and rendered as a hairline
+         between neighbouring figures.
 
       Paint stays userSpaceOnUse at the unrotated top head (351.03, 68.41)
-      / r 430 and the top dot ramp (327.3,9.2 → 374.7,127.7). The rotate
+      / r 430 and the top dot ramp (327.3,9.2 -> 374.7,127.7). The rotate
       lives on a parent <g>, not on <use>. Do not add gradientTransform
       rotate(...) here. Do not switch to objectBoundingBox.
 
-      Everything else in brand/ is generated - see scripts/brand/build-brand-assets.py. -->
+      #ring-clip is five copies of the tile — no matching stroke (a stroke
+      fattens at favicon size).
+
+      NOTE: scripts/brand/build-brand-assets.py reads brand/icon.svg.
+      Everything else in brand/ is generated from it. -->
 <defs>
 <radialGradient id="f-emerald" gradientUnits="userSpaceOnUse" cx="351.03" cy="68.41" r="430">
 <stop offset="0.12" stop-color="#5FD470" />
@@ -71,7 +95,7 @@
 <stop offset="0" stop-color="#976CE3" />
 <stop offset="1" stop-color="#8350DE" />
 </linearGradient>
-<path id="ring-petal-shape-smooth" d="M154.62,157.72 C155.51,158.11 155.58,158.08 158.67,156.7 C177.27,148.39 188.69,147.85 206.09,153.04 C211.93,154.79 213.06,155.3 218.26,158.56 C232.66,167.59 245.03,178.17 248.51,184.44 C249.16,185.62 250.66,186.07 251.69,186.94 C252.53,187.65 252.9,189.72 254.12,190.38 C255.34,191.06 256.9,191.31 259.04,192.12 C261.18,192.93 264.19,193.99 266.94,195.23 C269.7,196.47 271.5,197.09 275.57,199.55 C279.64,202 285.45,206.07 291.34,209.95 C297.23,213.83 305.99,219.84 310.91,222.85 C315.83,225.85 317.25,226.39 320.88,227.98 C324.51,229.57 328.68,231.19 332.69,232.37 C336.69,233.55 340.71,234.46 344.9,235.05 C349.1,235.64 353.68,235.89 357.86,235.91 C362.05,235.92 366.79,235.46 370.04,235.12 C373.29,234.78 374.93,234.38 377.36,233.87 C379.8,233.35 381.94,232.89 384.66,232.05 C387.39,231.22 389.76,230.5 393.72,228.85 C397.68,227.19 402.34,225.13 408.43,222.13 C414.51,219.13 424.44,213.76 430.24,210.84 C436.03,207.93 439.56,206.22 443.21,204.64 C446.87,203.06 449.62,202.16 452.15,201.36 C454.69,200.56 456.81,200.13 458.44,199.82 C460.07,199.52 460.37,199.5 461.92,199.51 C463.46,199.51 465.85,199.54 467.72,199.84 C469.59,200.14 471.68,200.77 473.12,201.32 C474.57,201.86 475.35,202.4 476.41,203.11 C477.47,203.81 478.42,204.49 479.48,205.56 C480.54,206.63 481.87,208.26 482.76,209.51 C483.65,210.76 484.2,211.65 484.84,213.08 C485.47,214.5 485.99,217.32 486.56,218.07 C487.11,218.79 487.85,218.45 488.21,217.9 C488.63,217.39 487.69,216.52 488.06,215.43 C488.49,214.15 488.54,212.62 489.46,211.63 C494.35,206.39 500.58,191.35 504.72,174.87 C506.21,168.91 506.36,167.68 506.21,161.59 C505.77,143.43 501.73,132.74 488.08,117.62 C485.81,115.1 485.76,115.05 485.86,114.08 C478.33,112.34 470.57,111.38 462.76,111.14 C454.94,110.89 447.04,111.39 439.14,112.81 C431.24,114.23 423.36,116.61 415.68,119.66 C408.01,122.7 400.61,126.35 393.66,129.62 C386.69,132.89 380.22,135.68 374.05,137.43 C367.87,139.19 361.98,139.97 356.11,140.1 C350.25,140.23 344.41,139.78 338.44,138.52 C332.45,137.26 326.33,135.06 319.69,131.76 C313.09,128.48 305.98,124.15 298.44,120.13 C290.89,116.1 283.04,112.58 275.14,110.31 C267.24,108.03 259.34,106.91 251.51,106.65 C243.69,106.39 235.92,106.96 228.37,108.34 C220.8,109.71 213.49,111.93 206.47,114.84 C199.46,117.75 192.73,121.31 186.35,125.4 C179.98,129.5 173.97,134.18 168.62,139.58 C163.26,144.98 158.59,151.09 154.62,157.72 Z" />
+<path id="ring-petal-shape-smooth" d="M154.6172,157.717 C155.5667,158.1604 156.6127,157.7209 157.6138,157.276 C159.7085,156.3452 161.6066,155.3907 163.6134,154.5997 C166.3551,153.5192 169.2996,152.7438 172.2393,152.0846 C174.6324,151.548 177.0223,151.0884 179.442,150.8374 C181.8445,150.5882 184.2764,150.5447 186.698,150.6628 C189.1863,150.7841 191.6637,151.0759 194.105,151.5405 C196.8108,152.0555 199.4723,152.7827 202.1276,153.5447 C205.1153,154.4019 208.0951,155.3031 210.9474,156.5138 C213.0017,157.3859 214.9899,158.4184 216.9082,159.5622 C219.8945,161.3427 222.7118,163.3926 225.5307,165.4403 C228.4542,167.5638 231.3795,169.6849 234.1701,171.9583 C236.7768,174.0818 239.2658,176.3383 241.8307,178.5534 C243.9956,180.423 246.2145,182.2631 247.9196,184.5244 C249.0284,185.995 249.92,187.6436 251.1244,189.0476 C255.0853,189.5056 258.8433,190.844 262.4648,192.4573 C266.0864,194.0706 269.5713,195.9589 272.9762,197.9808 C276.381,200.0028 279.7056,202.1584 283.0091,204.3437 C286.3127,206.5289 289.5951,208.7439 292.8984,210.9296 C296.2017,213.1153 299.5258,215.2717 302.8765,217.3796 C306.2273,219.4875 309.6046,221.5469 313.0309,223.5479 C316.4572,225.5489 319.9325,227.4916 323.5829,228.9931 C327.2332,230.4946 331.0587,231.5551 334.9069,232.5322 C338.7552,233.5094 342.6262,234.4033 346.5433,234.9272 C350.4604,235.4512 354.4235,235.6051 358.3824,235.53 C362.3413,235.4549 366.296,235.1507 370.2341,234.6908 C374.1723,234.2309 378.0938,233.6153 381.9036,232.5752 C385.7134,231.535 389.4114,230.0702 393.0971,228.6016 C396.7829,227.1331 400.4564,225.6609 404.0663,224.0385 C407.6761,222.4161 411.2223,220.6434 414.725,218.7932 C418.2277,216.943 421.6868,215.0151 425.168,213.1263 C428.6492,211.2375 432.1524,209.3876 435.7256,207.6785 C439.2987,205.9693 442.9417,204.4008 446.6854,203.1061 C450.4291,201.8114 454.2734,200.7905 458.1881,200.1991 C462.1027,199.6076 466.0878,199.4455 470.0212,200.1465 C473.9546,200.8474 477.8362,202.4114 480.6213,205.1081 C483.4063,207.8048 485.0947,211.6342 485.8831,215.5428 C486.8462,213.9635 488.1386,212.6061 489.1946,211.0971 C490.8183,208.7766 491.8827,206.0977 492.9918,203.4611 C494.3059,200.3372 495.6827,197.2727 496.8969,194.1374 C498.1966,190.7809 499.3099,187.3433 500.4261,183.9067 C501.5024,180.5929 502.5815,177.2801 503.352,173.8898 C503.847,171.7119 504.2147,169.502 504.4092,167.2787 C504.6792,164.1919 504.6155,161.0794 504.5076,157.9731 C504.4117,155.2122 504.2809,152.4563 503.9345,149.7238 C503.622,147.2584 503.1339,144.8121 502.4804,142.408 C501.8443,140.0685 501.0515,137.7691 500.0721,135.5612 C499.0857,133.3375 497.91,131.2066 496.6601,129.0964 C495.1248,126.5043 493.4775,123.9435 491.6026,121.6699 C490.2302,120.0057 488.7359,118.4955 487.2033,116.7909 C486.4708,115.9763 485.7296,115.1174 485.8579,114.0773 C479.9965,112.721 474.0277,111.8561 468.0273,111.4133 C462.0269,110.9706 455.995,110.95 449.9987,111.42 C444.0025,111.8901 438.042,112.8507 432.2046,114.2963 C426.3672,115.7419 420.6529,117.6724 415.0692,119.9087 C409.4854,122.1451 404.0323,124.6874 398.5995,127.2769 C393.1666,129.8663 387.7541,132.503 382.1404,134.6666 C376.5267,136.8302 370.7119,138.5207 364.7716,139.406 C358.8312,140.2913 352.7655,140.3712 346.7701,139.7739 C340.7746,139.1765 334.8495,137.9019 329.2016,135.8767 C323.5538,133.8514 318.1831,131.0755 312.9053,128.1692 C307.6275,125.263 302.4426,122.2263 297.1144,119.4358 C291.7862,116.6452 286.3147,114.1008 280.6478,112.0904 C274.981,110.08 269.1187,108.6035 263.173,107.7015 C257.2272,106.7995 251.1981,106.4719 245.1822,106.6222 C239.1663,106.7724 233.1637,107.4006 227.26,108.5462 C221.3564,109.6918 215.5518,111.355 209.9227,113.4734 C204.2936,115.5918 198.8402,118.1654 193.5769,121.0824 C188.3136,123.9993 183.2405,127.2595 178.4742,130.9295 C173.7079,134.5995 169.2484,138.6792 165.251,143.1697 C161.2536,147.6602 157.7183,152.5616 154.6172,157.717 Z" />
 <circle id="dot-petal-shape" cx="351.03" cy="68.41" r="59.24" />
 <clipPath id="ring-clip">
 <use href="#ring-petal-shape-smooth" />
