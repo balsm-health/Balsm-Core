@@ -39,10 +39,41 @@
          1e-3u; at 2 decimals it was 8e-3u and rendered as a hairline
          between neighbouring figures.
 
-      Paint stays userSpaceOnUse at the unrotated top head (351.03, 68.41)
-      / r 430 and the top dot ramp (327.3,9.2 -> 374.7,127.7). The rotate
-      lives on a parent <g>, not on <use>. Do not add gradientTransform
-      rotate(...) here. Do not switch to objectBoundingBox.
+      PAINT — ribbon shading, five figures kept distinct. Measured off
+      the reference (Balsm-Draft/assets/assets/circle/4.png): there each
+      figure is ONE hue held at S 0.86-1.00, ramping in LIGHTNESS along the
+      ring (teal runs L 0.28 -> 0.38) with only a small hue drift toward its
+      neighbour. It is not a hue sweep across the body — an earlier attempt
+      did that, matched colour exactly at the seams, and dissolved the five
+      figures into a rainbow smear. Don't go back to it.
+
+      Each figure: lighter at its leading end, base hue at 45%, deeper at
+      its trailing end, hue drifted 6% toward the next figure. Deltas are
+      L +0.06 / -0.11 in HLS with saturation held, so the deep end stays
+      vivid instead of going muddy. Colours stay the five brand petals in
+      their original positions — top teal #00C8D2, right blue #0083FA,
+      lower-right mint #00D69E, lower-left violet #8350DE, left emerald
+      #5FD470. The seams are meant to show: the colour step is what keeps
+      the five figures legible, exactly as in the reference.
+
+      Gradient axis (149.915,-37.392) -> (433.114,-108.028) is the
+      least-squares "constant along the leading seam, constant along the
+      trailing seam" direction, so the ramp runs along the ring rather than
+      across it.
+
+      Each petal is filled TWICE: two abutting antialiased fills leave a
+      dark hairline down the shared seam (coverage 0.75, not 1.0) wherever
+      neighbouring colours are close. Cheaper than a stroke, changes no
+      geometry.
+
+      Every mark paint is fill="url(...)" with no solid fills, which is what
+      lets build-brand-assets.py swap the whole mark to mono with one regex.
+      Keep it that way.
+
+      Gradients stay userSpaceOnUse in the unrotated frame; the rotate lives
+      on a parent <g>, not on <use>, so each petal's paint rotates with it.
+      Do not add gradientTransform rotate(...) here. Do not switch to
+      objectBoundingBox.
 
       #ring-clip is five copies of the tile — no matching stroke (a stroke
       fattens at favicon size).
@@ -50,92 +81,97 @@
       NOTE: scripts/brand/build-brand-assets.py reads brand/icon.svg.
       Everything else in brand/ is generated from it. -->
 <defs>
-<radialGradient id="f-emerald" gradientUnits="userSpaceOnUse" cx="351.03" cy="68.41" r="430">
-<stop offset="0.12" stop-color="#5FD470" />
-<stop offset="0.55" stop-color="#8FE19B" />
-<stop offset="1" stop-color="#DCF6E0" />
-</radialGradient>
-<radialGradient id="f-teal" gradientUnits="userSpaceOnUse" cx="351.03" cy="68.41" r="430">
-<stop offset="0.12" stop-color="#00C8D2" />
-<stop offset="0.55" stop-color="#4CD8E0" />
-<stop offset="1" stop-color="#C7F3F5" />
-</radialGradient>
-<radialGradient id="f-blue" gradientUnits="userSpaceOnUse" cx="351.03" cy="68.41" r="430">
-<stop offset="0.12" stop-color="#0083FA" />
-<stop offset="0.55" stop-color="#4CA8FC" />
-<stop offset="1" stop-color="#C7E4FE" />
-</radialGradient>
-<radialGradient id="f-mint" gradientUnits="userSpaceOnUse" cx="351.03" cy="68.41" r="430">
-<stop offset="0.12" stop-color="#00D69E" />
-<stop offset="0.55" stop-color="#4CE2BB" />
-<stop offset="1" stop-color="#C7F6EA" />
-</radialGradient>
-<radialGradient id="f-violet" gradientUnits="userSpaceOnUse" cx="351.03" cy="68.41" r="430">
-<stop offset="0.12" stop-color="#8350DE" />
-<stop offset="0.55" stop-color="#A884E8" />
-<stop offset="1" stop-color="#E4D8F8" />
-</radialGradient>
-<linearGradient id="f-dot-emerald" gradientUnits="userSpaceOnUse" x1="327.3" y1="9.2" x2="374.7" y2="127.7">
-<stop offset="0" stop-color="#79DB87" />
-<stop offset="1" stop-color="#5FD470" />
+<linearGradient id="f-r1" gradientUnits="userSpaceOnUse" x1="149.915" y1="-37.392" x2="433.114" y2="-108.028">
+  <stop offset="0" stop-color="#00E5F1" />
+  <stop offset="0.45" stop-color="#00C8D2" />
+  <stop offset="1" stop-color="#008F9A" />
 </linearGradient>
-<linearGradient id="f-dot-teal" gradientUnits="userSpaceOnUse" x1="327.3" y1="9.2" x2="374.7" y2="127.7">
-<stop offset="0" stop-color="#29D1D9" />
-<stop offset="1" stop-color="#00C8D2" />
+<linearGradient id="f-r2" gradientUnits="userSpaceOnUse" x1="149.915" y1="-37.392" x2="433.114" y2="-108.028">
+  <stop offset="0" stop-color="#1A92FF" />
+  <stop offset="0.45" stop-color="#0083FA" />
+  <stop offset="1" stop-color="#006EC2" />
 </linearGradient>
-<linearGradient id="f-dot-blue" gradientUnits="userSpaceOnUse" x1="327.3" y1="9.2" x2="374.7" y2="127.7">
-<stop offset="0" stop-color="#2997FB" />
-<stop offset="1" stop-color="#0083FA" />
+<linearGradient id="f-r3" gradientUnits="userSpaceOnUse" x1="149.915" y1="-37.392" x2="433.114" y2="-108.028">
+  <stop offset="0" stop-color="#00F5B5" />
+  <stop offset="0.45" stop-color="#00D69E" />
+  <stop offset="1" stop-color="#0D917C" />
 </linearGradient>
-<linearGradient id="f-dot-mint" gradientUnits="userSpaceOnUse" x1="327.3" y1="9.2" x2="374.7" y2="127.7">
-<stop offset="0" stop-color="#29DDAE" />
-<stop offset="1" stop-color="#00D69E" />
+<linearGradient id="f-r4" gradientUnits="userSpaceOnUse" x1="149.915" y1="-37.392" x2="433.114" y2="-108.028">
+  <stop offset="0" stop-color="#956AE3" />
+  <stop offset="0.45" stop-color="#8350DE" />
+  <stop offset="1" stop-color="#512EC8" />
 </linearGradient>
-<linearGradient id="f-dot-violet" gradientUnits="userSpaceOnUse" x1="327.3" y1="9.2" x2="374.7" y2="127.7">
-<stop offset="0" stop-color="#976CE3" />
-<stop offset="1" stop-color="#8350DE" />
+<linearGradient id="f-r5" gradientUnits="userSpaceOnUse" x1="149.915" y1="-37.392" x2="433.114" y2="-108.028">
+  <stop offset="0" stop-color="#77DA86" />
+  <stop offset="0.45" stop-color="#5FD470" />
+  <stop offset="1" stop-color="#1BE042" />
+</linearGradient>
+<linearGradient id="f-d1" gradientUnits="userSpaceOnUse" x1="327.3" y1="9.2" x2="374.7" y2="127.7">
+  <stop offset="0" stop-color="#00D7E4" />
+  <stop offset="1" stop-color="#00A9B3" />
+</linearGradient>
+<linearGradient id="f-d2" gradientUnits="userSpaceOnUse" x1="327.3" y1="9.2" x2="374.7" y2="127.7">
+  <stop offset="0" stop-color="#0D8DFF" />
+  <stop offset="1" stop-color="#0075DB" />
+</linearGradient>
+<linearGradient id="f-d3" gradientUnits="userSpaceOnUse" x1="327.3" y1="9.2" x2="374.7" y2="127.7">
+  <stop offset="0" stop-color="#05E3AE" />
+  <stop offset="1" stop-color="#04B48A" />
+</linearGradient>
+<linearGradient id="f-d4" gradientUnits="userSpaceOnUse" x1="327.3" y1="9.2" x2="374.7" y2="127.7">
+  <stop offset="0" stop-color="#8A60DF" />
+  <stop offset="1" stop-color="#6C37D7" />
+</linearGradient>
+<linearGradient id="f-d5" gradientUnits="userSpaceOnUse" x1="327.3" y1="9.2" x2="374.7" y2="127.7">
+  <stop offset="0" stop-color="#68DD7B" />
+  <stop offset="1" stop-color="#40D458" />
 </linearGradient>
 <path id="ring-petal-shape-smooth" d="M154.6172,157.717 C155.5667,158.1604 156.6127,157.7209 157.6138,157.276 C159.7085,156.3452 161.6066,155.3907 163.6134,154.5997 C166.3551,153.5192 169.2996,152.7438 172.2393,152.0846 C174.6324,151.548 177.0223,151.0884 179.442,150.8374 C181.8445,150.5882 184.2764,150.5447 186.698,150.6628 C189.1863,150.7841 191.6637,151.0759 194.105,151.5405 C196.8108,152.0555 199.4723,152.7827 202.1276,153.5447 C205.1153,154.4019 208.0951,155.3031 210.9474,156.5138 C213.0017,157.3859 214.9899,158.4184 216.9082,159.5622 C219.8945,161.3427 222.7118,163.3926 225.5307,165.4403 C228.4542,167.5638 231.3795,169.6849 234.1701,171.9583 C236.7768,174.0818 239.2658,176.3383 241.8307,178.5534 C243.9956,180.423 246.2145,182.2631 247.9196,184.5244 C249.0284,185.995 249.92,187.6436 251.1244,189.0476 C255.0853,189.5056 258.8433,190.844 262.4648,192.4573 C266.0864,194.0706 269.5713,195.9589 272.9762,197.9808 C276.381,200.0028 279.7056,202.1584 283.0091,204.3437 C286.3127,206.5289 289.5951,208.7439 292.8984,210.9296 C296.2017,213.1153 299.5258,215.2717 302.8765,217.3796 C306.2273,219.4875 309.6046,221.5469 313.0309,223.5479 C316.4572,225.5489 319.9325,227.4916 323.5829,228.9931 C327.2332,230.4946 331.0587,231.5551 334.9069,232.5322 C338.7552,233.5094 342.6262,234.4033 346.5433,234.9272 C350.4604,235.4512 354.4235,235.6051 358.3824,235.53 C362.3413,235.4549 366.296,235.1507 370.2341,234.6908 C374.1723,234.2309 378.0938,233.6153 381.9036,232.5752 C385.7134,231.535 389.4114,230.0702 393.0971,228.6016 C396.7829,227.1331 400.4564,225.6609 404.0663,224.0385 C407.6761,222.4161 411.2223,220.6434 414.725,218.7932 C418.2277,216.943 421.6868,215.0151 425.168,213.1263 C428.6492,211.2375 432.1524,209.3876 435.7256,207.6785 C439.2987,205.9693 442.9417,204.4008 446.6854,203.1061 C450.4291,201.8114 454.2734,200.7905 458.1881,200.1991 C462.1027,199.6076 466.0878,199.4455 470.0212,200.1465 C473.9546,200.8474 477.8362,202.4114 480.6213,205.1081 C483.4063,207.8048 485.0947,211.6342 485.8831,215.5428 C486.8462,213.9635 488.1386,212.6061 489.1946,211.0971 C490.8183,208.7766 491.8827,206.0977 492.9918,203.4611 C494.3059,200.3372 495.6827,197.2727 496.8969,194.1374 C498.1966,190.7809 499.3099,187.3433 500.4261,183.9067 C501.5024,180.5929 502.5815,177.2801 503.352,173.8898 C503.847,171.7119 504.2147,169.502 504.4092,167.2787 C504.6792,164.1919 504.6155,161.0794 504.5076,157.9731 C504.4117,155.2122 504.2809,152.4563 503.9345,149.7238 C503.622,147.2584 503.1339,144.8121 502.4804,142.408 C501.8443,140.0685 501.0515,137.7691 500.0721,135.5612 C499.0857,133.3375 497.91,131.2066 496.6601,129.0964 C495.1248,126.5043 493.4775,123.9435 491.6026,121.6699 C490.2302,120.0057 488.7359,118.4955 487.2033,116.7909 C486.4708,115.9763 485.7296,115.1174 485.8579,114.0773 C479.9965,112.721 474.0277,111.8561 468.0273,111.4133 C462.0269,110.9706 455.995,110.95 449.9987,111.42 C444.0025,111.8901 438.042,112.8507 432.2046,114.2963 C426.3672,115.7419 420.6529,117.6724 415.0692,119.9087 C409.4854,122.1451 404.0323,124.6874 398.5995,127.2769 C393.1666,129.8663 387.7541,132.503 382.1404,134.6666 C376.5267,136.8302 370.7119,138.5207 364.7716,139.406 C358.8312,140.2913 352.7655,140.3712 346.7701,139.7739 C340.7746,139.1765 334.8495,137.9019 329.2016,135.8767 C323.5538,133.8514 318.1831,131.0755 312.9053,128.1692 C307.6275,125.263 302.4426,122.2263 297.1144,119.4358 C291.7862,116.6452 286.3147,114.1008 280.6478,112.0904 C274.981,110.08 269.1187,108.6035 263.173,107.7015 C257.2272,106.7995 251.1981,106.4719 245.1822,106.6222 C239.1663,106.7724 233.1637,107.4006 227.26,108.5462 C221.3564,109.6918 215.5518,111.355 209.9227,113.4734 C204.2936,115.5918 198.8402,118.1654 193.5769,121.0824 C188.3136,123.9993 183.2405,127.2595 178.4742,130.9295 C173.7079,134.5995 169.2484,138.6792 165.251,143.1697 C161.2536,147.6602 157.7183,152.5616 154.6172,157.717 Z" />
 <circle id="dot-petal-shape" cx="351.03" cy="68.41" r="59.24" />
 <clipPath id="ring-clip">
-<use href="#ring-petal-shape-smooth" />
-<use href="#ring-petal-shape-smooth" transform="rotate(72 350.27 363.854)" />
-<use href="#ring-petal-shape-smooth" transform="rotate(144 350.27 363.854)" />
-<use href="#ring-petal-shape-smooth" transform="rotate(216 350.27 363.854)" />
-<use href="#ring-petal-shape-smooth" transform="rotate(288 350.27 363.854)" />
+  <use href="#ring-petal-shape-smooth" />
+  <use href="#ring-petal-shape-smooth" transform="rotate(72 350.27 363.854)" />
+  <use href="#ring-petal-shape-smooth" transform="rotate(144 350.27 363.854)" />
+  <use href="#ring-petal-shape-smooth" transform="rotate(216 350.27 363.854)" />
+  <use href="#ring-petal-shape-smooth" transform="rotate(288 350.27 363.854)" />
 </clipPath>
 </defs>
 <g id="ring" clip-path="url(#ring-clip)">
-<g id="ring-top" fill="url(#f-teal)">
+<g id="ring-top" fill="url(#f-r1)">
+<use href="#ring-petal-shape-smooth" />
 <use href="#ring-petal-shape-smooth" />
 </g>
-<g id="ring-right" fill="url(#f-blue)" transform="rotate(72 350.27 363.854)">
+<g id="ring-right" fill="url(#f-r2)" transform="rotate(72 350.27 363.854)">
+<use href="#ring-petal-shape-smooth" />
 <use href="#ring-petal-shape-smooth" />
 </g>
-<g id="ring-lower-right" fill="url(#f-mint)" transform="rotate(144 350.27 363.854)">
+<g id="ring-lower-right" fill="url(#f-r3)" transform="rotate(144 350.27 363.854)">
+<use href="#ring-petal-shape-smooth" />
 <use href="#ring-petal-shape-smooth" />
 </g>
-<g id="ring-lower-left" fill="url(#f-violet)" transform="rotate(216 350.27 363.854)">
+<g id="ring-lower-left" fill="url(#f-r4)" transform="rotate(216 350.27 363.854)">
+<use href="#ring-petal-shape-smooth" />
 <use href="#ring-petal-shape-smooth" />
 </g>
-<g id="ring-left" fill="url(#f-emerald)" transform="rotate(288 350.27 363.854)">
+<g id="ring-left" fill="url(#f-r5)" transform="rotate(288 350.27 363.854)">
+<use href="#ring-petal-shape-smooth" />
 <use href="#ring-petal-shape-smooth" />
 </g>
 </g>
 <g id="dots">
-<g id="dot-top" fill="url(#f-dot-teal)">
+<g id="dot-top" fill="url(#f-d1)">
 <use href="#dot-petal-shape" />
 </g>
-<g id="dot-right" fill="url(#f-dot-blue)" transform="rotate(72 350.27 363.854)">
+<g id="dot-right" fill="url(#f-d2)" transform="rotate(72 350.27 363.854)">
 <use href="#dot-petal-shape" />
 </g>
-<g id="dot-lower-right" fill="url(#f-dot-mint)" transform="rotate(144 350.27 363.854)">
+<g id="dot-lower-right" fill="url(#f-d3)" transform="rotate(144 350.27 363.854)">
 <use href="#dot-petal-shape" />
 </g>
-<g id="dot-lower-left" fill="url(#f-dot-violet)" transform="rotate(216 350.27 363.854)">
+<g id="dot-lower-left" fill="url(#f-d4)" transform="rotate(216 350.27 363.854)">
 <use href="#dot-petal-shape" />
 </g>
-<g id="dot-left" fill="url(#f-dot-emerald)" transform="rotate(288 350.27 363.854)">
+<g id="dot-left" fill="url(#f-d5)" transform="rotate(288 350.27 363.854)">
 <use href="#dot-petal-shape" />
 </g>
 </g>
