@@ -191,6 +191,26 @@
 - offline cache must be automatically cleared when a user logs out or when a session is revoked remotely, to prevent unauthorized access to stale data on shared or lost devices
 - sync status must be visible to the user — pending uploads, last successful sync time, and any failed sync items must be clearly displayed
 
+**Patient app — implementation status (2026-09-13).** The patient app satisfies
+the read half of this section and explicitly does not yet satisfy the write
+half:
+
+- *Met.* PHI (profile, medications, records, prescriptions, check-ins) has
+  always been on-device in an encrypted database. Server-owned read models —
+  the account summary, the geofence deny list and the care directory — are now
+  retained too, in a `cache_entry` table inside the same encrypted database.
+  Connectivity is surfaced to the user by an app-wide offline banner. The cache
+  is cleared on sign-in, sign-out and session expiry.
+- *Deliberately not met.* Offline changes are **not** queued and there is **no**
+  conflict-resolution UI. Writes fail fast with an explicit "you're offline"
+  message. Queuing was scoped out: it needs server-side idempotency keys and
+  per-endpoint merge rules that do not exist yet, and a partial queue is worse
+  than none because users cannot tell which writes survived.
+- *Not yet applicable.* Configurable cache size, sync-status display and
+  offline prescription QR presentation await the features that produce them.
+
+Design: `balsm_app/docs/superpowers/specs/2026-09-13-offline-resilient-reads-design.md`.
+
 ---
 
 ## 6. Maintainability & Code Quality
