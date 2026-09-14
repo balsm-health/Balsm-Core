@@ -41,7 +41,7 @@ Balsm is a healthcare platform consisting of multiple repositories:
 - do not leave dead code, commented-out code, or TODO comments without a linked issue
 - do not mix formatting changes with functional changes in the same commit
 - always check for typos in code, variable names, strings, comments, and documentation before submitting — typos in identifiers cause bugs, typos in user-facing text damage credibility
-- when a user request adds, modifies, or removes a business requirement, feature, or behavioral rule — update all affected documentation before or alongside the code implementation; this includes [`BUSINESS_FEATURES.md`](../../BUSINESS_FEATURES.md) for feature specs, [`PHASED_DELIVERY_STEPS.md`](../../PHASED_DELIVERY_STEPS.md) for delivery tasks, [`GLOSSARY.md`](../../GLOSSARY.md) for new or changed domain terms, [`NON_FUNCTIONAL_REQUIREMENTS.md`](../../NON_FUNCTIONAL_REQUIREMENTS.md) for validation and performance rules, [`CERTIFICATIONS.md`](../../CERTIFICATIONS.md) for standards and certification compliance, agent rules ([`AGENTS.md`](./AGENTS.md), [`CODING_STANDARDS.md`](./CODING_STANDARDS.md)) for AI behavior or coding convention changes, Claude skills (`.claude/commands/`) for new or modified slash commands, and any other relevant spec document; code changes without corresponding documentation updates are incomplete
+- when a user request adds, modifies, or removes a business requirement, feature, or behavioral rule — update all affected documentation before or alongside the code implementation; this includes [`BUSINESS_FEATURES.md`](../../../Balsm-Draft/main/BUSINESS_FEATURES.md) (Balsm-Draft repo) for feature specs, [`PHASED_DELIVERY_STEPS.md`](../../PHASED_DELIVERY_STEPS.md) for delivery tasks, [`GLOSSARY.md`](../../GLOSSARY.md) for new or changed domain terms, [`NON_FUNCTIONAL_REQUIREMENTS.md`](../../NON_FUNCTIONAL_REQUIREMENTS.md) for validation and performance rules, [`CERTIFICATIONS.md`](../../CERTIFICATIONS.md) for standards and certification compliance, agent rules ([`AGENTS.md`](./AGENTS.md), [`CODING_STANDARDS.md`](./CODING_STANDARDS.md)) for AI behavior or coding convention changes, Claude skills (`.claude/commands/`) for new or modified slash commands, and any other relevant spec document; code changes without corresponding documentation updates are incomplete
 
 ---
 
@@ -239,7 +239,7 @@ Read [`CODING_STANDARDS.md`](./CODING_STANDARDS.md) for detailed technical patte
 - [`AI_GOVERNANCE.md`](../../AI_GOVERNANCE.md) — AI governance, data privacy, and clinical AI policies
 - [`SYSTEM_THREAT_MODEL.md`](../../SYSTEM_THREAT_MODEL.md) — platform-wide STRIDE + AI/ML threat catalog and mitigations; phase specs reference threat IDs from this document
 - [`CERTIFICATIONS.md`](../../CERTIFICATIONS.md) — target certifications (DPG, FHIR, SNOMED, LOINC, ICD-10, RxNorm, PDPL) and **mandatory code-level compliance rules** for all generated code
-- [`BUSINESS_FEATURES.md`](../../BUSINESS_FEATURES.md) — full feature specifications
+- [`BUSINESS_FEATURES.md`](../../../Balsm-Draft/main/BUSINESS_FEATURES.md) (Balsm-Draft repo) — full feature specifications
 - [`PHASED_DELIVERY_STEPS.md`](../../PHASED_DELIVERY_STEPS.md) — delivery phases and milestones
 - [`GLOSSARY.md`](../../GLOSSARY.md) — domain terminology definitions
 - [`NON_FUNCTIONAL_REQUIREMENTS.md`](../../NON_FUNCTIONAL_REQUIREMENTS.md) — performance, scalability, compliance requirements
