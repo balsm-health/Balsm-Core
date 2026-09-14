@@ -1,6 +1,6 @@
 # Contract: Emergency QR Token (P001)
 
-**Version**: 1.0 · **Date**: 2026-07-17 · **FRs**: FR-013, FR-014, FR-015, FR-034
+**Version**: 1.1 · **Date**: 2026-09-14 (permanent tokens added; v1.0 2026-07-17) · **FRs**: FR-013, FR-014, FR-015, FR-034
 **Owner context**: Personal Health (module `emergency_card`) · **Endpoints**: see `dotnet-api-endpoints.md` §Emergency QR Module.
 
 Documents the **implemented** P001 token model. Referenced by `tasks/flutter.md` T133a and the emergency-QR mint/resolve tasks.
@@ -12,8 +12,10 @@ Documents the **implemented** P001 token model. Referenced by `tasks/flutter.md`
 
 ## Lifetime
 
-- TTL is one of `{3600, 21600, 86400, 604800}` seconds (1h / 6h / 24h / 7d); any other value → `422 InvalidTtl`.
-- Resolve returns `410` when the token is revoked OR expired; `404` when the `jti` is unknown. Revocation is immediate (explicit revoke, new mint, or account-deletion intake per FR-034).
+- TTL is one of `{0, 3600, 21600, 86400, 604800}` seconds (permanent / 1h / 6h / 24h / 7d); any other value → `422 InvalidTtl`.
+- **`ttl_seconds = 0` mints a permanent token** (v1.1): `expires_at` is `null` and the token resolves until revoked. At most one active token per user still holds — minting a permanent token revokes a temporary one and vice versa.
+- A permanent token's ciphertext can be replaced in place via `PUT /emergency-qr/{jti}/ciphertext` (owner-only, active-only), so the QR URL — and therefore a printed QR — never changes while a scan always decrypts to the current profile. The client re-encrypts with the SAME device-held key; the server still only ever sees ciphertext. The client stores `{jti, key, profile_etag}` in the platform keystore and refreshes when the on-device snapshot's etag drifts (app start + share-sheet open).
+- Resolve returns `410` when the token is revoked OR expired; `404` when the `jti` is unknown. Revocation is immediate (explicit revoke, new mint, or account-deletion intake per FR-034). `expires_at` in all responses is nullable — `null` means permanent.
 
 ## Confidentiality (key never reaches the server)
 

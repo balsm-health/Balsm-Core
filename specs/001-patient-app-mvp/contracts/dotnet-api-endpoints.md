@@ -130,17 +130,25 @@ Response: { "data": { "preferred_language": "ar-SA" } }
 ## Emergency QR Module
 
 ### `POST /emergency-qr/mint`
-Mint a new QR token. Revokes prior active token. Age-gated (FR-301b). `jti` is a 128-bit CSPRNG value (UUIDv4 — NOT a timestamp-prefixed UUIDv7). `ciphertext` is capped at 16 KB (reject larger → 422) to prevent storage abuse.
+Mint a new QR token. Revokes prior active token. Age-gated (FR-301b). `jti` is a 128-bit CSPRNG value (UUIDv4 — NOT a timestamp-prefixed UUIDv7). `ciphertext` is capped at 16 KB (reject larger → 422) to prevent storage abuse. `ttl_seconds: 0` mints a **permanent** token — `expires_at` comes back `null` and the token resolves until revoked.
 ```json
-Request:  { "ciphertext": "<base64, ≤16KB>", "profile_etag": "<hex8>", "ttl_seconds": 86400 }
-Response: { "data": { "jti": "<uuid>", "token_url": "{BASE_URL}/emergency/<jti>", "expires_at": "..." } }
+Request:  { "ciphertext": "<base64, ≤16KB>", "profile_etag": "<hex8>", "preferred_language": "en", "ttl_seconds": 86400 }
+Response: { "data": { "token_id": "<uuid>", "expires_at": "...|null" } }
 Errors:   403 AgeGateBlocked, 422 InvalidTtl, 422 CiphertextTooLarge
 ```
 
-### `GET /emergency-qr/active`
-Get current user's active QR token summary.
+### `PUT /emergency-qr/{jti}/ciphertext`
+Replace an active token's encrypted snapshot in place (permanent-QR data refresh — the QR URL never changes while scans decrypt to current data). Owner-scoped; the client re-encrypts with the same device-held key, so the server still sees ciphertext only.
 ```json
-Response: { "data": { "jti": "...", "expires_at": "...", "ttl_seconds": 86400 } | null }
+Request:  { "ciphertext": "<base64, ≤16KB>", "profile_etag": "<hex8>", "preferred_language": "en" }
+Response: { "data": { "updated": true } }
+Errors:   404 NotFound (unknown/not-owned jti), 409 TokenInactive (revoked or expired)
+```
+
+### `GET /emergency-qr/active`
+Get current user's active QR token summary. `expires_at` is `null` for a permanent token (`ttl_seconds: 0`).
+```json
+Response: { "data": { "token_id": "...", "expires_at": "...|null", "ttl_seconds": 86400 } | null }
 ```
 
 ### `POST /emergency-qr/{jti}/revoke`
