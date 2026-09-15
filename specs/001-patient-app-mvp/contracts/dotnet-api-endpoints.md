@@ -130,9 +130,9 @@ Response: { "data": { "preferred_language": "ar-SA" } }
 ## Emergency QR Module
 
 ### `POST /emergency-qr/mint`
-Mint a new QR token. Revokes prior active token. Age-gated (FR-301b). `jti` is a 128-bit CSPRNG value (UUIDv4 — NOT a timestamp-prefixed UUIDv7). `ciphertext` is capped at 16 KB (reject larger → 422) to prevent storage abuse. `ttl_seconds: 0` mints a **permanent** token — `expires_at` comes back `null` and the token resolves until revoked.
+Mint a new QR token. Revokes prior active token. Age-gated (FR-301b). `jti` is a 128-bit CSPRNG value (UUIDv4 — NOT a timestamp-prefixed UUIDv7). `ciphertext` is capped at 16 KB (reject larger → 422) to prevent storage abuse. `ttl_seconds: 0` mints a **permanent** token — `expires_at` comes back `null` and the token resolves until revoked. `token_id` is the offline-first path: a client-generated CSPRNG UUIDv4; the call is idempotent per token_id (retry refreshes the ciphertext of the existing active token), and another user's token_id is rejected.
 ```json
-Request:  { "ciphertext": "<base64, ≤16KB>", "profile_etag": "<hex8>", "preferred_language": "en", "ttl_seconds": 86400 }
+Request:  { "ciphertext": "<base64, ≤16KB>", "profile_etag": "<hex8>", "preferred_language": "en", "ttl_seconds": 86400, "token_id": "<uuid, optional>" }
 Response: { "data": { "token_id": "<uuid>", "expires_at": "...|null" } }
 Errors:   403 AgeGateBlocked, 422 InvalidTtl, 422 CiphertextTooLarge
 ```

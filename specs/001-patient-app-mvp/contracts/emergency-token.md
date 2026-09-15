@@ -1,6 +1,6 @@
 # Contract: Emergency QR Token (P001)
 
-**Version**: 1.1 · **Date**: 2026-09-14 (permanent tokens added; v1.0 2026-07-17) · **FRs**: FR-013, FR-014, FR-015, FR-034
+**Version**: 1.2 · **Date**: 2026-09-15 (offline-first client-minted jti; v1.1 permanent tokens 2026-09-14; v1.0 2026-07-17) · **FRs**: FR-013, FR-014, FR-015, FR-034
 **Owner context**: Personal Health (module `emergency_card`) · **Endpoints**: see `dotnet-api-endpoints.md` §Emergency QR Module.
 
 Documents the **implemented** P001 token model. Referenced by `tasks/flutter.md` T133a and the emergency-QR mint/resolve tasks.
@@ -8,6 +8,8 @@ Documents the **implemented** P001 token model. Referenced by `tasks/flutter.md`
 ## Token identity (`jti`)
 
 - `jti` is a **128-bit CSPRNG** value formatted as a UUIDv4 — **not** a timestamp-prefixed UUIDv7. A v7 `jti` would leak mint time and be partially predictable; the resolve surface is public, so the identifier must carry no structure.
+- **v1.2 — the client mints the jti** for permanent tokens (offline-first): the app generates it on-device, renders the QR immediately, and sends it as `token_id` when connectivity allows. The mint endpoint is **idempotent per token_id** — a retry of an existing active token refreshes its ciphertext in place; a `token_id` owned by another user is rejected. Temporary tokens keep server-assigned ids (their expiry is server-enforced).
+- The permanent token doubles as the patient's **stable profile identity token** — booking, emergency and delegation flows bind to its `jti`. Minting does not require any health data; an empty encrypted card is valid and fills in via the in-place refresh.
 - One active token per user: minting revokes the prior active row in the same transaction (partial unique index on non-revoked rows; see `supabase-schema.sql`).
 
 ## Lifetime
