@@ -75,3 +75,19 @@ Modules: .NET `Account`, `Auth`, `Sessions`, `Deletion`, `Disclosure`, `Geofence
 - Dual-mode auth (P004): cloud-first, local JWT fallback with cached credentials — one context, two deployments; queued offline registrations reconcile to cloud.
 - 100% test coverage constitutional for auth endpoints, both paths.
 - Web deletion entry (`balsm.health/account/delete`) is part of this context's surface (Google Play requirement).
+
+## Family linking (P002 — mapped ahead of implementation)
+
+The patient app already carries a **preview** of family/caregiver linking
+(add member by scanning their profile QR → outgoing `pending` link request →
+approval in the other person's app). Domain home: **this context** —
+`Caregiver` / `Guardianship` aggregates own the link request lifecycle
+(`FamilyLinkStatus: pending → linked`), binding to the profile-QR `jti`
+(never an account id; emergency-token spec v2.0 §Token identity).
+
+Current state (P001): client-side preview only — `FamilyMemberPreview` /
+`FamilyLinkRequest` live in the app shell with local state, the shared value
+object `FamilyLinkStatus` lives in the Flutter core domain layer, and no
+server surface exists. The P002 deliverable is the link-request API in this
+context (create by jti / list incoming / approve / decline) plus the app
+model's migration out of the shell into a module mapped here.
