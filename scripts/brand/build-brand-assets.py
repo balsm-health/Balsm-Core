@@ -35,11 +35,13 @@ CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 # Ink bounding boxes, measured with getBBox(). Lockups are laid out from
 # the ink box, not the viewBox, so padding stays optical rather than
 # inherited from whatever the source file happened to be exported with.
-MARK_INK = (8.46, 9.17, 682.37, 653.47)          # = brand/icon.svg viewBox
-WORD_INK = (4.0058, 3.9996, 112.5351, 46.5498)   # inside brand/wordmark.svg
+MARK_INK = (21.64, 15.0, 705.72, 676.92)         # ink box inside brand/icon.svg
+# Rendered ink (rsvg, 16x), not getBBox: the old getBBox box was 0.025 narrow and
+# 0.012 high, which left the lockups 0.06 tighter on the wordmark side.
+WORD_INK = (3.9989, 4.0057, 112.5619, 46.5559)   # inside brand/wordmark.svg
 
-MARK_AR = MARK_INK[2] / MARK_INK[3]              # 1.0446
-WORD_AR = WORD_INK[2] / WORD_INK[3]              # 2.4175
+MARK_AR = MARK_INK[2] / MARK_INK[3]              # 1.0425
+WORD_AR = WORD_INK[2] / WORD_INK[3]              # 2.4178
 
 # Lockup metrics carried over from the previous mark so the two lockups
 # keep their established proportions — only the mark's own aspect moved.
@@ -76,6 +78,8 @@ def _reprefix(markup: str, prefix: str) -> str:
     for old in sorted(ids, key=len, reverse=True):
         markup = markup.replace(f'id="{old}"', f'id="{prefix}{old}"')
         markup = markup.replace(f"url(#{old})", f"url(#{prefix}{old})")
+        # <use href> and gradient href inheritance must follow the rename too
+        markup = markup.replace(f'href="#{old}"', f'href="#{prefix}{old}"')
     return markup
 
 
@@ -101,10 +105,11 @@ def mark(x: float, y: float, height: float, *, mono: str | None = None,
         body = re.sub(r"<(?:linear|radial)Gradient\b.*?</(?:linear|radial)Gradient>",
                       "", body, flags=re.S)
         body = re.sub(r'fill="url\([^)]*\)"', f'fill="{mono}"', body)
-        # One colour means every seam between two shapes shows as an
-        # anti-aliasing gap. A hairline stroke in the same ink closes them.
-        body = body.replace("<path ", f'<path stroke="{mono}" stroke-width="1" ')
-        body = body.replace("<circle ", f'<circle stroke="{mono}" stroke-width="1" ')
+        # The mark closes its own seams with a filled #seam sliver, which the
+        # fill swap above already turned to ink. Nothing is stroked, so the
+        # outline stays a single edge and the ink box is the same as in colour.
+        # (Kept for any future stroke paint.)
+        body = re.sub(r'stroke="url\([^)]*\)"', f'stroke="{mono}"', body)
     tx, ty = x - s * MARK_INK[0], y - s * MARK_INK[1]
     op = f' opacity="{opacity}"' if opacity is not None else ""
     return (f'<g transform="translate({tx:.4f},{ty:.4f}) scale({s:.6f})"'
@@ -174,7 +179,12 @@ def social(white_plate: bool) -> str:
 
 def square_icon(size: float, *, mono: str | None = None, fill_frac: float = 0.96,
                 prefix: str = "q-") -> str:
-    """The mark alone, centred in a square frame — app-icon shaped."""
+    """The mark alone, centred in a square frame — app-icon shaped.
+
+    The ink box is centred, so left == right and top == bottom. The mark is
+    wider than tall (MARK_AR), so each top/bottom margin is larger than each
+    side margin by (w - h) / 2; no head-up placement can make them equal.
+    """
     h = size * fill_frac / MARK_AR if MARK_AR > 1 else size * fill_frac
     w = h * MARK_AR
     body = mark((size - w) / 2, (size - h) / 2, h, mono=mono, prefix=prefix)
@@ -197,8 +207,38 @@ def build_svg() -> None:
 
 
 # ── Rasterising ───────────────────────────────────────────────────────
+def _whole_px(text: str, px_w: int) -> tuple[str, int]:
+    """Pad the viewBox equally top and bottom so `px_w` wide is a whole number of
+    pixels tall. Without it the rounding lands entirely on the bottom edge."""
+    root = re.search(r"<svg\b[^>]*>", text).group(0)
+    vx, vy, vw, vh = [float(v) for v in
+                      re.search(r'viewBox="([^"]+)"', root).group(1).replace(",", " ").split()]
+    k = px_w / vw
+    px_h = round(vh * k)
+    nh = px_h / k
+    new = re.sub(r'viewBox="[^"]+"', f'viewBox="{vx:.6f} {vy - (nh - vh) / 2:.6f} {vw:.6f} {nh:.6f}"', root)
+    new = re.sub(r'\swidth="[^"]*"', f' width="{px_w}"', new)
+    new = re.sub(r'\sheight="[^"]*"', f' height="{px_h}"', new)
+    return text.replace(root, new, 1), px_h
+
+
 def rsvg(src: Path, out: Path, *, width: int | None = None,
          height: int | None = None, background: str | None = None) -> None:
+    if width and not height:
+        text, px_h = _whole_px(src.read_text(), width)
+        with tempfile.NamedTemporaryFile("w", suffix=".svg", delete=False,
+                                         dir=src.parent) as fh:
+            fh.write(text)
+            tmp = Path(fh.name)
+        try:
+            cmd = ["rsvg-convert", str(tmp), "-o", str(out), "-w", str(width), "-h", str(px_h)]
+            if background:
+                cmd += [f"--background-color={background}"]
+            subprocess.run(cmd, check=True)
+        finally:
+            tmp.unlink()
+        print(f"  {out.relative_to(ROOT)}")
+        return
     cmd = ["rsvg-convert", str(src), "-o", str(out)]
     if width:
         cmd += ["-w", str(width)]
