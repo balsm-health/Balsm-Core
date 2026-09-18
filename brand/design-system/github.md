@@ -38,7 +38,7 @@ The `--petal-*` design tokens (aqua/emerald/blue/mint/violet — used across but
 | `balsm-brand-canvas.md` (root, diverged — locked content, not synced) | `brand/balsm-brand-canvas.md` |
 
 ## Sync history
-- 2026-08-29 — **new mark.** The five-petal flower is retired; the mark is now five figures joined in a ring (`brand/icon.svg`, imported from the `circle` concept set). Every other file under `brand/` is now *generated* from `brand/icon.svg` + `brand/wordmark.svg` by `scripts/brand/build-brand-assets.py` — do not hand-edit them. `AnimatedLogo` and `ProSidebar`'s inline mark were redrawn to match; `--petal-*` tokens and the `PetalSpinner` name are unchanged.
+- 2026-08-29 — **new mark.** The five-petal flower is retired; the mark is now five ribbons joined in a ring (`brand/icon.svg`, imported from the `circle` concept set). Every other file under `brand/` is now *generated* from `brand/icon.svg` + `brand/wordmark.svg` by `scripts/brand/build-brand-assets.py` — do not hand-edit them. `AnimatedLogo` and `ProSidebar`'s inline mark were redrawn to match; `--petal-*` tokens and the `PetalSpinner` name are unchanged.
 - 2026-08-12T12:21:58Z — wordmark recolor #254B45→#1F2D3D (navy slate) + refreshed logo/wordmark files.
 - 2026-08-12T10:16:22Z — pulled new `icon-social*` and `og-image*` assets; icon geometry/colors confirmed unchanged.
 - 2026-08-06T16:19:46Z — full re-check (repo-wide + brand/ scoped): no changes beyond what's already pulled; github.md consolidated.

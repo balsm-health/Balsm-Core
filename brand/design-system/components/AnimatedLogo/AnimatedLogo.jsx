@@ -1,7 +1,7 @@
 // Balsm DS — AnimatedLogo (the Balsm mark, animated)
-// Redrawn 2026-08 to the "five figures joined in a ring" mark: five
+// Redrawn 2026-08 to the "five ribbons joined in a ring" mark: five
 // gradient-filled ring wedges (clipped as a group for rounded cusps) plus
-// a small gradient dot at each figure's tip. Each figure is one ring path
+// a small gradient dot at each ribbon's tip. Each ribbon is one ring path
 // + its dot, sharing --i so they move together. Reveal is picked with
 // `variant`; motion lives in components.css (.b-logomark*) — unchanged
 // from the previous mark, since the DOM shape (5 animated units) is the
@@ -42,8 +42,8 @@ const B_LOGO_DOT_STOPS = {
 const B_LOGO_HUB = [349.65, 335.9];
 const B_LOGO_VIEWBOX = '-31.5 -30.8 762.4 733.5';
 
-// Each figure's outward unit-vector × 220, DOM order — used by the
-// 'magnetic' reveal so every figure flies in from its own side.
+// Each ribbon's outward unit-vector × 220, DOM order — used by the
+// 'magnetic' reveal so every ribbon flies in from its own side.
 const B_LOGO_DIRS = [
   [1, -220],     // top
   [215, -46],    // right

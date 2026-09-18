@@ -12,7 +12,7 @@
 // Clockwise from the top: teal, blue, mint, violet, emerald — matches brand/icon.svg.
 const _MARK_HUES = ['#00C8D2', '#0083FA', '#00D69E', '#8350DE', '#5FD470'];
 
-// Inline Balsm mark — five figures joined in a ring, simplified to a head
+// Inline Balsm mark — five ribbons joined in a ring, simplified to a head
 // and a body arc each so it survives being drawn at 28px. Always on-brand,
 // no asset path needed.
 const _RING_R = 10.0;

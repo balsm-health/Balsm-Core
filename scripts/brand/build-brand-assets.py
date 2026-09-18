@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Regenerate every derived file in brand/ from the two canonical sources.
 
-    brand/icon.svg      the mark  — five figures joined in a ring
+    brand/icon.svg      the mark  — five ribbons joined in a ring
     brand/wordmark.svg  the type  — بلسم / Balsm.health
 
 Everything else under brand/ is output: mono variants, lockups, social

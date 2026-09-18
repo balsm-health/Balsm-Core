@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="21.64 15 705.72 676.92" width="705.72" height="676.92" role="img" aria-label="Balsm - five identical figures joined in a symmetric ring">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="21.64 15 705.72 676.92" width="705.72" height="676.92" role="img" aria-label="Balsm - five identical ribbons joined in a symmetric ring">
 <title>Balsm</title>
 <!-- Balsm mark, five-fold symmetric. Source: Balsm-Draft assets/circle/27-vector.svg
      (traced from assets/circle/4.png; pipeline and notes in assets/circle/4-svg/27-pipeline).
 
      ONE RIBBON, ONE HEAD, FIVE TIMES. #ribbon is a single closed path and #head a single
-     circle; every figure is a <use> of them turned by rotate(72k 374.5 383). The seam
+     circle; every ribbon is a <use> of them turned by rotate(72k 374.5 383). The seam
      where two ribbons meet is the same curve in both copies (exact to 0.001), so the ring
      reads as one band.
 
@@ -29,9 +29,9 @@
      COLOUR is the petal palette (design-system/colors_and_type.css), clockwise from the top in
      the order of the previous icon.svg: aqua, blue, emerald, violet, mint. The five
      gradient-<petal> fills inherit one #ribbon-axis (userSpaceOnUse, unrotated frame; the
-     rotate lives on each <use>, so the paint turns with its figure) and share one OKLab
+     rotate lives on each <use>, so the paint turns with its ribbon) and share one OKLab
      lightness profile: deep at
-     the leading seam, light at the trailing seam, clockwise, the same depth on every figure,
+     the leading seam, light at the trailing seam, clockwise, the same depth on every ribbon,
      smoothed (largest slope jump 0.12). The profile's zero is the base token, present as an
      exact stop at offset 0.435; hues follow each petal's 600 -> base -> light ramp. The
      head-<petal> fills are the previous icon's dot colours with one shared lightness step, on

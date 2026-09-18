@@ -18,7 +18,7 @@ Upstream: the Claude Design project `51cdbf29-13b7-4206-9328-125fade14cc3`. Pull
 |---|---|
 | [brand/colors_and_type.css](brand/colors_and_type.css) | **Tier 1–2 source of truth** — global + semantic tokens: petals, neutrals, type, spacing, radii, shadows, motion, breakpoints, containers, gutters. Import this first. |
 | [brand/balsm-brand-canvas.md](brand/balsm-brand-canvas.md) | Brand canvas — mission, voice, values, positioning, experience. Source of truth for tone. |
-| [brand/logo-vertical.svg](brand/logo-vertical.svg) | Official mark — five figures joined in a ring — over the bilingual wordmark. Use as-is. |
+| [brand/logo-vertical.svg](brand/logo-vertical.svg) | Official mark — five ribbons joined in a ring — over the bilingual wordmark. Use as-is. |
 | [brand/logo-vertical-mono-white.svg](brand/logo-vertical-mono-white.svg) | Reverse lockup — white ink, for dark surfaces. (`-on-white` files are the opposite: full-colour logo baked onto a white background.) |
 | [brand/balsm-background.png](brand/balsm-background.png) | Watercolor wash of the mark — hero/welcome backdrops only. |
 
@@ -51,7 +51,7 @@ A surface that only needs color and type imports tier 1–2 alone. Pull tier 3 w
 ## 3. Brand non-negotiables
 
 1. **Name.** Always `Balsm.health` in product (`.health` one weight lighter, smaller). Arabic: `بلسم` — plain spelling, no diacritics.
-2. **Mark.** Five figures joined in a ring, in **five distinct hues** — aqua, emerald, blue, mint, violet. Never recolor to a single hue except in the documented mono / reverse lockups (§7).
+2. **Mark.** Five ribbons joined in a ring, in **five distinct hues** — aqua, emerald, blue, mint, violet. Never recolor to a single hue except in the documented mono / reverse lockups (§7).
 3. **No medical-cliché iconography** for brand symbols (no cross, syringe, heart). Lucide `pill` / `stethoscope` / `syringe` are fine **inside** the product, never as a logo replacement.
 4. **No emoji in product UI.** The mark is our emoji. Marketing decks may use a single `🌿` sparingly.
 5. **Arabic is first-class.** Every surface must work with `dir="rtl"` and `--font-arabic`. `[dir="rtl"]` selectors swap fonts automatically.
@@ -62,7 +62,7 @@ A surface that only needs color and type imports tier 1–2 alone. Pull tier 3 w
 
 ## 4. Color — the five petals
 
-The brand has **no single primary color.** The mark carries five hues, one per figure; the design system treats them as a categorical palette. Reach for one when you need a category (modules, departments, charts). Use all five together only in brand moments (hero, loading, watermark).
+The brand has **no single primary color.** The mark carries five hues, one per ribbon; the design system treats them as a categorical palette. Reach for one when you need a category (modules, departments, charts). Use all five together only in brand moments (hero, loading, watermark).
 
 | Token | Hex | Role |
 |---|---|---|

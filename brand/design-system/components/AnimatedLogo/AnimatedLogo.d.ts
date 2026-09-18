@@ -9,18 +9,18 @@ export type LogoVariant =
   | 'bloom'    // signature clockwise unfurl + untwist from the hub
   | 'cascade'  // calm sequential grow, no rotation
   | 'pop'      // near-simultaneous scale-in with overshoot
-  | 'wave'     // a pulse ripples figure to figure
-  | 'unwind'   // figures spiral open from a tight twist
+  | 'wave'     // a pulse ripples ribbon to ribbon
+  | 'unwind'   // ribbons spiral open from a tight twist
   | 'fade'     // minimal soft fade + lift (whole mark)
   | 'spin-in'  // the mark rotates into place like a pinwheel
   | 'iris'     // a circular reveal opens from the hub
   | 'liquid'    // balm drops fall in and settle with a squash
   | 'heartbeat' // a cardiac lub-dub brings the whole mark to life
-  | 'orbit'     // figures swirl in from a wide orbit
-  | 'fold'      // figures unfold open like paper
-  | 'develop'   // surfaces from grayscale into full color, figure by figure
-  | 'magnetic'  // figures fly in from their own side and snap home
-  | 'draw';     // each figure draws its outline, then fills
+  | 'orbit'     // ribbons swirl in from a wide orbit
+  | 'fold'      // ribbons unfold open like paper
+  | 'develop'   // surfaces from grayscale into full color, ribbon by ribbon
+  | 'magnetic'  // ribbons fly in from their own side and snap home
+  | 'draw';     // each ribbon draws its outline, then fills
 
 export interface AnimatedLogoProps {
   /** Rendered size in px (number) or any CSS length (string). Square. */
@@ -34,7 +34,7 @@ export interface AnimatedLogoProps {
   idle?: LogoIdle;
   /** Speed multiplier for the whole sequence (2 = twice as fast). */
   speed?: number;
-  /** Render every figure in one color (monochrome mark) instead of brand colors. */
+  /** Render every ribbon in one color (monochrome mark) instead of brand colors. */
   color?: string;
   /** Soft radial halo that blooms with the mark — for dark hero backgrounds. */
   glow?: boolean;
@@ -47,7 +47,7 @@ export interface AnimatedLogoProps {
 }
 
 /**
- * The Balsm mark, animated. Five figures reveal from the shared hub with
+ * The Balsm mark, animated. Five ribbons reveal from the shared hub with
  * the chosen `variant`, then settle into a calm idle. Honors
  * prefers-reduced-motion (renders the finished mark, no motion).
  */
