@@ -19,10 +19,10 @@ commit: (see branch head — no commit sha resolved)
 - **Mono-lockup family** — `icon-mono-black/white`, `logo-horizontal-mono-black/white`, `-on-white` variants, `logo.svg/.png` alias — all present under `brand/`.
 - **Wordmark TLD** — `--balsm-wordmark-tld #526174` (slate gray) in root + `care_app/colors_and_type.css` and README.
 - **Reverse-lockup naming** — `logo-{vertical,horizontal}-white.png` renamed to `-mono-white.png` throughout (preview card, docs).
-- Fonts and `--petal-*` tokens confirmed unchanged from `brand/colors_and_type.css`.
+- Fonts and `--hue-*` tokens confirmed unchanged from `brand/colors_and_type.css`.
 
 ### Note
-The `--petal-*` design tokens (aqua/emerald/blue/mint/violet — used across buttons, badges, charts) are intentionally UNCHANGED from the new logo artwork's bespoke 5-color palette. Worth confirming with the Balsm-Core team whether the two should eventually be reconciled.
+The `--hue-*` design tokens (aqua/emerald/blue/mint/violet — used across buttons, badges, charts) are intentionally UNCHANGED from the new logo artwork's bespoke 5-color palette. Worth confirming with the Balsm-Core team whether the two should eventually be reconciled.
 
 ## Screen map
 | Screen/asset | Repo source |
@@ -38,7 +38,8 @@ The `--petal-*` design tokens (aqua/emerald/blue/mint/violet — used across but
 | `balsm-brand-canvas.md` (root, diverged — locked content, not synced) | `brand/balsm-brand-canvas.md` |
 
 ## Sync history
-- 2026-08-29 — **new mark.** The five-petal flower is retired; the mark is now five ribbons joined in a ring (`brand/icon.svg`, imported from the `circle` concept set). Every other file under `brand/` is now *generated* from `brand/icon.svg` + `brand/wordmark.svg` by `scripts/brand/build-brand-assets.py` — do not hand-edit them. `AnimatedLogo` and `ProSidebar`'s inline mark were redrawn to match; `--petal-*` tokens and the `PetalSpinner` name are unchanged.
+- 2026-09-18 — **petal → ribbon/hue rename.** The 2026-08-29 mark change left `petal` in every identifier. The mark's shapes are now called **ribbons**, the palette the **five brand hues**. Renamed: `--petal-<h>` → `--hue-<h>` (all `-600`/`-50` siblings), `--grad-petal` → `--grad-brand`, `--shadow-petal` → `--shadow-brand`, `.b-logomark__petal` → `.b-logomark__ribbon`, `.b-petal-spinner`/`__petal` → `.b-mark-spinner`/`__dot`, `@keyframes b-petal-pulse` → `b-mark-pulse`, `PetalSpinner` → `MarkSpinner`, `B_LOGO_PETALS` → `B_LOGO_RIBBONS`, and the `<LoadingOverlay>` `spinner` prop value `'petal'` → `'mark'` (its `_adherence.oxlintrc.json` rule too). `preview/colors-petals.html` → `preview/colors-hues.html`. **Breaking for consumers** — the spinner dots are named `__dot`, not `__ribbon`, because they are circles (the mark's heads), not ribbon paths. No token *value* changed. Note: `--balsm-<hue>-*` is a separate derived ramp and was not touched.
+- 2026-08-29 — **new mark.** The five-petal flower is retired; the mark is now five ribbons joined in a ring (`brand/icon.svg`, imported from the `circle` concept set). Every other file under `brand/` is now *generated* from `brand/icon.svg` + `brand/wordmark.svg` by `scripts/brand/build-brand-assets.py` — do not hand-edit them. `AnimatedLogo` and `ProSidebar`'s inline mark were redrawn to match; `--hue-*` tokens and the `MarkSpinner` name are unchanged.
 - 2026-08-12T12:21:58Z — wordmark recolor #254B45→#1F2D3D (navy slate) + refreshed logo/wordmark files.
 - 2026-08-12T10:16:22Z — pulled new `icon-social*` and `og-image*` assets; icon geometry/colors confirmed unchanged.
 - 2026-08-06T16:19:46Z — full re-check (repo-wide + brand/ scoped): no changes beyond what's already pulled; github.md consolidated.

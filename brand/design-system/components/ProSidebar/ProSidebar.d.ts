@@ -26,7 +26,7 @@ export interface ProSidebarIdentity {
   branch?: React.ReactNode;
   /** Role line for the account row. */
   role?: React.ReactNode;
-  /** Avatar background color (a petal hue). */
+  /** Avatar background color (a brand hue). */
   color?: string;
   onClick?: () => void;
 }

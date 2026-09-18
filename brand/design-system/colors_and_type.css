@@ -20,42 +20,42 @@
      departments, charts), and for the FULL FIVE only in brand moments
      (loading, hero, watermark).
 
-     The --petal-* prefix predates the 2026-08-29 mark change — the
-     five-petal flower it was named for is retired (see github.md) —
-     and is kept because four sibling repos consume these tokens.
+     Renamed from --petal-* on 2026-09-18: the five-petal flower those
+     tokens were named for was retired on 2026-08-29 (see github.md).
+     --balsm-<hue>-* is a different, derived ramp — do not confuse them.
 
      Order below is clockwise from the top, matching brand/icon.svg:
      aqua is the untransformed copy, each next is rotate(+72).
      ──────────────────────────────────────────────────────────── */
-  --petal-aqua:    #02BBB5;   /* top ribbon */
-  --petal-blue:    #1283FF;   /* top-right ribbon */
-  --petal-emerald: #01C4A2;   /* bottom-right ribbon — closest to "Balsm green" */
-  --petal-violet:  #724DD0;   /* bottom-left ribbon */
-  --petal-mint:    #55D77F;   /* top-left ribbon */
+  --hue-aqua:    #02BBB5;   /* top ribbon */
+  --hue-blue:    #1283FF;   /* top-right ribbon */
+  --hue-emerald: #01C4A2;   /* bottom-right ribbon — closest to "Balsm green" */
+  --hue-violet:  #724DD0;   /* bottom-left ribbon */
+  --hue-mint:    #55D77F;   /* top-left ribbon */
 
   /* Hover / pressed step (≈ -8% L) for each hue */
-  --petal-aqua-600:    #029E99;
-  --petal-blue-600:    #0F6BCC;
-  --petal-emerald-600: #019A7F;
-  --petal-violet-600:  #5C3AB0;
-  --petal-mint-600:    #3FC366;
+  --hue-aqua-600:    #029E99;
+  --hue-blue-600:    #0F6BCC;
+  --hue-emerald-600: #019A7F;
+  --hue-violet-600:  #5C3AB0;
+  --hue-mint-600:    #3FC366;
 
   /* Soft "wash" surface (≈ +50% L) for each hue — backgrounds, chips */
-  --petal-aqua-50:    #E2F8F6;
-  --petal-blue-50:    #E4F0FF;
-  --petal-emerald-50: #E1F8F1;
-  --petal-violet-50:  #ECE6FA;
-  --petal-mint-50:    #E8F9EE;
+  --hue-aqua-50:    #E2F8F6;
+  --hue-blue-50:    #E4F0FF;
+  --hue-emerald-50: #E1F8F1;
+  --hue-violet-50:  #ECE6FA;
+  --hue-mint-50:    #E8F9EE;
 
   /* ── Aliases for the two most-reached-for hues ────────────────
      PRIMARY = blue  (the action color — CTAs, links, focus)
      ACCENT  = teal  (the calmer healing color — surfaces, success-y moments)
      The brand has no single "primary"; these are convenience aliases. */
-  --balsm-primary:    var(--petal-blue);
-  --balsm-primary-hover: var(--petal-blue-600);
-  --balsm-primary-bg: var(--petal-blue-50);
-  --balsm-accent:     var(--petal-aqua);
-  --balsm-accent-bg:  var(--petal-aqua-50);
+  --balsm-primary:    var(--hue-blue);
+  --balsm-primary-hover: var(--hue-blue-600);
+  --balsm-primary-bg: var(--hue-blue-50);
+  --balsm-accent:     var(--hue-aqua);
+  --balsm-accent-bg:  var(--hue-aqua-50);
 
   /* ── Wordmark ────────────────────────────────────────────────
      The official wordmark is navy slate #1F2D3D (previously pine green
@@ -94,20 +94,20 @@
   --balsm-white:    #FFFFFF;
 
   /* ── Semantic clinical state ───────────────────────────────── */
-  --balsm-success: var(--petal-mint);          /* mint green — dispensed, vitals normal */
-  --balsm-success-bg: var(--petal-mint-50);
+  --balsm-success: var(--hue-mint);          /* mint green — dispensed, vitals normal */
+  --balsm-success-bg: var(--hue-mint-50);
   --balsm-warning: #E5B428;                    /* sun — low stock, approval */
   --balsm-warning-bg: #FDF5DC;
   --balsm-danger:  #D44A3C;                    /* warm red — expired, recall */
   --balsm-danger-bg:  #FBEBE7;
-  --balsm-info:    var(--petal-blue);          /* blue — informational, sync */
-  --balsm-info-bg:    var(--petal-blue-50);
+  --balsm-info:    var(--hue-blue);          /* blue — informational, sync */
+  --balsm-info-bg:    var(--hue-blue-50);
   --balsm-neutral: var(--balsm-ink-500);
   --balsm-neutral-bg: var(--balsm-ink-100);
 
   /* Clinical / pharma flags */
-  --balsm-controlled: var(--petal-violet);     /* purple is OUR purple now — Schedule II/III */
-  --balsm-controlled-bg: var(--petal-violet-50);
+  --balsm-controlled: var(--hue-violet);     /* purple is OUR purple now — Schedule II/III */
+  --balsm-controlled-bg: var(--hue-violet-50);
   --balsm-expiring: #D97A20;                   /* amber — expiring soon */
   --balsm-expiring-bg: #FBEEDC;
 
@@ -118,7 +118,7 @@
   --balsm-surface-inverse:var(--balsm-ink-900);
   --balsm-border:         var(--balsm-ink-200);
   --balsm-border-strong:  var(--balsm-ink-300);
-  --balsm-border-focus:   var(--petal-blue);
+  --balsm-border-focus:   var(--hue-blue);
 
   /* ── Foreground tokens (semantic) ──────────────────────────── */
   --fg1: var(--balsm-ink-900);         /* primary text */
@@ -126,7 +126,7 @@
   --fg3: var(--balsm-ink-600);         /* tertiary / meta */
   --fg4: var(--balsm-ink-400);         /* placeholder, disabled */
   --fg-on-brand: #FFFFFF;
-  --fg-link: var(--petal-blue);
+  --fg-link: var(--hue-blue);
 
   /* ── Type families ─────────────────────────────────────────── */
   --font-display: 'Montserrat', 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -187,7 +187,7 @@
   --shadow-md: 0 8px 20px rgba(20, 32, 43, 0.08), 0 2px 6px rgba(20, 32, 43, 0.04);
   --shadow-lg: 0 18px 40px rgba(20, 32, 43, 0.10), 0 4px 12px rgba(20, 32, 43, 0.06);
   --shadow-brand: 0 8px 24px rgba(18, 131, 255, 0.22);
-  --shadow-petal: 0 8px 24px rgba(114, 77, 208, 0.18);
+  --shadow-brand: 0 8px 24px rgba(114, 77, 208, 0.18);
   --shadow-inset: inset 0 1px 0 rgba(255,255,255,0.6);
 
   /* ── Motion ───────────────────────────────────────────────── */
@@ -199,7 +199,7 @@
   --dur-slow: 320ms; /* @kind other */
 
   /* ── Gradients (signature) ─────────────────────────────────── */
-  --grad-petal: linear-gradient(135deg, #02BBB5 0%, #1283FF 60%, #724DD0 100%); /* @kind color */ /* the FULL petal sweep */
+  --grad-brand: linear-gradient(135deg, #02BBB5 0%, #1283FF 60%, #724DD0 100%); /* @kind color */ /* the FULL brand sweep */
   --grad-mint:   linear-gradient(135deg, #55D77F 0%, #01C4A2 100%); /* @kind color */
   --grad-sky:    linear-gradient(135deg, #1283FF 0%, #0F6BCC 100%); /* @kind color */
   --grad-violet: linear-gradient(135deg, #8E6FE0 0%, #724DD0 100%); /* @kind color */
@@ -238,22 +238,22 @@
 
   /* ── Legacy aliases (point old tokens at the brand hues) ──────
      Older preview cards & UI kits may still reference these.
-     Don't use in new code — reach for --petal-* or semantic tokens. */
-  --balsm-teal-50:  var(--petal-aqua-50);
+     Don't use in new code — reach for --hue-* or semantic tokens. */
+  --balsm-teal-50:  var(--hue-aqua-50);
   --balsm-teal-100: #C9EEEB;
   --balsm-teal-200: #98DCD8;
   --balsm-teal-300: #5FC9C4;
   --balsm-teal-400: #2FC0B9;
-  --balsm-teal-500: var(--petal-aqua);
-  --balsm-teal-600: var(--petal-aqua-600);
+  --balsm-teal-500: var(--hue-aqua);
+  --balsm-teal-600: var(--hue-aqua-600);
   --balsm-teal-700: #016F6B;
-  --balsm-blue-50:  var(--petal-blue-50);
+  --balsm-blue-50:  var(--hue-blue-50);
   --balsm-blue-100: #CFE3FF;
   --balsm-blue-200: #9CC2FF;
   --balsm-blue-300: #5FA0FF;
   --balsm-blue-400: #2E86F0;
-  --balsm-blue-500: var(--petal-blue);
-  --balsm-blue-600: var(--petal-blue-600);
+  --balsm-blue-500: var(--hue-blue);
+  --balsm-blue-600: var(--hue-blue-600);
   --balsm-blue-700: #0A4F99;
   --balsm-blue-900: var(--balsm-ink-900);
 }
@@ -325,7 +325,7 @@ body {
   font-weight: 600;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--petal-emerald);
+  color: var(--hue-emerald);
 }
 
 .p, p {

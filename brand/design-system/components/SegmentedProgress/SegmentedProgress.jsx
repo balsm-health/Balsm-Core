@@ -5,8 +5,8 @@
 // color: aqua | blue | mint | violet | emerald | sun | danger | ink
 
 const _METER_VAR = {
-  aqua: 'var(--petal-aqua)', blue: 'var(--petal-blue)', mint: 'var(--petal-mint)',
-  violet: 'var(--petal-violet)', emerald: 'var(--petal-emerald)',
+  aqua: 'var(--hue-aqua)', blue: 'var(--hue-blue)', mint: 'var(--hue-mint)',
+  violet: 'var(--hue-violet)', emerald: 'var(--hue-emerald)',
   sun: 'var(--balsm-warning)', danger: 'var(--balsm-danger)', ink: 'var(--balsm-ink-300)',
 };
 

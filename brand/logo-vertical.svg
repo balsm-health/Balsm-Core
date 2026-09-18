@@ -27,15 +27,15 @@
      would vanish under the mono fill regex, and a clip-path hardens the outline in rsvg.
      Do not stroke #ribbon itself: that pushes the outline out and draws it twice.
 
-     COLOUR is the petal palette (design-system/colors_and_type.css), clockwise from the top in
+     COLOUR is the brand hue palette (design-system/colors_and_type.css), clockwise from the top in
      the order of the previous icon.svg: aqua, blue, emerald, violet, mint. The five
-     gradient-<petal> fills inherit one #ribbon-axis (userSpaceOnUse, unrotated frame; the
+     gradient-<hue> fills inherit one #ribbon-axis (userSpaceOnUse, unrotated frame; the
      rotate lives on each <use>, so the paint turns with its ribbon) and share one OKLab
      lightness profile: deep at
      the leading seam, light at the trailing seam, clockwise, the same depth on every ribbon,
      smoothed (largest slope jump 0.12). The profile's zero is the base token, present as an
-     exact stop at offset 0.435; hues follow each petal's 600 -> base -> light ramp. The
-     head-<petal> fills are the previous icon's dot colours with one shared lightness step, on
+     exact stop at offset 0.435; hues follow each hue's 600 -> base -> light ramp. The
+     head-<hue> fills are the previous icon's dot colours with one shared lightness step, on
      the previous icon's head axis (#head-axis: top edge to bottom edge, light end 21.8
      degrees counter-clockwise from outward). Regenerate with the pipeline (polish.py,
      brandmaster.py) rather than hand-editing hexes. -->

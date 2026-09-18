@@ -465,9 +465,9 @@ const TREND_GLU    = [129, 167, 145, 156, 138, 142, 134];
 
 /* ── Doctors ─────────────────────────────────────────────── */
 const DOCTORS = [
-  { id: 'sara',  name: { en: 'Dr. Sara Kamal', ar: 'د. سارة كمال'  }, specialty: { en: 'Internal Medicine', ar: 'الباطنة'       }, initials: 'SK', color: 'var(--petal-aqua)',    rating: '4.9', experience: { en: '12 yrs', ar: '١٢ سنة'  } },
-  { id: 'ahmed', name: { en: 'Dr. Ahmed Nour',  ar: 'د. أحمد نور'  }, specialty: { en: 'Cardiology',        ar: 'أمراض القلب'  }, initials: 'AN', color: 'var(--petal-blue)',    rating: '4.8', experience: { en: '9 yrs',  ar: '٩ سنوات' } },
-  { id: 'mona',  name: { en: 'Dr. Mona Saad',   ar: 'د. منى سعد'   }, specialty: { en: 'Endocrinology',    ar: 'الغدد الصماء' }, initials: 'MS', color: 'var(--petal-emerald)', rating: '4.9', experience: { en: '15 yrs', ar: '١٥ سنة'  } },
+  { id: 'sara',  name: { en: 'Dr. Sara Kamal', ar: 'د. سارة كمال'  }, specialty: { en: 'Internal Medicine', ar: 'الباطنة'       }, initials: 'SK', color: 'var(--hue-aqua)',    rating: '4.9', experience: { en: '12 yrs', ar: '١٢ سنة'  } },
+  { id: 'ahmed', name: { en: 'Dr. Ahmed Nour',  ar: 'د. أحمد نور'  }, specialty: { en: 'Cardiology',        ar: 'أمراض القلب'  }, initials: 'AN', color: 'var(--hue-blue)',    rating: '4.8', experience: { en: '9 yrs',  ar: '٩ سنوات' } },
+  { id: 'mona',  name: { en: 'Dr. Mona Saad',   ar: 'د. منى سعد'   }, specialty: { en: 'Endocrinology',    ar: 'الغدد الصماء' }, initials: 'MS', color: 'var(--hue-emerald)', rating: '4.9', experience: { en: '15 yrs', ar: '١٥ سنة'  } },
 ];
 
 /* ── Appointments ────────────────────────────────────────── */
@@ -498,9 +498,9 @@ const PRESCRIPTIONS = [
 
 /* ── Family accounts ────────────────────────────────────── */
 const FAMILY_ACCOUNTS = [
-  { id: 'layla', name: { en: 'Layla Hassan', ar: 'ليلى حسن'  }, initials: 'LH', color: 'var(--petal-aqua)',   relation: { en: 'You',      ar: 'أنتِ'   }, age: 58, since: { en: 'Mar 2025', ar: 'مارس 2025'  }, conditions: [{ en: 'Type 2 diabetes', ar: 'السكري من النوع الثاني' }, { en: 'Hypertension', ar: 'ارتفاع ضغط الدم' }] },
-  { id: 'karim', name: { en: 'Karim Hassan', ar: 'كريم حسن'  }, initials: 'KH', color: 'var(--petal-blue)',   relation: { en: 'Husband',  ar: 'الزوج'  }, age: 63, since: { en: 'Mar 2025', ar: 'مارس 2025'  }, conditions: [{ en: 'Hypertension', ar: 'ارتفاع ضغط الدم' }] },
-  { id: 'nadia', name: { en: 'Nadia Hassan', ar: 'ناديا حسن' }, initials: 'NH', color: 'var(--petal-violet)', relation: { en: 'Daughter', ar: 'الابنة' }, age: 28, since: { en: 'Apr 2025', ar: 'أبريل 2025' }, conditions: [] },
+  { id: 'layla', name: { en: 'Layla Hassan', ar: 'ليلى حسن'  }, initials: 'LH', color: 'var(--hue-aqua)',   relation: { en: 'You',      ar: 'أنتِ'   }, age: 58, since: { en: 'Mar 2025', ar: 'مارس 2025'  }, conditions: [{ en: 'Type 2 diabetes', ar: 'السكري من النوع الثاني' }, { en: 'Hypertension', ar: 'ارتفاع ضغط الدم' }] },
+  { id: 'karim', name: { en: 'Karim Hassan', ar: 'كريم حسن'  }, initials: 'KH', color: 'var(--hue-blue)',   relation: { en: 'Husband',  ar: 'الزوج'  }, age: 63, since: { en: 'Mar 2025', ar: 'مارس 2025'  }, conditions: [{ en: 'Hypertension', ar: 'ارتفاع ضغط الدم' }] },
+  { id: 'nadia', name: { en: 'Nadia Hassan', ar: 'ناديا حسن' }, initials: 'NH', color: 'var(--hue-violet)', relation: { en: 'Daughter', ar: 'الابنة' }, age: 28, since: { en: 'Apr 2025', ar: 'أبريل 2025' }, conditions: [] },
 ];
 
 /* ── Languages (en + ar fully translated; others preview) ─ */
@@ -527,9 +527,9 @@ const COUNTRIES = [
 
 /* ── Health records (labs / scans / reports) ─────────────── */
 const RECORD_TYPES = {
-  lab:    { icon: 'flask-conical', color: 'var(--petal-mint-600)', bg: 'var(--petal-mint-50)',   labelKey: 'rec_lab',    oneKey: 'rec_lab_one'    },
-  scan:   { icon: 'scan-line',     color: 'var(--petal-blue)',     bg: 'var(--petal-blue-50)',   labelKey: 'rec_scan',   oneKey: 'rec_scan_one'   },
-  report: { icon: 'file-text',     color: 'var(--petal-violet)',   bg: 'var(--petal-violet-50)', labelKey: 'rec_report', oneKey: 'rec_report_one' },
+  lab:    { icon: 'flask-conical', color: 'var(--hue-mint-600)', bg: 'var(--hue-mint-50)',   labelKey: 'rec_lab',    oneKey: 'rec_lab_one'    },
+  scan:   { icon: 'scan-line',     color: 'var(--hue-blue)',     bg: 'var(--hue-blue-50)',   labelKey: 'rec_scan',   oneKey: 'rec_scan_one'   },
+  report: { icon: 'file-text',     color: 'var(--hue-violet)',   bg: 'var(--hue-violet-50)', labelKey: 'rec_report', oneKey: 'rec_report_one' },
 };
 
 const HEALTH_RECORDS = [

@@ -165,7 +165,7 @@ export function ProSidebar({
                   style={{
                     all: 'unset', boxSizing: 'border-box', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10,
                     padding: '9px 10px', borderRadius: 10, transition: 'background 160ms ease',
-                    background: on ? 'var(--petal-blue-50, #E6F0F9)' : 'transparent',
+                    background: on ? 'var(--hue-blue-50, #E6F0F9)' : 'transparent',
                     color: on ? 'var(--balsm-primary, #0083FA)' : 'var(--balsm-ink-700, #384756)',
                   }}>
                   <span style={{ width: 18, height: 18, flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', color: on ? 'var(--balsm-primary, #0083FA)' : 'var(--balsm-ink-600, #526174)' }}>

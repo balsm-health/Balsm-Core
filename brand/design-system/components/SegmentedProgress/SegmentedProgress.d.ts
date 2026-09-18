@@ -5,7 +5,7 @@ export type MeterColor = 'aqua' | 'blue' | 'mint' | 'violet' | 'emerald' | 'sun'
 export interface MeterSegment {
   label: React.ReactNode;
   value: number;
-  /** Named petal/semantic color. */
+  /** Named brand-hue/semantic color. */
   color?: MeterColor;
   /** Raw CSS color override (wins over `color`). */
   hex?: string;

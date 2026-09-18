@@ -17,17 +17,17 @@
 <body>
 <div id="root"></div>
 <script type="text/babel">
-  function Petals({size='lg'}){const c=typeof size==='string'?`b-petal-spinner--${size}`:'';const st=typeof size==='number'?{width:size,height:size}:undefined;
-    return <span className={['b-petal-spinner',c].filter(Boolean).join(' ')} style={st} aria-hidden="true"><span className="b-petal-spinner__petal"/><span className="b-petal-spinner__petal"/><span className="b-petal-spinner__petal"/><span className="b-petal-spinner__petal"/><span className="b-petal-spinner__petal"/></span>;}
+  function MarkDots({size='lg'}){const c=typeof size==='string'?`b-mark-spinner--${size}`:'';const st=typeof size==='number'?{width:size,height:size}:undefined;
+    return <span className={['b-mark-spinner',c].filter(Boolean).join(' ')} style={st} aria-hidden="true"><span className="b-mark-spinner__dot"/><span className="b-mark-spinner__dot"/><span className="b-mark-spinner__dot"/><span className="b-mark-spinner__dot"/><span className="b-mark-spinner__dot"/></span>;}
   function Ring(){return <span className="b-ring-spinner" style={{width:40,height:40,'--ring-w':'4px'}} aria-hidden="true"/>;}
-  function LoadingOverlay({ open=true, variant='cream', message, submessage, progress, indeterminate=false, spinner='petal', contained=false, backgroundImage, className='', style, ...rest }) {
+  function LoadingOverlay({ open=true, variant='cream', message, submessage, progress, indeterminate=false, spinner='mark', contained=false, backgroundImage, className='', style, ...rest }) {
     if(!open)return null;
     const cls=['b-overlay',`b-overlay--${variant}`, contained&&'b-overlay--contained', className].filter(Boolean).join(' ');
     const st={...style}; if(backgroundImage)st['--overlay-bg']=`url(${backgroundImage})`;
     const showBar=progress!=null||indeterminate;
     return <div className={cls} style={st} role="status" aria-live="polite" {...rest}>
       <div className="b-overlay__inner">
-        {spinner==='ring'?<Ring/>:<Petals size="lg"/>}
+        {spinner==='ring'?<Ring/>:<MarkDots size="lg"/>}
         {message&&<div className="b-overlay__msg">{message}</div>}
         {submessage&&<div className="b-overlay__sub">{submessage}</div>}
         {showBar&&<div className="b-overlay__progress"><div className={['b-progress','b-progress--primary',indeterminate&&'b-progress--indeterminate'].filter(Boolean).join(' ')}>

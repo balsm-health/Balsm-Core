@@ -66,11 +66,11 @@ The brand has **no single primary color.** The mark carries five hues, one per r
 
 | Token | Hex | Role |
 |---|---|---|
-| `--petal-aqua` | `#02BBB5` | Accent · healing surfaces · "Balsm-feeling" moments |
-| `--petal-emerald` | `#01C4A2` | Eyebrow labels · success-adjacent affordances |
-| `--petal-blue` | `#1283FF` | **Primary action** — CTAs, links, focus rings |
-| `--petal-mint` | `#55D77F` | **Success** — sale completed, vitals normal, synced |
-| `--petal-violet` | `#724DD0` | **Controlled substance** — Schedule II/III flags |
+| `--hue-aqua` | `#02BBB5` | Accent · healing surfaces · "Balsm-feeling" moments |
+| `--hue-emerald` | `#01C4A2` | Eyebrow labels · success-adjacent affordances |
+| `--hue-blue` | `#1283FF` | **Primary action** — CTAs, links, focus rings |
+| `--hue-mint` | `#55D77F` | **Success** — sale completed, vitals normal, synced |
+| `--hue-violet` | `#724DD0` | **Controlled substance** — Schedule II/III flags |
 
 Each hue has `-600` (hover/pressed) and `-50` (soft wash background) siblings. Aliases: `--balsm-primary` (blue), `--balsm-accent` (aqua).
 
@@ -81,11 +81,11 @@ Each hue has `-600` (hover/pressed) and `-50` (soft wash background) siblings. A
 **Cream:** `--balsm-cream-100 #F4F3EC` — warm document surface for receipts, prescriptions, marketing decks, print. Never substitute cool gray.
 
 **Semantic clinical state:**
-- Success = `--petal-mint`
+- Success = `--hue-mint`
 - Warning = `#E5B428` (sun) — low stock, approval needed
 - Danger = `#D44A3C` (warm desaturated red — never fire-engine, which reads as panic)
-- Info = `--petal-blue`
-- Controlled substance = `--petal-violet`
+- Info = `--hue-blue`
+- Controlled substance = `--hue-violet`
 - Expiring soon = `#D97A20`
 
 Full token list: [brand/colors_and_type.css](brand/colors_and_type.css).
@@ -104,7 +104,7 @@ Full token list: [brand/colors_and_type.css](brand/colors_and_type.css).
 - Scale: `--fs-xs` 12 → `--fs-6xl` 72 (16px base, ~1.25 modular).
 - Classes: `.h-display`, `.h1`–`.h5`, `.p`, `.p-sm`, `.meta`, `.code`, `.eyebrow`, `.wordmark`, `.wordmark-ar`.
 - Eyebrows: `text-transform: uppercase; letter-spacing: 0.16em`.
-  **⚠ The specified emerald fails WCAG AA.** `--petal-emerald #01C4A2` at the 12-px eyebrow size scores **2.23:1 on white** and **2.00:1 on cream** — against a 4.5:1 requirement. Use a darkened emerald for eyebrow *text*: `#017560` clears AA on white (5.65), cream (5.08) and `#FAFAF7` (5.41). On dark surfaces the full-strength `#01C4A2` is the accessible one (7.68:1) and `#017560` fails (3.03:1) — so this token must flip by theme, not be a single value.
+  **⚠ The specified emerald fails WCAG AA.** `--hue-emerald #01C4A2` at the 12-px eyebrow size scores **2.23:1 on white** and **2.00:1 on cream** — against a 4.5:1 requirement. Use a darkened emerald for eyebrow *text*: `#017560` clears AA on white (5.65), cream (5.08) and `#FAFAF7` (5.41). On dark surfaces the full-strength `#01C4A2` is the accessible one (7.68:1) and `#017560` fails (3.03:1) — so this token must flip by theme, not be a single value.
   This applies to the brand hues generally: they are calibrated as *fills*, not as text colors. Drawing small text in any raw hue on a light surface will fail AA.
 - **RTL eyebrows:** Arabic has no uppercase (so `text-transform` is a no-op) and letter-spacing **breaks the cursive joins**. Under `[dir="rtl"]`, eyebrows must reset `letter-spacing: 0`, `text-transform: none`, and swap to `--font-arabic` — an explicit `font-family` on the class otherwise beats the inherited RTL swap.
 - Wordmark default: Montserrat 700 (closest free analog to the custom-set SVG wordmark). Swap `--font-display` if a custom wordmark face is later commissioned.
@@ -126,7 +126,7 @@ The `--space-*` scale is intentionally identical to Tailwind's default 4-px scal
 **Shadows.** Warm, soft `rgba(20, 32, 43, 0.06–0.10)` — never crisp drop shadows.
 - `--shadow-sm` default · `--shadow-md` hero · `--shadow-lg` modal
 - `--shadow-brand` (blue-tinted) for primary CTAs
-- `--shadow-petal` (violet-tinted) for controlled-substance surfaces and brand moments
+- `--shadow-brand` (violet-tinted) for controlled-substance surfaces and brand moments
 
 **Motion.** Default ease `cubic-bezier(0.16, 1, 0.3, 1)` — calm, never bouncy. Healthcare deserves stillness.
 - Durations 120 / 200 / 320 ms.
@@ -195,8 +195,8 @@ Per-stack mapping: Flutter `LayoutBuilder` / `MediaQuery.sizeOf` against these v
 |---|---|
 | **Primary** — app icon, web, marketing, storefront | Full 5-color mark + bilingual wordmark |
 | **Reverse** — dark UI, splash, photos, signage | All-white knockout (mark + wordmark) |
-| **Mono ink** — receipts watermark, stamps, fax, 16-px favicon | Single `--balsm-wordmark #1F2D3D`, or solid `--petal-blue` |
-| **Mono brand** — single color but on-brand | Solid `--petal-emerald #01C4A2` — closest to historic "Balsm green," most legible single hue |
+| **Mono ink** — receipts watermark, stamps, fax, 16-px favicon | Single `--balsm-wordmark #1F2D3D`, or solid `--hue-blue` |
+| **Mono brand** — single color but on-brand | Solid `--hue-emerald #01C4A2` — closest to historic "Balsm green," most legible single hue |
 
 Mark usage: app icon (squircle-clipped, ink or cream bg) · loading spinner (4s linear rotate) · empty-state hero (centered, 96px) · prescription/receipt watermark (8–10% opacity) · hero backdrop (over the watercolor pattern).
 

@@ -74,7 +74,7 @@
   box-shadow: 0 6px 18px rgba(18,131,255,.36);
 }
 .b-btn-primary:active:not(:disabled) {
-  background: var(--petal-blue-600);
+  background: var(--hue-blue-600);
   box-shadow: none;
   transform: translateY(1px);
 }
@@ -218,24 +218,24 @@
 .b-badge__remove:hover { background: rgba(0,0,0,.22); }
 
 /* clinical variants */
-.b-badge--success  { background: var(--petal-mint-50);      color: #1f6a36; }
-.b-badge--success  .b-badge__dot { background: var(--petal-mint); }
+.b-badge--success  { background: var(--hue-mint-50);      color: #1f6a36; }
+.b-badge--success  .b-badge__dot { background: var(--hue-mint); }
 .b-badge--warning  { background: #fdf5dc;                   color: #7a5a0f; }
 .b-badge--warning  .b-badge__dot { background: var(--balsm-warning); }
 .b-badge--danger   { background: var(--balsm-danger-bg);    color: #7a2a20; }
 .b-badge--danger   .b-badge__dot { background: var(--balsm-danger); }
-.b-badge--info     { background: var(--petal-blue-50);      color: #08407a; }
+.b-badge--info     { background: var(--hue-blue-50);      color: #08407a; }
 .b-badge--info     .b-badge__dot { background: var(--balsm-primary); }
-.b-badge--controlled { background: var(--petal-violet-50);  color: #3d2872; }
-.b-badge--controlled .b-badge__dot { background: var(--petal-violet); }
+.b-badge--controlled { background: var(--hue-violet-50);  color: #3d2872; }
+.b-badge--controlled .b-badge__dot { background: var(--hue-violet); }
 .b-badge--expiring { background: #fbeedc;                   color: #7a4310; }
 .b-badge--expiring .b-badge__dot { background: var(--balsm-expiring); }
 .b-badge--neutral  { background: var(--balsm-neutral-bg);   color: var(--balsm-ink-700); }
 .b-badge--neutral  .b-badge__dot { background: var(--balsm-neutral); }
 .b-badge--brand    { background: var(--balsm-primary);      color: #fff; }
 .b-badge--outline  { background: var(--balsm-surface); color: var(--balsm-ink-700); border: 1px solid var(--balsm-border); }
-.b-badge--emerald  { background: var(--petal-emerald-50);   color: #015a47; }
-.b-badge--emerald  .b-badge__dot { background: var(--petal-emerald); }
+.b-badge--emerald  { background: var(--hue-emerald-50);   color: #015a47; }
+.b-badge--emerald  .b-badge__dot { background: var(--hue-emerald); }
 
 /* ============================================================ */
 /* FIELD WRAPPER  (shared by Input, Select, Textarea)           */
@@ -468,7 +468,7 @@
 }
 .b-select-option:hover                  { background: var(--balsm-surface-muted); }
 .b-select-option--selected              { background: var(--balsm-primary-bg); color: var(--balsm-primary); font-weight: 600; }
-.b-select-option--selected:hover        { background: var(--petal-blue-50); }
+.b-select-option--selected:hover        { background: var(--hue-blue-50); }
 .b-select-option--disabled              { opacity: .42; cursor: not-allowed; }
 .b-select-option__check                 { color: var(--balsm-primary); flex-shrink: 0; }
 .b-select-empty                         { padding: 16px 12px; font-size: 13px; color: var(--fg3); text-align: center; }
@@ -525,7 +525,7 @@
   width: 3px;
   border-radius: var(--toast-radius) 0 0 var(--toast-radius);
 }
-.b-toast--success::before { background: var(--petal-mint); }
+.b-toast--success::before { background: var(--hue-mint); }
 .b-toast--warning::before { background: var(--balsm-warning); }
 .b-toast--danger::before  { background: var(--balsm-danger); }
 .b-toast--info::before    { background: var(--balsm-primary); }
@@ -540,10 +540,10 @@
   border-radius: var(--radius-md);
   flex-shrink: 0;
 }
-.b-toast--success .b-toast__icon { background: var(--petal-mint-50);   color: #1f6a36; }
+.b-toast--success .b-toast__icon { background: var(--hue-mint-50);   color: #1f6a36; }
 .b-toast--warning .b-toast__icon { background: #fdf5dc;                color: #7a5a0f; }
 .b-toast--danger  .b-toast__icon { background: var(--balsm-danger-bg); color: var(--balsm-danger); }
-.b-toast--info    .b-toast__icon { background: var(--petal-blue-50);   color: var(--balsm-primary); }
+.b-toast--info    .b-toast__icon { background: var(--hue-blue-50);   color: var(--balsm-primary); }
 
 /* body */
 .b-toast__body  { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
@@ -642,18 +642,18 @@
 
 /* color variants */
 .b-progress--primary  .b-progress__fill { background: var(--balsm-primary); }
-.b-progress--accent   .b-progress__fill { background: var(--petal-aqua); }
-.b-progress--success  .b-progress__fill { background: var(--petal-mint); }
+.b-progress--accent   .b-progress__fill { background: var(--hue-aqua); }
+.b-progress--success  .b-progress__fill { background: var(--hue-mint); }
 .b-progress--warning  .b-progress__fill { background: var(--balsm-warning); }
 .b-progress--danger   .b-progress__fill { background: var(--balsm-danger); }
-.b-progress--violet   .b-progress__fill { background: var(--petal-violet); }
+.b-progress--violet   .b-progress__fill { background: var(--hue-violet); }
 .b-progress--expiring .b-progress__fill { background: var(--balsm-expiring); }
-.b-progress--brand    .b-progress__fill { background: var(--grad-petal); }
+.b-progress--brand    .b-progress__fill { background: var(--grad-brand); }
 
 /* track tint follows the fill hue (soft wash) */
-.b-progress--accent   .b-progress__track { background: var(--petal-aqua-50); }
-.b-progress--success  .b-progress__track { background: var(--petal-mint-50); }
-.b-progress--violet   .b-progress__track { background: var(--petal-violet-50); }
+.b-progress--accent   .b-progress__track { background: var(--hue-aqua-50); }
+.b-progress--success  .b-progress__track { background: var(--hue-mint-50); }
+.b-progress--violet   .b-progress__track { background: var(--hue-violet-50); }
 
 /* ── Indeterminate (loading, unknown duration) ───────────────── */
 .b-progress--indeterminate .b-progress__fill {
@@ -714,11 +714,11 @@
   stroke-linecap: round;
   transition: stroke-dashoffset var(--dur-slow, 320ms) cubic-bezier(.16,1,.3,1);
 }
-.b-progress-ring--accent  .b-progress-ring__fill { stroke: var(--petal-aqua); }
-.b-progress-ring--success .b-progress-ring__fill { stroke: var(--petal-mint); }
+.b-progress-ring--accent  .b-progress-ring__fill { stroke: var(--hue-aqua); }
+.b-progress-ring--success .b-progress-ring__fill { stroke: var(--hue-mint); }
 .b-progress-ring--warning .b-progress-ring__fill { stroke: var(--balsm-warning); }
 .b-progress-ring--danger  .b-progress-ring__fill { stroke: var(--balsm-danger); }
-.b-progress-ring--violet  .b-progress-ring__fill { stroke: var(--petal-violet); }
+.b-progress-ring--violet  .b-progress-ring__fill { stroke: var(--hue-violet); }
 .b-progress-ring__center {
   position: absolute;
   inset: 0;
@@ -761,20 +761,20 @@
           mask: radial-gradient(farthest-side, transparent calc(100% - var(--ring-w, 3px)), #000 calc(100% - var(--ring-w, 3px)));
   animation: b-spin 0.85s linear infinite;
 }
-.b-ring-spinner--accent  { background: conic-gradient(from 90deg, transparent, var(--petal-aqua)); }
-.b-ring-spinner--success { background: conic-gradient(from 90deg, transparent, var(--petal-mint)); }
-.b-ring-spinner--violet  { background: conic-gradient(from 90deg, transparent, var(--petal-violet)); }
+.b-ring-spinner--accent  { background: conic-gradient(from 90deg, transparent, var(--hue-aqua)); }
+.b-ring-spinner--success { background: conic-gradient(from 90deg, transparent, var(--hue-mint)); }
+.b-ring-spinner--violet  { background: conic-gradient(from 90deg, transparent, var(--hue-violet)); }
 .b-ring-spinner--ink     { background: conic-gradient(from 90deg, transparent, var(--balsm-ink-400)); }
 
 /* ── Five-dot mark spinner (brand / full-screen moments) ────── */
-.b-petal-spinner {
+.b-mark-spinner {
   position: relative;
   display: inline-block;
   width: 48px;
   height: 48px;
   animation: b-spin 3.6s linear infinite;
 }
-.b-petal-spinner__petal {
+.b-mark-spinner__dot {
   position: absolute;
   top: 0; left: 50%;
   width: 28%;
@@ -784,17 +784,17 @@
   transform-origin: 50% 178%;
   opacity: .9;
 }
-.b-petal-spinner__petal:nth-child(1) { transform: rotate(0deg);   background: var(--petal-emerald); animation: b-petal-pulse 3.6s ease-in-out infinite; }
-.b-petal-spinner__petal:nth-child(2) { transform: rotate(72deg);  background: var(--petal-blue);    animation: b-petal-pulse 3.6s ease-in-out -0.72s infinite; }
-.b-petal-spinner__petal:nth-child(3) { transform: rotate(144deg); background: var(--petal-mint);    animation: b-petal-pulse 3.6s ease-in-out -1.44s infinite; }
-.b-petal-spinner__petal:nth-child(4) { transform: rotate(216deg); background: var(--petal-violet);  animation: b-petal-pulse 3.6s ease-in-out -2.16s infinite; }
-.b-petal-spinner__petal:nth-child(5) { transform: rotate(288deg); background: var(--petal-aqua);    animation: b-petal-pulse 3.6s ease-in-out -2.88s infinite; }
-@keyframes b-petal-pulse {
+.b-mark-spinner__dot:nth-child(1) { transform: rotate(0deg);   background: var(--hue-emerald); animation: b-mark-pulse 3.6s ease-in-out infinite; }
+.b-mark-spinner__dot:nth-child(2) { transform: rotate(72deg);  background: var(--hue-blue);    animation: b-mark-pulse 3.6s ease-in-out -0.72s infinite; }
+.b-mark-spinner__dot:nth-child(3) { transform: rotate(144deg); background: var(--hue-mint);    animation: b-mark-pulse 3.6s ease-in-out -1.44s infinite; }
+.b-mark-spinner__dot:nth-child(4) { transform: rotate(216deg); background: var(--hue-violet);  animation: b-mark-pulse 3.6s ease-in-out -2.16s infinite; }
+.b-mark-spinner__dot:nth-child(5) { transform: rotate(288deg); background: var(--hue-aqua);    animation: b-mark-pulse 3.6s ease-in-out -2.88s infinite; }
+@keyframes b-mark-pulse {
   0%, 100% { opacity: .35; }
   40%      { opacity: 1; }
 }
-.b-petal-spinner--sm { width: 28px; height: 28px; }
-.b-petal-spinner--lg { width: 72px; height: 72px; }
+.b-mark-spinner--sm { width: 28px; height: 28px; }
+.b-mark-spinner--lg { width: 72px; height: 72px; }
 
 /* ============================================================ */
 /* SKELETON  — shimmer placeholders                             */
@@ -831,15 +831,15 @@
   .b-progress--indeterminate .b-progress__fill,
   .b-progress--striped .b-progress__fill::after,
   .b-ring-spinner,
-  .b-petal-spinner,
-  .b-petal-spinner__petal,
+  .b-mark-spinner,
+  .b-mark-spinner__dot,
   .b-skeleton {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
   .b-progress--indeterminate .b-progress__fill { width: 100%; left: 0; right: 0; }
   .b-skeleton { background-position: 0 0; }
-  .b-petal-spinner__petal { opacity: .9; }
+  .b-mark-spinner__dot { opacity: .9; }
 }
 
 /* ============================================================ */
@@ -920,7 +920,7 @@
   border-color: var(--balsm-primary);
   color: var(--balsm-primary);
   background: var(--balsm-surface);
-  box-shadow: 0 0 0 4px var(--petal-blue-50);
+  box-shadow: 0 0 0 4px var(--hue-blue-50);
 }
 .b-step--active .b-step__label { color: var(--balsm-primary); }
 .b-step--active .b-step__marker::before {
@@ -944,12 +944,12 @@
 .b-steps--dot .b-step__marker svg { display: none; }
 .b-steps--dot .b-step__line { margin: 0 8px; }
 
-.b-steps--success .b-step--done .b-step__marker { background: var(--petal-mint); border-color: var(--petal-mint); }
-.b-steps--success .b-step--done .b-step__line::after { background: var(--petal-mint); }
-.b-steps--success .b-step--active .b-step__marker { border-color: var(--petal-mint); color: #1f6a36; box-shadow: 0 0 0 4px var(--petal-mint-50); }
-.b-steps--violet .b-step--done .b-step__marker { background: var(--petal-violet); border-color: var(--petal-violet); }
-.b-steps--violet .b-step--done .b-step__line::after { background: var(--petal-violet); }
-.b-steps--violet .b-step--active .b-step__marker { border-color: var(--petal-violet); color: var(--petal-violet); box-shadow: 0 0 0 4px var(--petal-violet-50); }
+.b-steps--success .b-step--done .b-step__marker { background: var(--hue-mint); border-color: var(--hue-mint); }
+.b-steps--success .b-step--done .b-step__line::after { background: var(--hue-mint); }
+.b-steps--success .b-step--active .b-step__marker { border-color: var(--hue-mint); color: #1f6a36; box-shadow: 0 0 0 4px var(--hue-mint-50); }
+.b-steps--violet .b-step--done .b-step__marker { background: var(--hue-violet); border-color: var(--hue-violet); }
+.b-steps--violet .b-step--done .b-step__line::after { background: var(--hue-violet); }
+.b-steps--violet .b-step--active .b-step__marker { border-color: var(--hue-violet); color: var(--hue-violet); box-shadow: 0 0 0 4px var(--hue-violet-50); }
 
 .b-steps--vertical { flex-direction: column; align-items: stretch; }
 .b-steps--vertical .b-step { flex-direction: column; align-items: stretch; flex: 0 0 auto; }
@@ -1006,7 +1006,7 @@
   pointer-events: none;
 }
 .b-progress-btn--secondary .b-progress-btn__fill,
-.b-progress-btn--ghost .b-progress-btn__fill { background: var(--petal-blue-50); }
+.b-progress-btn--ghost .b-progress-btn__fill { background: var(--hue-blue-50); }
 [dir="rtl"] .b-progress-btn__fill { inset: 0 0 0 auto; }
 
 .b-progress-btn--indeterminate .b-progress-btn__fill {
@@ -1046,9 +1046,9 @@
   box-shadow: 0 0 8px rgba(18,131,255,.6), 0 0 2px rgba(18,131,255,.9);
   transition: width 240ms var(--ease-out), opacity 320ms ease 120ms;
 }
-.b-toploader--accent  .b-toploader__bar { background: var(--petal-aqua);   box-shadow: 0 0 8px rgba(2,187,181,.55); }
-.b-toploader--success .b-toploader__bar { background: var(--petal-mint);   box-shadow: 0 0 8px rgba(85,215,127,.55); }
-.b-toploader--brand   .b-toploader__bar { background: var(--grad-petal);   box-shadow: 0 0 8px rgba(114,77,208,.45); }
+.b-toploader--accent  .b-toploader__bar { background: var(--hue-aqua);   box-shadow: 0 0 8px rgba(2,187,181,.55); }
+.b-toploader--success .b-toploader__bar { background: var(--hue-mint);   box-shadow: 0 0 8px rgba(85,215,127,.55); }
+.b-toploader--brand   .b-toploader__bar { background: var(--grad-brand);   box-shadow: 0 0 8px rgba(114,77,208,.45); }
 .b-toploader--done .b-toploader__bar { opacity: 0; }
 
 .b-toploader--indeterminate .b-toploader__bar {
@@ -1091,11 +1091,11 @@
   transition: width var(--dur-slow) var(--ease-out);
 }
 .b-meter--gap .b-meter__seg { border-radius: var(--radius-pill); }
-.b-meter__seg--aqua    { background: var(--petal-aqua); }
-.b-meter__seg--blue    { background: var(--petal-blue); }
-.b-meter__seg--mint    { background: var(--petal-mint); }
-.b-meter__seg--violet  { background: var(--petal-violet); }
-.b-meter__seg--emerald { background: var(--petal-emerald); }
+.b-meter__seg--aqua    { background: var(--hue-aqua); }
+.b-meter__seg--blue    { background: var(--hue-blue); }
+.b-meter__seg--mint    { background: var(--hue-mint); }
+.b-meter__seg--violet  { background: var(--hue-violet); }
+.b-meter__seg--emerald { background: var(--hue-emerald); }
 .b-meter__seg--sun     { background: var(--balsm-warning); }
 .b-meter__seg--danger  { background: var(--balsm-danger); }
 .b-meter__seg--ink     { background: var(--balsm-ink-300); }
@@ -1396,7 +1396,7 @@
 }
 
 /* Every animated layer pivots on the shared hub, in viewBox units */
-.b-logomark__petal,
+.b-logomark__ribbon,
 .b-logomark__reveal,
 .b-logomark__breath,
 .b-logomark__spin,
@@ -1404,7 +1404,7 @@
   transform-box: view-box;
   transform-origin: 349.65px 335.9px;
 }
-.b-logomark__petal { will-change: transform, opacity; }
+.b-logomark__ribbon { will-change: transform, opacity; }
 .b-logomark__glow  { opacity: 0; }
 
 /* Optional glow eases in across the reveal window, for any variant */
@@ -1414,10 +1414,10 @@
 @keyframes b-logo-glow-in { 0%, 55% { opacity: 0; } 100% { opacity: 1; } }
 
 /* ===== Reveals ============================================== */
-/* ---- Petal-level: stagger with --i (0..4), clockwise -------- */
+/* ---- Ribbon-level: stagger with --i (0..4), clockwise ------- */
 
 /* bloom (signature) — unfurl + untwist from the hub */
-.b-logomark--playing.b-logomark--v-bloom .b-logomark__petal {
+.b-logomark--playing.b-logomark--v-bloom .b-logomark__ribbon {
   animation: b-logo-bloom calc(1150ms * var(--logo-speed)) var(--logo-ease) both;
   animation-delay: calc(var(--i) * 120ms * var(--logo-speed));
 }
@@ -1429,7 +1429,7 @@
 }
 
 /* cascade — calm sequential grow, no rotation */
-.b-logomark--playing.b-logomark--v-cascade .b-logomark__petal {
+.b-logomark--playing.b-logomark--v-cascade .b-logomark__ribbon {
   animation: b-logo-cascade calc(720ms * var(--logo-speed)) var(--logo-ease) both;
   animation-delay: calc(var(--i) * 150ms * var(--logo-speed));
 }
@@ -1439,7 +1439,7 @@
 }
 
 /* pop — near-simultaneous scale-in with overshoot */
-.b-logomark--playing.b-logomark--v-pop .b-logomark__petal {
+.b-logomark--playing.b-logomark--v-pop .b-logomark__ribbon {
   animation: b-logo-pop calc(700ms * var(--logo-speed)) var(--logo-ease) both;
   animation-delay: calc(var(--i) * 40ms * var(--logo-speed));
 }
@@ -1449,8 +1449,8 @@
   100% { transform: scale(1); }
 }
 
-/* wave — a pulse ripples petal to petal */
-.b-logomark--playing.b-logomark--v-wave .b-logomark__petal {
+/* wave — a pulse ripples ribbon to ribbon */
+.b-logomark--playing.b-logomark--v-wave .b-logomark__ribbon {
   animation: b-logo-wave calc(680ms * var(--logo-speed)) var(--logo-ease) both;
   animation-delay: calc(var(--i) * 120ms * var(--logo-speed));
 }
@@ -1460,8 +1460,8 @@
   100% { transform: scale(1); }
 }
 
-/* unwind — petals spiral open from a tight twist */
-.b-logomark--playing.b-logomark--v-unwind .b-logomark__petal {
+/* unwind — ribbons spiral open from a tight twist */
+.b-logomark--playing.b-logomark--v-unwind .b-logomark__ribbon {
   animation: b-logo-unwind calc(1150ms * var(--logo-speed)) var(--logo-ease) both;
   animation-delay: calc(var(--i) * 90ms * var(--logo-speed));
 }
@@ -1501,13 +1501,13 @@
 @keyframes b-logo-iris { 0% { r: 0px; } 100% { r: 380px; } }
 
 /* ===== Creative reveals ==================================== */
-/* Unlike the ordinary entrances (which all settle a petal into  */
+/* Unlike the ordinary entrances (which all settle a ribbon into  */
 /* place), these change character: liquid drops, a cardiac beat, */
 /* an orbit swirl, a paper fold, a grayscale→color develop, a    */
 /* magnetic assemble, and a self-drawing outline.                */
 
 /* liquid — balm drops fall in and settle with a squash */
-.b-logomark--playing.b-logomark--v-liquid .b-logomark__petal {
+.b-logomark--playing.b-logomark--v-liquid .b-logomark__ribbon {
   animation: b-logo-liquid calc(780ms * var(--logo-speed)) cubic-bezier(.34, 1.4, .5, 1) both;
   animation-delay: calc(var(--i) * 95ms * var(--logo-speed));
 }
@@ -1532,8 +1532,8 @@
   100% { transform: scale(1); }
 }
 
-/* orbit — petals swirl in from a wide orbit */
-.b-logomark--playing.b-logomark--v-orbit .b-logomark__petal {
+/* orbit — ribbons swirl in from a wide orbit */
+.b-logomark--playing.b-logomark--v-orbit .b-logomark__ribbon {
   animation: b-logo-orbit calc(1120ms * var(--logo-speed)) cubic-bezier(.22, .8, .28, 1) both;
   animation-delay: calc(var(--i) * 85ms * var(--logo-speed));
 }
@@ -1543,8 +1543,8 @@
   100% { transform: rotate(0deg) translateX(0) scale(1); }
 }
 
-/* fold — petals unfold open like paper (vertical crease at the hub) */
-.b-logomark--playing.b-logomark--v-fold .b-logomark__petal {
+/* fold — ribbons unfold open like paper (vertical crease at the hub) */
+.b-logomark--playing.b-logomark--v-fold .b-logomark__ribbon {
   animation: b-logo-fold calc(720ms * var(--logo-speed)) cubic-bezier(.2, .8, .2, 1) both;
   animation-delay: calc(var(--i) * 110ms * var(--logo-speed));
 }
@@ -1554,8 +1554,8 @@
   100% { transform: scaleY(1) scaleX(1); }
 }
 
-/* develop — surfaces from grayscale into full color, petal by petal */
-.b-logomark--playing.b-logomark--v-develop .b-logomark__petal {
+/* develop — surfaces from grayscale into full color, ribbon by ribbon */
+.b-logomark--playing.b-logomark--v-develop .b-logomark__ribbon {
   animation: b-logo-develop calc(940ms * var(--logo-speed)) ease-out both;
   animation-delay: calc(var(--i) * 130ms * var(--logo-speed));
 }
@@ -1565,9 +1565,9 @@
   100% { opacity: 1; filter: grayscale(0) brightness(1) contrast(1); transform: scale(1); }
 }
 
-/* magnetic — petals fly in from their own side and snap home
-   (--fx/--fy are set per petal on the element = each petal's outward vector) */
-.b-logomark--playing.b-logomark--v-magnetic .b-logomark__petal {
+/* magnetic — ribbons fly in from their own side and snap home
+   (--fx/--fy are set per ribbon on the element = each ribbon's outward vector) */
+.b-logomark--playing.b-logomark--v-magnetic .b-logomark__ribbon {
   animation: b-logo-magnetic calc(820ms * var(--logo-speed)) cubic-bezier(.3, 1.3, .5, 1) both;
   animation-delay: calc(var(--i) * 55ms * var(--logo-speed));
 }
@@ -1577,9 +1577,9 @@
   100% { transform: translate(0, 0) scale(1) rotate(0deg); }
 }
 
-/* draw — each petal draws its outline, then fills (pathLength=100 on the paths) */
-.b-logomark--v-draw .b-logomark__petal { stroke-dasharray: 100 100; }
-.b-logomark--playing.b-logomark--v-draw .b-logomark__petal {
+/* draw — each ribbon draws its outline, then fills (pathLength=100 on the paths) */
+.b-logomark--v-draw .b-logomark__ribbon { stroke-dasharray: 100 100; }
+.b-logomark--playing.b-logomark--v-draw .b-logomark__ribbon {
   animation: b-logo-draw calc(1150ms * var(--logo-speed)) ease-in-out both;
   animation-delay: calc(var(--i) * 130ms * var(--logo-speed));
 }
@@ -1616,9 +1616,9 @@
     animation-iteration-count: 1 !important;
   }
   .b-overlay { animation: none; }
-  .b-logomark__petal, .b-logomark__reveal, .b-logomark__breath,
+  .b-logomark__ribbon, .b-logomark__reveal, .b-logomark__breath,
   .b-logomark__spin,  .b-logomark__glow,   .b-logomark__iris { animation: none !important; }
-  .b-logomark__petal, .b-logomark__reveal { opacity: 1 !important; transform: none !important; }
+  .b-logomark__ribbon, .b-logomark__reveal { opacity: 1 !important; transform: none !important; }
   .b-logomark__glow  { opacity: 1; }
   .b-logomark__iris  { r: 470px; }
 }
@@ -1712,10 +1712,10 @@
    in RTL a left accent lands on the wrong side of the content. */
 .b-card--accent { border-top-width: 3px; border-top-style: solid; }
 .b-card--accent-primary { border-top-color: var(--balsm-primary); }
-.b-card--accent-success { border-top-color: var(--petal-mint); }
+.b-card--accent-success { border-top-color: var(--hue-mint); }
 .b-card--accent-warning { border-top-color: var(--balsm-expiring); }
 .b-card--accent-danger  { border-top-color: var(--balsm-danger); }
-.b-card--accent-brand   { border-top-color: transparent; border-image: var(--grad-petal) 1; }
+.b-card--accent-brand   { border-top-color: transparent; border-image: var(--grad-brand) 1; }
 
 /* ============================================================ */
 /* TABLE  — dense data, priority-based column dropping          */
@@ -1756,7 +1756,7 @@
 
 .b-table--zebra tbody tr:nth-child(even) { background: var(--balsm-ink-50); }
 .b-table--hover tbody tr { transition: background 120ms; }
-.b-table--hover tbody tr:hover { background: var(--petal-blue-50, var(--balsm-ink-50)); }
+.b-table--hover tbody tr:hover { background: var(--hue-blue-50, var(--balsm-ink-50)); }
 
 /* density */
 .b-table--dense th, .b-table--dense td { padding: 7px 10px; font-size: 12.5px; }
@@ -1783,7 +1783,7 @@
 .b-table__sort[aria-sort="descending"] .b-table__sort-icon { opacity: 1; transform: rotate(180deg); }
 
 /* selected row */
-.b-table tbody tr.is-selected { background: var(--petal-blue-50); }
+.b-table tbody tr.is-selected { background: var(--hue-blue-50); }
 .b-table tbody tr.is-selected td { border-bottom-color: rgba(18,131,255,.18); }
 
 /* Priority-based column dropping (design.md §9).
@@ -1918,7 +1918,7 @@
 .b-switch__input:focus-visible + .b-switch__track { box-shadow: 0 0 0 3px rgba(18,131,255,.25); }
 .b-switch:hover:not(.b-switch--disabled) .b-switch__input:not(:checked) + .b-switch__track { background: var(--balsm-ink-400); }
 
-.b-switch--success .b-switch__input:checked + .b-switch__track { background: var(--petal-mint); }
+.b-switch--success .b-switch__input:checked + .b-switch__track { background: var(--hue-mint); }
 .b-switch--sm .b-switch__track { width: 34px; height: 20px; }
 .b-switch--sm .b-switch__thumb { width: 15px; height: 15px; top: 2.5px; }
 .b-switch--sm .b-switch__input:checked + .b-switch__track .b-switch__thumb { translate: 14px 0; }
@@ -2019,8 +2019,8 @@
 .b-modal__icon svg { width: 20px; height: 20px; }
 .b-modal__icon--danger  { background: var(--balsm-danger-bg); color: var(--balsm-danger); }
 .b-modal__icon--warning { background: var(--balsm-expiring-bg); color: var(--balsm-expiring); }
-.b-modal__icon--info    { background: var(--petal-blue-50); color: var(--balsm-primary); }
-.b-modal__icon--success { background: var(--petal-mint-50); color: #1f6a36; }
+.b-modal__icon--info    { background: var(--hue-blue-50); color: var(--balsm-primary); }
+.b-modal__icon--success { background: var(--hue-mint-50); color: #1f6a36; }
 
 /* full-screen sheet on phones — a 460px dialog centred on a 360px
    screen is a cramped card; on touch it should own the viewport */
@@ -2069,15 +2069,15 @@
 .b-avatar--xl { width: 64px; height: 64px; font-size: 22px; }
 .b-avatar--square { border-radius: var(--radius-md, 10px); }
 
-/* tones — deterministic per person, from the petal palette.
+/* tones — deterministic per person, from the brand hue palette.
    Tinted background + dark text, never saturated fill + white:
    initials must stay legible at 22px. */
-.b-avatar--aqua    { background: var(--petal-aqua-50);    color: #0b6b66; }
-.b-avatar--emerald { background: var(--petal-emerald-50); color: #0a6b58; }
-.b-avatar--blue    { background: var(--petal-blue-50);    color: #10508f; }
-.b-avatar--mint    { background: var(--petal-mint-50);    color: #1f6a36; }
-.b-avatar--violet  { background: var(--petal-violet-50);  color: #452b8a; }
-.b-avatar--brand   { background: var(--grad-petal); color: #fff; }
+.b-avatar--aqua    { background: var(--hue-aqua-50);    color: #0b6b66; }
+.b-avatar--emerald { background: var(--hue-emerald-50); color: #0a6b58; }
+.b-avatar--blue    { background: var(--hue-blue-50);    color: #10508f; }
+.b-avatar--mint    { background: var(--hue-mint-50);    color: #1f6a36; }
+.b-avatar--violet  { background: var(--hue-violet-50);  color: #452b8a; }
+.b-avatar--brand   { background: var(--grad-brand); color: #fff; }
 
 /* presence / sync dot */
 .b-avatar__status {
@@ -2089,7 +2089,7 @@
   border: 2px solid var(--balsm-surface, #fff);
   box-sizing: border-box;
 }
-.b-avatar__status--online  { background: var(--petal-mint); }
+.b-avatar__status--online  { background: var(--hue-mint); }
 .b-avatar__status--offline { background: var(--balsm-ink-400); }
 .b-avatar__status--syncing { background: var(--balsm-expiring); }
 

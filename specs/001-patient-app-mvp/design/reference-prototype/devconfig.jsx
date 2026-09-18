@@ -544,10 +544,10 @@ function DevConfigOverlay({ onClose, screenshot }) {
                 style={{ height:50, fontSize:13, justifyContent:'flex-start', paddingInlineStart:16, gap:12,
                   opacity: sendStatus==='sending' ? .6 : 1 }}>
                 <div style={{ width:34, height:34, borderRadius:8,
-                  background: sendStatus==='sent' ? 'var(--petal-mint-50)' : sendStatus==='error' ? '#FBEBE7' : 'var(--balsm-ink-50)',
+                  background: sendStatus==='sent' ? 'var(--hue-mint-50)' : sendStatus==='error' ? '#FBEBE7' : 'var(--balsm-ink-50)',
                   display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
                   <Icon name={sendStatus==='sent' ? 'check' : sendStatus==='error' ? 'alert-triangle' : sendStatus==='sending' ? 'loader' : 'send'}
-                    size={16} style={{ color: sendStatus==='sent' ? 'var(--petal-mint)' : sendStatus==='error' ? 'var(--balsm-danger)' : 'var(--fg2)' }} />
+                    size={16} style={{ color: sendStatus==='sent' ? 'var(--hue-mint)' : sendStatus==='error' ? 'var(--balsm-danger)' : 'var(--fg2)' }} />
                 </div>
                 <div style={{ textAlign:'left' }}>
                   <div style={{ fontWeight:700, fontSize:13 }}>

@@ -27,16 +27,16 @@ function DSProgress({ value, variant = 'primary', size = 'md', label, showValue 
   );
 }
 
-/* ── Five-petal brand spinner ────────────────────────────────── */
-function DSPetalSpinner({ size = 'md', label, className = '', style }) {
-  const sizeCls = typeof size === 'string' ? `b-petal-spinner--${size}` : '';
+/* ── Brand mark spinner ────────────────────────────────── */
+function DSMarkSpinner({ size = 'md', label, className = '', style }) {
+  const sizeCls = typeof size === 'string' ? `b-mark-spinner--${size}` : '';
   const sizeStyle = typeof size === 'number' ? { width: size, height: size } : undefined;
   const node = (
-    <span className={['b-petal-spinner', sizeCls, className].filter(Boolean).join(' ')}
+    <span className={['b-mark-spinner', sizeCls, className].filter(Boolean).join(' ')}
       style={{ ...sizeStyle, ...style }} role="status" aria-label={label || 'Loading'}>
-      <span className="b-petal-spinner__petal" /><span className="b-petal-spinner__petal" />
-      <span className="b-petal-spinner__petal" /><span className="b-petal-spinner__petal" />
-      <span className="b-petal-spinner__petal" />
+      <span className="b-mark-spinner__dot" /><span className="b-mark-spinner__dot" />
+      <span className="b-mark-spinner__dot" /><span className="b-mark-spinner__dot" />
+      <span className="b-mark-spinner__dot" />
     </span>
   );
   if (!label) return node;
@@ -125,7 +125,7 @@ function DSTopLoadingBar({ value = null, loading, variant = 'primary', height = 
 
 /* ── Loading overlay (brand / cream / scrim) ─────────────────── */
 function DSLoadingOverlay({ open = true, variant = 'cream', message, submessage, progress,
-  indeterminate = false, spinner = 'petal', backgroundImage, className = '', style }) {
+  indeterminate = false, spinner = 'mark', backgroundImage, className = '', style }) {
   if (!open) return null;
   const cls = ['b-overlay', `b-overlay--${variant}`, className].filter(Boolean).join(' ');
   const st = { ...style };
@@ -134,7 +134,7 @@ function DSLoadingOverlay({ open = true, variant = 'cream', message, submessage,
   return (
     <div className={cls} style={st} role="status" aria-live="polite">
       <div className="b-overlay__inner">
-        {spinner === 'ring' ? <DSSpinner size={40} thickness={4} /> : <DSPetalSpinner size="lg" />}
+        {spinner === 'ring' ? <DSSpinner size={40} thickness={4} /> : <DSMarkSpinner size="lg" />}
         {message && <div className="b-overlay__msg">{message}</div>}
         {submessage && <div className="b-overlay__sub">{submessage}</div>}
         {showBar && (
@@ -167,7 +167,7 @@ function DSMeter({ title, total, segments = [], size = 'md', legend = true, clas
         <div className="b-meter__legend">
           {segments.map((s, i) => (
             <span key={i} className="b-meter__item">
-              <span className="b-meter__swatch" style={{ background: `var(--petal-${s.color}, var(--balsm-ink-300))` }} />
+              <span className="b-meter__swatch" style={{ background: `var(--hue-${s.color}, var(--balsm-ink-300))` }} />
               {s.label} {s.shown != null && <span className="b-meter__val">{s.shown}</span>}
             </span>
           ))}
@@ -178,6 +178,6 @@ function DSMeter({ title, total, segments = [], size = 'md', legend = true, clas
 }
 
 Object.assign(window, {
-  DSProgress, DSPetalSpinner, DSSpinner, DSSkeleton, DSProgressButton,
+  DSProgress, DSMarkSpinner, DSSpinner, DSSkeleton, DSProgressButton,
   DSTopLoadingBar, DSLoadingOverlay, DSMeter,
 });

@@ -7,11 +7,11 @@
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 :root {
-  /* App accent — the petal that tints CTAs, rings, active states.
-     Driven by the "accent petal" Tweak. Defaults to brand blue. */
-  --app-accent:      var(--petal-blue);
-  --app-accent-600:  var(--petal-blue-600);
-  --app-accent-50:   var(--petal-blue-50);
+  /* App accent — the hue that tints CTAs, rings, active states.
+     Driven by the "accent hue" Tweak. Defaults to brand blue. */
+  --app-accent:      var(--hue-blue);
+  --app-accent-600:  var(--hue-blue-600);
+  --app-accent-50:   var(--hue-blue-50);
   --app-accent-shadow: 0 8px 22px rgba(18,131,255,0.26);
 
   /* Accessibility font scale — driven by the "font scale" Tweak */
@@ -175,11 +175,11 @@ body {
 /* ── Pills / chips ────────────────────────────────────────── */
 .pill { display: inline-flex; align-items: center; gap: 6px; border-radius: var(--radius-pill); padding: 4px 11px; font-size: var(--pt-xs); font-weight: 600; line-height: 1.4; }
 .pill .dot { width: 7px; height: 7px; border-radius: 999px; flex-shrink: 0; }
-.pill.success { background: var(--petal-mint-50); color: #1F6A36; } .pill.success .dot { background: var(--petal-mint); }
-.pill.info { background: var(--petal-blue-50); color: #08407A; } .pill.info .dot { background: var(--petal-blue); }
+.pill.success { background: var(--hue-mint-50); color: #1F6A36; } .pill.success .dot { background: var(--hue-mint); }
+.pill.info { background: var(--hue-blue-50); color: #08407A; } .pill.info .dot { background: var(--hue-blue); }
 .pill.warn { background: #FDF5DC; color: #7A5A0F; } .pill.warn .dot { background: var(--balsm-warning); }
 .pill.danger { background: #FBEBE7; color: #7A2A20; } .pill.danger .dot { background: var(--balsm-danger); }
-.pill.violet { background: var(--petal-violet-50); color: #3D2872; } .pill.violet .dot { background: var(--petal-violet); }
+.pill.violet { background: var(--hue-violet-50); color: #3D2872; } .pill.violet .dot { background: var(--hue-violet); }
 .pill.neutral { background: var(--balsm-ink-100); color: var(--balsm-ink-700); } .pill.neutral .dot { background: var(--balsm-ink-500); }
 
 /* ── Avatar ───────────────────────────────────────────────── */
@@ -187,7 +187,7 @@ body {
   width: 44px; height: 44px; border-radius: var(--radius-pill);
   display: inline-flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-weight: 700; font-size: var(--pt-md);
-  background: var(--petal-aqua); color: #fff; flex-shrink: 0;
+  background: var(--hue-aqua); color: #fff; flex-shrink: 0;
 }
 [dir="rtl"] .avatar { font-family: var(--font-arabic); }
 
@@ -289,12 +289,12 @@ body {
   background: var(--app-accent); color: #fff; position: relative; overflow: hidden;
   box-shadow: var(--app-accent-shadow);
 }
-.hero-card .petal-wm {
+.hero-card .mark-wm {
   position: absolute; right: -28px; top: -28px; width: 150px; height: 150px;
   opacity: 0.16; pointer-events: none;
   filter: brightness(0) invert(1);
 }
-[dir="rtl"] .hero-card .petal-wm { right: auto; left: -28px; }
+[dir="rtl"] .hero-card .mark-wm { right: auto; left: -28px; }
 .hero-card .label { font-size: var(--pt-sm); font-weight: 600; opacity: 0.9; }
 .hero-card .h { font-family: var(--font-display); font-weight: 800; font-size: var(--pt-2xl); letter-spacing: -0.01em; margin: 2px 0 14px; }
 [dir="rtl"] .hero-card .h { font-family: var(--font-arabic); }
@@ -419,14 +419,14 @@ input.vital-num:focus { border-color: var(--app-accent); background: var(--app-a
   background: #fff; border: 1.5px solid var(--balsm-border); border-radius: var(--radius-lg);
   cursor: pointer; transition: all var(--dur-base) var(--ease-out); margin-bottom: 10px;
 }
-.check-row.taken { border-color: var(--petal-mint); background: var(--petal-mint-50); }
+.check-row.taken { border-color: var(--hue-mint); background: var(--hue-mint-50); }
 .check-row.skipped { border-color: var(--balsm-border); opacity: 0.6; }
 .check-box {
   width: 30px; height: 30px; border-radius: 9px; border: 2px solid var(--balsm-border-strong);
   flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff;
   transition: all var(--dur-base) var(--ease-out);
 }
-.check-row.taken .check-box { background: var(--petal-mint); border-color: var(--petal-mint); }
+.check-row.taken .check-box { background: var(--hue-mint); border-color: var(--hue-mint); }
 .check-box i { width: 18px; height: 18px; stroke-width: 3; }
 .check-row .grow { flex: 1; min-width: 0; }
 .check-row .cname { font-weight: 600; font-size: var(--pt-md); color: var(--fg1); }
@@ -439,7 +439,7 @@ input.vital-num:focus { border-color: var(--app-accent); background: var(--app-a
 .pain-lbl { font-size: var(--pt-md); font-weight: 600; color: var(--fg3); margin-top: 4px; }
 .pain-track { position: relative; height: 56px; margin: 18px 4px 6px; }
 .pain-rail { position: absolute; top: 50%; left: 0; right: 0; height: 12px; transform: translateY(-50%); border-radius: 999px;
-  background: linear-gradient(90deg, var(--petal-mint) 0%, var(--balsm-sun-400) 50%, var(--balsm-danger) 100%); }
+  background: linear-gradient(90deg, var(--hue-mint) 0%, var(--balsm-sun-400) 50%, var(--balsm-danger) 100%); }
 .pain-knob { position: absolute; top: 50%; width: 36px; height: 36px; border-radius: 999px; background: #fff;
   border: 3px solid currentColor; transform: translate(-50%, -50%); box-shadow: var(--shadow-md); }
 .pain-ticks { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: var(--pt-2xs); color: var(--fg4); padding: 0 4px; }
@@ -471,8 +471,8 @@ input.vital-num:focus { border-color: var(--app-accent); background: var(--app-a
 /* ── Summary / confirmation ───────────────────────────────── */
 .confirm-hero { text-align: center; padding: 30px 24px 8px; }
 .confirm-mark { width: 88px; height: 88px; margin: 0 auto 18px; border-radius: var(--radius-pill);
-  background: var(--petal-mint-50); display: flex; align-items: center; justify-content: center; }
-.confirm-mark i { width: 44px; height: 44px; stroke-width: 2.25; color: var(--petal-mint-600); }
+  background: var(--hue-mint-50); display: flex; align-items: center; justify-content: center; }
+.confirm-mark i { width: 44px; height: 44px; stroke-width: 2.25; color: var(--hue-mint-600); }
 .save-note { display: inline-flex; align-items: center; gap: 8px; font-size: var(--pt-sm); color: var(--fg3); background: var(--balsm-ink-50);
   padding: 8px 14px; border-radius: var(--radius-pill); margin-top: 14px; }
 .save-note i { width: 15px; height: 15px; }

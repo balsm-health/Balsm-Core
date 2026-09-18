@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export type LogoIdle = 'breathe' | 'rotate' | 'none';
 
-/** Reveal (entrance) styles. Petal-staggered: bloom, cascade, pop, wave,
+/** Reveal (entrance) styles. Ribbon-staggered: bloom, cascade, pop, wave,
  *  unwind. Whole-mark: fade, spin-in, iris. Creative: liquid, heartbeat,
  *  orbit, fold, develop, magnetic, draw. */
 export type LogoVariant =

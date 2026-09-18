@@ -63,7 +63,7 @@ input:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
 }
 .proto-toolbar__brand-mark {
   width: 28px; height: 28px;
-  background: var(--grad-petal);
+  background: var(--grad-brand);
   border-radius: var(--radius-pill);
 }
 .proto-toolbar__group {
@@ -300,7 +300,7 @@ input:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
   top: 12px;
   width: 6px; height: 6px;
   border-radius: var(--radius-pill);
-  background: var(--petal-mint);
+  background: var(--hue-mint);
 }
 [dir="rtl"] .proto-notes__rules li { padding: var(--space-1) var(--space-5) var(--space-1) 0; }
 [dir="rtl"] .proto-notes__rules li::before { left: auto; right: 0; }
@@ -383,7 +383,7 @@ input:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
   font-weight: 600;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
-  color: var(--petal-emerald);
+  color: var(--hue-emerald);
   margin: 0 0 var(--space-2);
 }
 
@@ -545,7 +545,7 @@ input:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
   flex-shrink: 0;
 }
 .list-item__icon--primary { background: var(--balsm-primary-bg); color: var(--balsm-primary); }
-.list-item__icon--success { background: var(--balsm-success-bg); color: var(--petal-emerald-600); }
+.list-item__icon--success { background: var(--balsm-success-bg); color: var(--hue-emerald-600); }
 .list-item__icon--danger { background: var(--balsm-danger-bg); color: var(--balsm-danger); }
 .list-item__icon--violet { background: var(--balsm-controlled-bg); color: var(--balsm-controlled); }
 .list-item__body { flex: 1; min-width: 0; }
@@ -573,7 +573,7 @@ input:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
   color: var(--balsm-primary);
   border-color: var(--balsm-primary);
 }
-.chip--success { background: var(--balsm-success-bg); color: var(--petal-emerald-600); }
+.chip--success { background: var(--balsm-success-bg); color: var(--hue-emerald-600); }
 .chip--danger { background: var(--balsm-danger-bg); color: var(--balsm-danger); }
 .chip--warning { background: var(--balsm-warning-bg); color: var(--balsm-sun-600); }
 .chip--controlled { background: var(--balsm-controlled-bg); color: var(--balsm-controlled); }
@@ -639,13 +639,13 @@ input:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
   color: var(--fg3);
   font-weight: 500;
 }
-.privacy-marker--encrypted { color: var(--petal-aqua); }
+.privacy-marker--encrypted { color: var(--hue-aqua); }
 
 /* Logo mark */
 .logo-mark {
   width: 56px; height: 56px;
   border-radius: var(--radius-pill);
-  background: var(--grad-petal);
+  background: var(--grad-brand);
   position: relative;
   display: grid; place-items: center;
 }
@@ -660,7 +660,7 @@ input:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
   position: relative;
   width: 12px; height: 12px;
   border-radius: var(--radius-pill);
-  background: var(--grad-petal);
+  background: var(--grad-brand);
   z-index: 1;
 }
 .logo-mark--lg { width: 88px; height: 88px; }
@@ -671,7 +671,7 @@ input:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
 .brand-swirl {
   width: 80px; height: 80px;
   border-radius: var(--radius-pill);
-  background: var(--grad-petal);
+  background: var(--grad-brand);
   animation: spin 2s linear infinite;
   position: relative;
 }
@@ -910,7 +910,7 @@ input:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
 .web-header__mark {
   width: 24px; height: 24px;
   border-radius: var(--radius-pill);
-  background: var(--grad-petal);
+  background: var(--grad-brand);
 }
 .web-header__locale { font-size: var(--fs-sm); color: var(--fg3); }
 
@@ -932,7 +932,7 @@ input:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
 .col { display: flex; flex-direction: column; gap: var(--space-3); }
 .muted { color: var(--fg3); }
 .danger-text { color: var(--balsm-danger); }
-.success-text { color: var(--petal-emerald-600); }
+.success-text { color: var(--hue-emerald-600); }
 .mono { font-family: var(--font-mono); }
 .flex-1 { flex: 1; }
 .text-center { text-align: center; }
@@ -1042,7 +1042,7 @@ input:focus-visible, button:focus-visible, [tabindex="0"]:focus-visible {
 .sidebar__brand-mark {
   width: 32px; height: 32px;
   border-radius: var(--radius-pill);
-  background: var(--grad-petal);
+  background: var(--grad-brand);
 }
 .sidebar__brand-name {
   font-family: var(--font-display);

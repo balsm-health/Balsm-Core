@@ -24,7 +24,7 @@
   /* two definitions */
   .defs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .def{border:1px solid var(--balsm-ink-100);border-radius:var(--radius-md);padding:14px 16px;display:flex;flex-direction:column;gap:6px}
-  .def--resp{background:var(--petal-blue-50)} .def--adapt{background:var(--petal-aqua-50)}
+  .def--resp{background:var(--hue-blue-50)} .def--adapt{background:var(--hue-aqua-50)}
   .def h4{margin:0;font-family:var(--font-display);font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px}
   .pip{width:8px;height:8px;border-radius:50%}
   .def p{margin:0;font-size:11.5px;color:var(--fg2);line-height:1.5}
@@ -32,7 +32,7 @@
   /* live adaptive demo */
   .demo-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .seg{height:30px;padding:0 13px;border:1px solid var(--balsm-ink-200);background:#fff;border-radius:var(--radius-pill);cursor:pointer;font-family:var(--font-body);font-size:12px;font-weight:600;color:var(--fg2);display:inline-flex;align-items:center;gap:6px}
-  .seg[aria-pressed="true"]{border-color:var(--balsm-primary);color:var(--balsm-ink-900);box-shadow:0 0 0 3px var(--petal-blue-50)}
+  .seg[aria-pressed="true"]{border-color:var(--balsm-primary);color:var(--balsm-ink-900);box-shadow:0 0 0 3px var(--hue-blue-50)}
   .seg small{font-family:var(--font-mono);font-size:10px;color:var(--fg3)}
   .wtag{margin-inline-start:auto;font-family:var(--font-mono);font-size:11px;color:var(--fg3)}
   .stage{background:var(--balsm-cream-100);border:1px solid var(--balsm-ink-100);border-radius:var(--radius-lg);padding:18px;text-align:center;overflow:hidden}
@@ -40,9 +40,9 @@
   .frame[data-w="phone"]{width:360px} .frame[data-w="tablet"]{width:720px} .frame[data-w="desktop"]{width:1040px} .frame[data-w="fluid"]{width:100%}
   .frame-in{padding:16px;display:flex;flex-direction:column;gap:14px}
 
-  .demo-split .aside{background:var(--petal-aqua-50);border-radius:var(--radius-sm);padding:12px;font-size:11px;color:var(--balsm-ink-800)}
+  .demo-split .aside{background:var(--hue-aqua-50);border-radius:var(--radius-sm);padding:12px;font-size:11px;color:var(--balsm-ink-800)}
   .demo-split .main{background:var(--balsm-ink-50);border-radius:var(--radius-sm);padding:12px;font-size:11px;color:var(--balsm-ink-800);min-height:64px}
-  .pillrow .chip{height:30px;padding:0 12px;border-radius:var(--radius-pill);background:var(--petal-blue-50);color:var(--balsm-ink-800);font-size:11px;font-weight:600;display:inline-flex;align-items:center}
+  .pillrow .chip{height:30px;padding:0 12px;border-radius:var(--radius-pill);background:var(--hue-blue-50);color:var(--balsm-ink-800);font-size:11px;font-weight:600;display:inline-flex;align-items:center}
   .field{flex:1;min-width:0}
   .field .lbl{display:block;margin-bottom:4px}
   .field .box{height:34px;border:1px solid var(--balsm-ink-200);border-radius:var(--radius-md);background:#fff}
@@ -72,11 +72,11 @@
 
   <div class="defs">
     <div class="def def--resp">
-      <h4><span class="pip" style="background:var(--petal-blue)"></span>Responsive</h4>
+      <h4><span class="pip" style="background:var(--hue-blue)"></span>Responsive</h4>
       <p>Fluid reflow across a continuous range — driven by the <b>viewport</b>. Marketing web, admin UI. Use <code>.container</code>, <code>.grid</code>, <code>.card-grid</code>, fluid type.</p>
     </div>
     <div class="def def--adapt">
-      <h4><span class="pip" style="background:var(--petal-aqua)"></span>Adaptive</h4>
+      <h4><span class="pip" style="background:var(--hue-aqua)"></span>Adaptive</h4>
       <p>Distinct layouts swapped at a boundary — driven by the element's own <b>container</b>, so it adapts inside a narrow pane / foldable. Patient app, POS. Use <code>.cq</code> + <code>.adaptive-*</code>.</p>
     </div>
   </div>

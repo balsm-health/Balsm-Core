@@ -1,17 +1,18 @@
 /* ============================================================
    Balsm Design System — root entry point
-   Community-Owned Healthcare OS · Open. Arab. Owned.
+   Community-Owned Healthcare OS · Open. Arab. Trusted.
 
    Import this single file to get all design tokens,
-   typography roles, responsive utilities, and semantic helpers.
+   typography roles, responsive + adaptive utilities, and
+   semantic helpers.
 
-   @import order matters: tokens first, then type roles,
-   then responsive utilities (all live in colors_and_type.css).
+   @import order matters: tokens + type roles first
+   (colors_and_type.css, which pulls in the self-hosted
+   @font-face layer from fonts.css), then component tokens and
+   styles, then the adaptive / container-query layer.
    ============================================================ */
 
 @import url('./colors_and_type.css');
-
-/* Future: uncomment as additional token files are added
-@import url('./motion.css');
+@import url('./component-tokens.css');
 @import url('./components.css');
-*/
+@import url('./adaptive.css');

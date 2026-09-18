@@ -166,7 +166,7 @@ function HomeScreen() {
         {/* Hero check-in */}
         {!checkedIn ? (
           <div className="hero-card">
-            <img className="petal-wm" src="assets/logo-vertical.svg" alt="" />
+            <img className="mark-wm" src="assets/logo-vertical.svg" alt="" />
             <div className="label">{t('today_lbl')}</div>
             <div className="h" style={{ textWrap: 'balance' }}>{t('hero_q')}</div>
             <div className="cta" onClick={openFlow} style={{ whiteSpace: 'nowrap' }}>
@@ -230,7 +230,7 @@ function HomeScreen() {
         {/* Nearby care shortcut */}
         <div className="card" style={{ margin: '14px 20px 0', padding: '13px 16px', display: 'flex', alignItems: 'center', gap: 13, cursor: 'pointer' }}
           onClick={() => setTab('map')}>
-          <div style={{ width: 38, height: 38, borderRadius: 'var(--radius-md)', background: 'var(--petal-blue-50)', color: 'var(--petal-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <div style={{ width: 38, height: 38, borderRadius: 'var(--radius-md)', background: 'var(--hue-blue-50)', color: 'var(--hue-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <Icon name="map-pin" size={19} />
           </div>
           <div className="grow">
@@ -243,7 +243,7 @@ function HomeScreen() {
         {/* Health records shortcut */}
         <div className="card" style={{ margin: '14px 20px 0', padding: '13px 16px', display: 'flex', alignItems: 'center', gap: 13, cursor: 'pointer' }}
           onClick={() => setTab('records')}>
-          <div style={{ width: 38, height: 38, borderRadius: 'var(--radius-md)', background: 'var(--petal-violet-50)', color: 'var(--petal-violet)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <div style={{ width: 38, height: 38, borderRadius: 'var(--radius-md)', background: 'var(--hue-violet-50)', color: 'var(--hue-violet)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <Icon name="folder-heart" size={19} />
           </div>
           <div className="grow">
@@ -276,8 +276,8 @@ function HomeScreen() {
         <div className="row-head"><h2>{t('meds_today')}</h2><a onClick={() => setTab('meds')}>{t('see_all')}</a></div>
         <div className="card" style={{ margin: '0 20px' }}>
           {MEDS.map((m, i) => {
-            const bg = { info:'var(--petal-blue-50)', violet:'var(--petal-violet-50)', success:'var(--petal-mint-50)' }[m.tone];
-            const fg = { info:'var(--petal-blue)',    violet:'var(--petal-violet)',    success:'var(--petal-mint-600)' }[m.tone];
+            const bg = { info:'var(--hue-blue-50)', violet:'var(--hue-violet-50)', success:'var(--hue-mint-50)' }[m.tone];
+            const fg = { info:'var(--hue-blue)',    violet:'var(--hue-violet)',    success:'var(--hue-mint-600)' }[m.tone];
             const done = checkedIn || i === 0;
             return (
               <div key={m.id} className="med-row">
@@ -319,9 +319,9 @@ function HistoryRow({ h, onClick }) {
       </div>
       <div className="grow">
         <div className="hsummary">
-          <Icon name="activity" size={14} style={{ color: 'var(--petal-violet)' }} /><span className="num" dir="ltr">{h.bp}</span>
+          <Icon name="activity" size={14} style={{ color: 'var(--hue-violet)' }} /><span className="num" dir="ltr">{h.bp}</span>
           <span style={{ color: 'var(--balsm-ink-300)' }}>·</span>
-          <Icon name="droplet" size={14} style={{ color: 'var(--petal-mint-600)' }} /><span className="num">{h.glu}</span>
+          <Icon name="droplet" size={14} style={{ color: 'var(--hue-mint-600)' }} /><span className="num">{h.glu}</span>
         </div>
       </div>
       <MoodFace level={h.mood} size={26} color={MOOD_COLORS[h.mood - 1]} />
@@ -352,10 +352,10 @@ function TrendsScreen() {
           <span className="ctitle">{t('m_bp')}</span>
           <span className="cval">{t('avg')} <b className="num" style={{ color: 'var(--fg1)' }}>131/84</b> {t('unit_bp')}</span>
         </div>
-        <LineChart rtl={rtl} series={[{ data: TREND_BP_SYS, color: 'var(--petal-violet)' }, { data: TREND_BP_DIA, color: 'var(--petal-blue)' }]} />
+        <LineChart rtl={rtl} series={[{ data: TREND_BP_SYS, color: 'var(--hue-violet)' }, { data: TREND_BP_DIA, color: 'var(--hue-blue)' }]} />
         <div style={{ display: 'flex', gap: 16, marginTop: 10 }}>
-          <span className="meta" style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 8, height: 8, borderRadius: 99, background: 'var(--petal-violet)', display: 'inline-block' }} />{t('sys')}</span>
-          <span className="meta" style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 8, height: 8, borderRadius: 99, background: 'var(--petal-blue)', display: 'inline-block' }} />{t('dia')}</span>
+          <span className="meta" style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 8, height: 8, borderRadius: 99, background: 'var(--hue-violet)', display: 'inline-block' }} />{t('sys')}</span>
+          <span className="meta" style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span style={{ width: 8, height: 8, borderRadius: 99, background: 'var(--hue-blue)', display: 'inline-block' }} />{t('dia')}</span>
         </div>
       </div>
       <div className="card chart-card" style={{ marginTop: 14 }}>
@@ -363,7 +363,7 @@ function TrendsScreen() {
           <span className="ctitle">{t('m_glucose')}</span>
           <span className="cval">{t('avg')} <b className="num" style={{ color: 'var(--fg1)' }}>144</b> {t('unit_glu')}</span>
         </div>
-        <LineChart rtl={rtl} series={[{ data: TREND_GLU, color: 'var(--petal-mint-600)' }]} />
+        <LineChart rtl={rtl} series={[{ data: TREND_GLU, color: 'var(--hue-mint-600)' }]} />
       </div>
       <div className="row-head"><h2>{t('reports')}</h2></div>
       <div className="card" style={{ margin: '0 20px' }}>
@@ -393,7 +393,7 @@ function MedsScreen() {
 
       <div className="card list-card">
         <div className="list-row" onClick={() => setRxOpen(true)}>
-          <div className="lico" style={{ background: 'var(--petal-violet-50)', color: 'var(--petal-violet)' }}><Icon name="file-text" /></div>
+          <div className="lico" style={{ background: 'var(--hue-violet-50)', color: 'var(--hue-violet)' }}><Icon name="file-text" /></div>
           <div className="grow">{t('prescriptions')}</div>
           <span className="pill success" style={{ marginRight: 8 }}><span className="dot" />{activeRxCount} {t('rx_active').toLowerCase()}</span>
           <span className="rchev"><Icon name="chevron-right" /></span>
@@ -404,7 +404,7 @@ function MedsScreen() {
         <div className="ring">
           <svg width="56" height="56">
             <circle cx="28" cy="28" r="24" fill="none" stroke="var(--balsm-ink-100)" strokeWidth="6" />
-            <circle cx="28" cy="28" r="24" fill="none" stroke="var(--petal-mint)" strokeWidth="6" strokeLinecap="round"
+            <circle cx="28" cy="28" r="24" fill="none" stroke="var(--hue-mint)" strokeWidth="6" strokeLinecap="round"
               strokeDasharray={2 * Math.PI * 24} strokeDashoffset={2 * Math.PI * 24 * (1 - 0.92)} />
           </svg>
           <div className="rtxt num" style={{ fontSize: 'var(--pt-sm)' }}>92%</div>
@@ -424,8 +424,8 @@ function MedsScreen() {
           </div>
           <div className="card" style={{ margin: '0 20px' }}>
             {g.meds.map(m => {
-              const bg = { info:'var(--petal-blue-50)', violet:'var(--petal-violet-50)', success:'var(--petal-mint-50)' }[m.tone];
-              const fg = { info:'var(--petal-blue)',    violet:'var(--petal-violet)',    success:'var(--petal-mint-600)' }[m.tone];
+              const bg = { info:'var(--hue-blue-50)', violet:'var(--hue-violet-50)', success:'var(--hue-mint-50)' }[m.tone];
+              const fg = { info:'var(--hue-blue)',    violet:'var(--hue-violet)',    success:'var(--hue-mint-600)' }[m.tone];
               return (
                 <div key={m.id} className="med-row">
                   <div className="med-ico" style={{ background: bg, color: fg }}><Icon name={m.icon} /></div>
@@ -507,7 +507,7 @@ function PersonalDetailsScreen({ onBack }) {
 
         {/* Avatar */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '14px 0 20px' }}>
-          <div style={{ width: 72, height: 72, borderRadius: 9999, background: 'var(--petal-aqua)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 26 }}>
+          <div style={{ width: 72, height: 72, borderRadius: 9999, background: 'var(--hue-aqua)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 26 }}>
             {(firstName[0] || '') + (lastName[0] || '')}
           </div>
           <button className="btn ghost" style={{ fontSize: 'var(--pt-sm)', color: 'var(--app-accent)', fontWeight: 600 }}>
@@ -552,7 +552,7 @@ function PersonalDetailsScreen({ onBack }) {
               </div>
               <div className="grow">
                 <div style={{ fontWeight: 600, fontSize: 'var(--pt-md)', color: 'var(--fg1)' }}>{label}</div>
-                {connected && <div style={{ fontSize: 'var(--pt-xs)', color: 'var(--petal-mint-600)', marginTop: 2, display: 'flex', alignItems: 'center', gap: 4 }}><Icon name="check-circle" size={12} />{t('conn_primary')}</div>}
+                {connected && <div style={{ fontSize: 'var(--pt-xs)', color: 'var(--hue-mint-600)', marginTop: 2, display: 'flex', alignItems: 'center', gap: 4 }}><Icon name="check-circle" size={12} />{t('conn_primary')}</div>}
               </div>
               <button onClick={toggle} className={connected ? 'btn secondary' : 'btn soft'} style={{ height: 36, padding: '0 14px', fontSize: 'var(--pt-sm)', flexShrink: 0 }}>
                 {connected ? t('conn_remove') : t('conn_connect')}
@@ -800,8 +800,8 @@ function MedicalProfileScreen({ onBack }) {
     const v = w / (h * h);
     if (!isFinite(v)) return null;
     const cat = v < 18.5
-      ? { key: 'bmi_under',  color: 'var(--petal-blue)',           bg: 'var(--petal-blue-50)' }
-      : v < 25  ? { key: 'bmi_normal', color: 'var(--petal-mint-600)',       bg: 'var(--petal-mint-50)' }
+      ? { key: 'bmi_under',  color: 'var(--hue-blue)',           bg: 'var(--hue-blue-50)' }
+      : v < 25  ? { key: 'bmi_normal', color: 'var(--hue-mint-600)',       bg: 'var(--hue-mint-50)' }
       : v < 30  ? { key: 'bmi_over',   color: 'var(--balsm-expiring,#D97A20)', bg: '#FBF0E2' }
       :           { key: 'bmi_obese',  color: 'var(--balsm-danger)',          bg: '#FBEBE7' };
     const pct = Math.max(2, Math.min(98, ((v - 15) / (35 - 15)) * 100));
@@ -903,7 +903,7 @@ function MedicalProfileScreen({ onBack }) {
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <span className="pill" style={{ background: bmi.bg, color: bmi.color, fontWeight: 700, fontSize: '11px' }}>{t(bmi.key)}</span>
-                <div style={{ position: 'relative', height: 6, borderRadius: 99, marginTop: 8, background: 'linear-gradient(90deg, var(--petal-blue) 0%, var(--petal-mint) 33%, var(--balsm-expiring,#D97A20) 66%, var(--balsm-danger) 100%)' }}>
+                <div style={{ position: 'relative', height: 6, borderRadius: 99, marginTop: 8, background: 'linear-gradient(90deg, var(--hue-blue) 0%, var(--hue-mint) 33%, var(--balsm-expiring,#D97A20) 66%, var(--balsm-danger) 100%)' }}>
                   <div style={{ position: 'absolute', top: '50%', insetInlineStart: `${bmi.pct}%`, width: 12, height: 12, borderRadius: 99, background: '#fff', border: '2.5px solid var(--fg1)', transform: 'translate(-50%, -50%)' }} />
                 </div>
               </div>
@@ -925,9 +925,9 @@ function EmergencyScreen({ onBack }) {
   useEffect(() => { setNavHidden(true); return () => setNavHidden(false); }, []);
   const contacts = [
     { key: 'em_ambulance', icon: 'ambulance', num: '123', color: 'var(--balsm-danger)',          bg: '#FBEBE7' },
-    { key: 'em_police',    icon: 'shield',    num: '122', color: 'var(--petal-blue)',            bg: 'var(--petal-blue-50)' },
+    { key: 'em_police',    icon: 'shield',    num: '122', color: 'var(--hue-blue)',            bg: 'var(--hue-blue-50)' },
     { key: 'em_fire',      icon: 'flame',     num: '180', color: 'var(--balsm-expiring, #D97A20)', bg: '#FBF0E2' },
-    { key: 'em_tourist',   icon: 'compass',   num: '126', color: 'var(--petal-violet)',          bg: 'var(--petal-violet-50)' },
+    { key: 'em_tourist',   icon: 'compass',   num: '126', color: 'var(--hue-violet)',          bg: 'var(--hue-violet-50)' },
   ];
   return (
     <div className="screen fade-in">

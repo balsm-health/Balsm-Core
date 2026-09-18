@@ -8,7 +8,7 @@
 
 | Path | What it is |
 |---|---|
-| `mocks/system/loading-and-progress.html` | Live component gallery — Progress, Spinner (five-petal), Skeleton, Steps, ProgressButton, TopLoadingBar, SegmentedProgress, LoadingOverlay; determinate/indeterminate + offline-sync + RTL. Self-contained (React+Babel CDN). |
+| `mocks/system/loading-and-progress.html` | Live component gallery — Progress, Spinner (mark), Skeleton, Steps, ProgressButton, TopLoadingBar, SegmentedProgress, LoadingOverlay; determinate/indeterminate + offline-sync + RTL. Self-contained (React+Babel CDN). |
 
 ## Covered by the imported `balsm_app/` prototype (Balsm Care)
 
