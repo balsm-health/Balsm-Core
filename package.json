@@ -4,7 +4,8 @@
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
-    "docs:diagrams": "for f in architecture/diagrams/*.mmd; do node_modules/.bin/mmdc -i \"$f\" -o \"architecture/diagrams/svg/$(basename ${f%.mmd}).svg\" --quiet; done"
+    "docs:diagrams": "for f in architecture/diagrams/*.mmd; do node_modules/.bin/mmdc -i \"$f\" -o \"architecture/diagrams/svg/$(basename ${f%.mmd}).svg\" --quiet; done",
+    "brand:build": "python3 scripts/brand/build-brand-assets.py"
   },
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "^11.14.0",

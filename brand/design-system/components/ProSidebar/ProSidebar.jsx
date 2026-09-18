@@ -6,21 +6,36 @@
 // Sections: brand mark · workspace switcher · grouped nav (scrolls) ·
 //           account / profile footer.
 // RTL-aware (pass dir="rtl"); icons are Lucide names (kebab or Pascal)
-// or any React node. Self-contained: inline five-petal mark fallback,
+// or any React node. Self-contained: inline Balsm mark fallback,
 // token vars with hard-coded fallbacks, no stylesheet dependency.
 
-const _PETAL_HUES = ['#01C4A2', '#1283FF', '#55D77F', '#724DD0', '#02BBB5'];
+// Clockwise from the top: teal, blue, mint, violet, emerald — matches brand/icon.svg.
+const _MARK_HUES = ['#00C8D2', '#0083FA', '#00D69E', '#8350DE', '#5FD470'];
 
-// Inline five-petal brand mark — always on-brand, no asset path needed.
-function _PetalMark({ size = 30 }) {
+// Inline Balsm mark — five figures joined in a ring, simplified to a head
+// and a body arc each so it survives being drawn at 28px. Always on-brand,
+// no asset path needed.
+const _RING_R = 10.0;
+const _RING_C = 2 * Math.PI * _RING_R;
+const _ARC = _RING_C / 5;
+
+function _BalsmMark({ size = 30 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" aria-hidden="true" style={{ display: 'block' }}>
-      <g style={{ mixBlendMode: 'multiply' }}>
-        {_PETAL_HUES.map((c, i) => (
-          <ellipse key={i} cx="20" cy="11.5" rx="5.6" ry="8.6" fill={c} fillOpacity="0.88"
-            transform={`rotate(${i * 72} 20 20)`} />
+      <g fill="none" strokeWidth="5" strokeLinecap="round">
+        {_MARK_HUES.map((c, i) => (
+          <circle key={i} cx="20" cy="20" r={_RING_R} stroke={c}
+            strokeDasharray={`${_ARC - 2} ${_RING_C - _ARC + 2}`}
+            transform={`rotate(${i * 72 - 126} 20 20)`} />
         ))}
       </g>
+      {_MARK_HUES.map((c, i) => {
+        const a = ((i * 72 - 90) * Math.PI) / 180;
+        return (
+          <circle key={i} cx={(20 + 15.8 * Math.cos(a)).toFixed(2)}
+            cy={(20 + 15.8 * Math.sin(a)).toFixed(2)} r="3.6" fill={c} />
+        );
+      })}
     </svg>
   );
 }
@@ -79,7 +94,7 @@ function _SwitchRow({ initials, name, sub, color, onClick, variant }) {
       }}>
       <span style={{
         width: isTop ? 34 : 36, height: isTop ? 34 : 36, flex: 'none',
-        borderRadius: isTop ? 9 : 999, background: color || '#1283FF', color: '#fff',
+        borderRadius: isTop ? 9 : 999, background: color || '#0083FA', color: '#fff',
         display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700,
         fontSize: 13, fontFamily: "'Montserrat',sans-serif",
       }}>{initials}</span>
@@ -125,7 +140,7 @@ export function ProSidebar({
         <span style={{ width: 30, height: 30, flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {logoSrc
             ? <img src={logoSrc} alt="" style={{ width: 30, height: 30, objectFit: 'contain' }} />
-            : <_PetalMark size={28} />}
+            : <_BalsmMark size={28} />}
         </span>
         <span style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: '-0.01em', color: 'var(--balsm-ink-600, #526174)' }}>
           {brand}<span style={{ fontWeight: 500, color: 'var(--balsm-ink-500, #78838F)' }}>{brandTld}</span>
@@ -150,15 +165,15 @@ export function ProSidebar({
                   style={{
                     all: 'unset', boxSizing: 'border-box', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10,
                     padding: '9px 10px', borderRadius: 10, transition: 'background 160ms ease',
-                    background: on ? 'var(--petal-blue-50, #E4F0FF)' : 'transparent',
-                    color: on ? 'var(--balsm-primary, #1283FF)' : 'var(--balsm-ink-700, #384756)',
+                    background: on ? 'var(--petal-blue-50, #E6F0F9)' : 'transparent',
+                    color: on ? 'var(--balsm-primary, #0083FA)' : 'var(--balsm-ink-700, #384756)',
                   }}>
-                  <span style={{ width: 18, height: 18, flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', color: on ? 'var(--balsm-primary, #1283FF)' : 'var(--balsm-ink-600, #526174)' }}>
+                  <span style={{ width: 18, height: 18, flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', color: on ? 'var(--balsm-primary, #0083FA)' : 'var(--balsm-ink-600, #526174)' }}>
                     <_Icon name={item.icon} size={18} />
                   </span>
                   <span style={{ flex: 1, fontSize: 14, fontWeight: on ? 600 : 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', textAlign: 'start' }}>{item.label}</span>
                   {item.count != null && item.count !== '' && (
-                    <span style={{ fontSize: 11, fontFamily: "'IBM Plex Mono',monospace", padding: '1px 7px', borderRadius: 999, whiteSpace: 'nowrap', background: on ? 'var(--balsm-primary, #1283FF)' : 'var(--balsm-ink-100, #EBEDF0)', color: on ? '#fff' : 'var(--balsm-ink-700, #384756)' }}>{item.count}</span>
+                    <span style={{ fontSize: 11, fontFamily: "'IBM Plex Mono',monospace", padding: '1px 7px', borderRadius: 999, whiteSpace: 'nowrap', background: on ? 'var(--balsm-primary, #0083FA)' : 'var(--balsm-ink-100, #EBEDF0)', color: on ? '#fff' : 'var(--balsm-ink-700, #384756)' }}>{item.count}</span>
                   )}
                 </button>
               );

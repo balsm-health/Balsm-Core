@@ -11,9 +11,9 @@
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
   <style>
     :root{
-      --petal-aqua:#02BBB5; --petal-emerald:#01C4A2; --petal-blue:#1283FF; --petal-mint:#55D77F; --petal-violet:#724DD0;
-      --petal-aqua-50:#E2F8F6; --petal-blue-50:#E4F0FF; --petal-mint-50:#E8F9EE; --petal-violet-50:#ECE6FA;
-      --balsm-primary:var(--petal-blue); --balsm-primary-hover:#0F6BCC;
+      --petal-aqua:#00C8D2; --petal-emerald:#5FD470; --petal-blue:#0083FA; --petal-mint:#00D69E; --petal-violet:#8350DE;
+      --petal-aqua-50:#E6F8F9; --petal-blue-50:#E6F0F9; --petal-mint-50:#E6F9F4; --petal-violet-50:#EEE9F6;
+      --balsm-primary:var(--petal-blue); --balsm-primary-hover:#066DCB;
       --balsm-warning:#E5B428; --balsm-danger:#D44A3C; --balsm-expiring:#D97A20;
       --balsm-cream-50:#FAFAF7; --balsm-cream-100:#F4F3EC;
       --balsm-ink-900:#14202B; --balsm-ink-800:#1F2D3D; --balsm-ink-700:#384756; --balsm-ink-600:#526174;
@@ -26,7 +26,7 @@
       --font-mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
       --radius-xs:4px; --radius-sm:6px; --radius-md:10px; --radius-lg:14px; --radius-pill:999px;
       --dur-base:200ms; --dur-slow:320ms; --ease-out:cubic-bezier(.16,1,.3,1);
-      --grad-petal:linear-gradient(135deg,#02BBB5 0%,#1283FF 60%,#724DD0 100%);
+      --grad-petal:linear-gradient(135deg,#00C8D2 0%,#0083FA 60%,#8350DE 100%);
     }
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--balsm-cream-50);font-family:var(--font-body);color:var(--fg1);-webkit-font-smoothing:antialiased}
@@ -294,10 +294,10 @@
   }
 
   const PRIMARIES={
-    blue:{label:'Blue',c:'#1283FF',h:'#0F6BCC',wash:'#E4F0FF'},
-    aqua:{label:'Aqua',c:'#02BBB5',h:'#029E99',wash:'#E2F8F6'},
-    emerald:{label:'Emerald',c:'#01C4A2',h:'#019A7F',wash:'#E1F8F1'},
-    violet:{label:'Violet',c:'#724DD0',h:'#5C3AB0',wash:'#ECE6FA'},
+    blue:{label:'Blue',c:'#0083FA',h:'#066DCB',wash:'#E6F0F9'},
+    aqua:{label:'Aqua',c:'#00C8D2',h:'#059DA4',wash:'#E6F8F9'},
+    emerald:{label:'Emerald',c:'#5FD470',h:'#46C458',wash:'#EAF5EC'},
+    violet:{label:'Violet',c:'#8350DE',h:'#6D35D0',wash:'#EEE9F6'},
   };
   function App() {
     const [primary,setPrimary]=React.useState('blue');
@@ -324,7 +324,7 @@
         <div className="head">
           <span className="kicker">Balsm Design System · Components</span>
           <h1 className="title">Loading &amp; progress</h1>
-          <p className="lede">Eight indicators for progress and loading status — determinate &amp; indeterminate, the five-petal brand loader, offline-sync states, steppers, progress buttons, route bars, segmented meters, and full-screen overlays. Each animates live; variants shown side by side to choose from.</p>
+          <p className="lede">Eight indicators for progress and loading status — determinate &amp; indeterminate, the brand-mark brand loader, offline-sync states, steppers, progress buttons, route bars, segmented meters, and full-screen overlays. Each animates live; variants shown side by side to choose from.</p>
         </div>
 
         <div className="switcher">
@@ -383,10 +383,10 @@
 
         <section>
           <h2 className="sect-h">Spinner</h2>
-          <p className="sect-sub">Five-petal mark for brand &amp; full-screen moments · inline ring for everyday loading.</p>
+          <p className="sect-sub">The brand mark for full-screen moments · inline ring for everyday loading.</p>
           <div className="panel" style={{display:'flex',flexDirection:'column',gap:24}}>
             <div className="row">
-              <div><div className="lbl">Five-petal mark</div><div className="row" style={{gap:30}}><div className="cell"><PetalSpinner size="sm"/><span className="cap">sm</span></div><div className="cell"><PetalSpinner size="md"/><span className="cap">md</span></div><div className="cell"><PetalSpinner size="lg"/><span className="cap">lg</span></div></div></div>
+              <div><div className="lbl">Brand mark</div><div className="row" style={{gap:30}}><div className="cell"><PetalSpinner size="sm"/><span className="cap">sm</span></div><div className="cell"><PetalSpinner size="md"/><span className="cap">md</span></div><div className="cell"><PetalSpinner size="lg"/><span className="cap">lg</span></div></div></div>
               <div><div className="lbl">Inline ring · semantic</div><div className="row" style={{gap:22}}><div className="cell"><Spinner size={20}/><span className="cap">primary</span></div><div className="cell"><Spinner size={26} variant="accent"/><span className="cap">accent</span></div><div className="cell"><Spinner size={26} variant="success"/><span className="cap">success</span></div><div className="cell"><Spinner size={26} variant="violet"/><span className="cap">violet</span></div><div className="cell"><Spinner size={26} variant="ink"/><span className="cap">ink</span></div></div></div>
             </div>
             <div className="brand-card"><PetalSpinner size={56}/><div style={{display:'flex',flexDirection:'column',gap:3}}><span className="brand-ttl">Preparing your health record</span><span className="brand-sub">On your device, by design.</span><span className="brand-sub ar">نُجهّز سجلّك الصحي — على جهازك، بالتصميم.</span></div></div>

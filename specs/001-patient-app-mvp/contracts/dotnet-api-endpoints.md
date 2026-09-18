@@ -130,17 +130,25 @@ Response: { "data": { "preferred_language": "ar-SA" } }
 ## Emergency QR Module
 
 ### `POST /emergency-qr/mint`
-Mint a new QR token. Revokes prior active token. Age-gated (FR-301b). `jti` is a 128-bit CSPRNG value (UUIDv4 — NOT a timestamp-prefixed UUIDv7). `ciphertext` is capped at 16 KB (reject larger → 422) to prevent storage abuse.
+Mint a new QR token. Revokes prior active token. Age-gated (FR-301b). `jti` is a 128-bit CSPRNG value (UUIDv4 — NOT a timestamp-prefixed UUIDv7). `ciphertext` is capped at 16 KB (reject larger → 422) to prevent storage abuse. `ttl_seconds: 0` mints a **permanent** token — `expires_at` comes back `null` and the token resolves until revoked. `token_id` is the offline-first path: a client-generated CSPRNG UUIDv4; the call is idempotent per token_id (retry refreshes the ciphertext of the existing active token), and another user's token_id is rejected.
 ```json
-Request:  { "ciphertext": "<base64, ≤16KB>", "profile_etag": "<hex8>", "ttl_seconds": 86400 }
-Response: { "data": { "jti": "<uuid>", "token_url": "{BASE_URL}/emergency/<jti>", "expires_at": "..." } }
+Request:  { "ciphertext": "<base64, ≤16KB>", "profile_etag": "<hex8>", "ttl_seconds": 86400, "token_id": "<uuid, optional>" }
+Response: { "data": { "token_id": "<uuid>", "expires_at": "...|null" } }
 Errors:   403 AgeGateBlocked, 422 InvalidTtl, 422 CiphertextTooLarge
 ```
 
-### `GET /emergency-qr/active`
-Get current user's active QR token summary.
+### `PUT /emergency-qr/{jti}/ciphertext`
+Replace an active token's encrypted snapshot in place (permanent-QR data refresh — the QR URL never changes while scans decrypt to current data). Owner-scoped; the client re-encrypts with the same device-held key, so the server still sees ciphertext only.
 ```json
-Response: { "data": { "jti": "...", "expires_at": "...", "ttl_seconds": 86400 } | null }
+Request:  { "ciphertext": "<base64, ≤16KB>", "profile_etag": "<hex8>" }
+Response: { "data": { "updated": true } }
+Errors:   404 NotFound (unknown/not-owned jti), 409 TokenInactive (revoked or expired)
+```
+
+### `GET /emergency-qr/active`
+Get current user's active QR token summary. `expires_at` is `null` for a permanent token (`ttl_seconds: 0`).
+```json
+Response: { "data": { "token_id": "...", "expires_at": "...|null", "ttl_seconds": 86400 } | null }
 ```
 
 ### `POST /emergency-qr/{jti}/revoke`
@@ -151,10 +159,17 @@ Errors:   404 NotFound (unknown or not-owned jti)
 ```
 
 ### `GET /emergency-qr/resolve/{jti}` *(public, no auth)*
-Resolve a QR token for the public emergency page. Per-IP rate-limited (unauthenticated scraping/DoS guard) and returns `Cache-Control: no-store` so the ciphertext is never cached by intermediaries. The AES key is never in this response — it lives only in the URL fragment the server never receives.
+Resolve a QR token for the public `/t/{jti}` page (spec v2.0 envelope). Per-IP rate-limited (unauthenticated scraping/DoS guard) and returns `Cache-Control: no-store` so the ciphertext is never cached by intermediaries. The AES key is never in this response — it lives only in the URL fragment the server never receives. Revoked, expired, and unknown tokens all answer a **uniform 404** with an identical body, so a prober cannot learn that a jti once existed. Language is inside the encrypted payload — the server no longer stores or returns it.
 ```json
-Response: { "data": { "ciphertext": "<base64>", "preferred_language": "ar-EG" } }
-Errors:   404 TokenNotFound, 410 TokenExpiredOrRevoked, 429 TooManyRequests
+Response: { "data": { "v": 1, "type": "profile", "expires_at": "...|null", "ciphertext_base64": "<base64>" } }
+Errors:   404 NotFound (unknown, revoked, or expired — indistinguishable), 429 TooManyRequests
+```
+
+### `GET /emergency-qr/scans`
+Owner's own scan history (spec v2.0): each successful public resolve as {when, coarse client class, country when geo is configured} — never the scanner's identity. Newest first, capped at 50. Failed resolves are not recorded.
+```json
+Response: { "data": { "scans": [ { "token_id": "<uuid>", "resolved_at": "2025-01-01T00:00:00Z", "client": "web", "country": null } ] } }
+Errors:   401 Unauthorized
 ```
 
 ---

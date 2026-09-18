@@ -21,5 +21,5 @@ export interface PetalSpinnerProps extends Omit<React.HTMLAttributes<HTMLSpanEle
   label?: React.ReactNode;
 }
 
-/** The five-petal flower mark, slowly rotating — brand / full-screen loading. */
+/** The Balsm mark, slowly rotating — brand / full-screen loading. */
 export declare function PetalSpinner(props: PetalSpinnerProps): React.ReactElement;

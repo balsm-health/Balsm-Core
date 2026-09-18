@@ -275,7 +275,7 @@ A patient who signed up in Egypt later switches their country to Saudi Arabia (r
 
 **Emergency QR (FR-014..FR-015)**
 
-- **FR-014**: System MUST allow patients to mint QR tokens with TTL of {3600, 21600, 86400, 604800} seconds (1h, 6h, 24h, 7d), with at most one active token per user.
+- **FR-014**: System MUST allow patients to mint QR tokens with TTL of {0, 3600, 21600, 86400, 604800} seconds (permanent, 1h, 6h, 24h, 7d), with at most one active token per user. *(Amended 2026-09-14: TTL 0 added — a permanent token never expires, its URL never changes, and its ciphertext is refreshed in place so scans always show current data; see `contracts/emergency-token.md` v1.1.)*
 - **FR-015**: System MUST allow patients to revoke active QR tokens; subsequent public resolves MUST return "expired" within 2 seconds of revocation.
 
 **Medications & Dose Tracking (FR-016..FR-023)**

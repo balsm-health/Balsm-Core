@@ -35,7 +35,7 @@ export interface ProSidebarProps extends Omit<React.HTMLAttributes<HTMLElement>,
   dir?: 'ltr' | 'rtl';
   brand?: string;
   brandTld?: string;
-  /** Custom logo URL; omit to use the inline five-petal mark. */
+  /** Custom logo URL; omit to use the inline Balsm mark. */
   logoSrc?: string | null;
   /** Workspace / entity switcher at the top. Omit to hide. */
   workspace?: ProSidebarIdentity | null;

@@ -1,6 +1,6 @@
 # Balsm Design System
 
-> **Balsm.health · بلسم** — the community-owned healthcare OS for the Arab world. **Open. Arab. Owned.** · مفتوح. عربي. مملوك.
+> **Balsm.health · بلسم** — the community-owned healthcare OS for the Arab world. **Open. Arab. Trusted.** · مفتوح. عربي. موثوق.
 
 ---
 
@@ -28,7 +28,7 @@ Balsm promises that your healthcare — whether you give it or receive it — be
 
 **The Category:** Community-Owned Healthcare OS — infrastructure that belongs to the people who use it, built on open standards, designed for Arabic-speaking care, resilient enough to run without a single byte of cloud dependency.
 
-**Three Words:** Open. Arab. Owned. · مفتوح. عربي. مملوك.
+**Three Words:** Open. Arab. Trusted. · مفتوح. عربي. موثوق.
 
 **One-line:** The community-owned healthcare OS for the Arab world. نظام صحي مجتمعي للعالم العربي.
 
@@ -156,13 +156,13 @@ Three moments capture everything Balsm promises to feel like:
 
 ## Product Architecture
 
-The product ships as three surfaces:
+The product ships in three slices:
 
-| Surface | Scope | Status |
+| Slice | Surface | Status |
 | --- | --- | --- |
-| **Balsm Pharmacy** | Pharmacy POS · Inventory · Admin | Built from `components/` — the standalone kit was retired upstream 2026-08-13 |
-| **Balsm Care** | Care recipient app · Doctor encounter · Full care loop | Built from `components/` — the standalone prototype was retired upstream 2026-08-13 |
-| **Balsm Network** | Paid cloud tier | Not yet designed |
+| **Slice 1** | Pharmacy POS · Inventory · Admin | Designed — product surfaces live in the Balsm Pro App project |
+| **Slice 2** | Care recipient app · Doctor encounter · Full care loop | Mobile app prototyped — lives in the Balsm Pro App project |
+| **Slice 3** | Balsm Network (paid cloud tier) | Not yet designed |
 
 **Differentiators:** Arabic-first / full RTL · Offline-default · Egypt-localized (EGP, NID, Law 182/1960, 27 governorates, DD/MM/YYYY) · Calm clinical aesthetic — five-petal mark, no medical-cliché iconography.
 
@@ -241,7 +241,7 @@ Scale: `--fs-xs` 12px → `--fs-6xl` 72px (\~1.25 modular ratio). Lives in `colo
 
 ### Backgrounds & Imagery
 
-- The signature watercolor petal pattern (`../balsm-background.png`) — hero backdrops, welcome screens, full-bleed print covers. **Never inside product chrome.**
+- The signature watercolor petal pattern (`brand/balsm-background.png`) — hero backdrops, welcome screens, full-bleed print covers. **Never inside product chrome.**
 - **No hand-drawn illustrations. No stock-photo people.** When imagery is needed: the flower, the watercolor pattern, or a placeholder.
 - **No repeating geometric patterns.** The watercolor petal pattern is the only pattern.
 - No glassmorphism. No frosted-glass cards — reads as consumer-flashy, not clinical.
@@ -252,7 +252,7 @@ Scale: `--fs-xs` 12px → `--fs-6xl` 72px (\~1.25 modular ratio). Lives in `colo
 
 **Lucide** ([lucide.dev](https://lucide.dev)) — outline, geometric, calm. Stroke weight 1.75px default / 2px emphasis. Size 16 / 20 / 24px.
 
-The **five-petal flower mark** (`../logo-vertical.svg`) is the only Balsm-bespoke icon. Use as app icon, loading spinner (4s slow rotate), empty-state hero, or watermark on prescriptions (8–10% opacity). **Never redraw it.**
+The **five-petal flower mark** (`brand/logo-vertical.svg`) is the only Balsm-bespoke icon. Use as app icon, loading spinner (4s slow rotate), empty-state hero, or watermark on prescriptions (8–10% opacity). **Never redraw it.**
 
 ```html
 <script src="https://unpkg.com/lucide@latest"></script>
@@ -270,9 +270,10 @@ The **five-petal flower mark** (`../logo-vertical.svg`) is the only Balsm-bespok
 | `SKILL.md` | Agent-Skill manifest — read if you are an LLM designing with Balsm |
 | `styles.css` | Root entry point — imports all token layers in order |
 | `colors_and_type.css` | Tier 1 & 2 tokens: color, type, spacing, radii, shadows, motion, responsive |
+| `fonts.css` + `fonts/` | Self-hosted `@font-face` layer — Montserrat + IBM Plex Sans (variable, roman + italic), IBM Plex Sans Arabic (7 static weights), Cairo (variable), IBM Plex Mono (14 static faces). No CDN: offline-default and sovereignty both require the type to ship with the product. |
 | `component-tokens.css` | Tier 3 tokens: per-component sizing, elevation scale, density modes |
 | `adaptive.css` | Tier 4 — container-query adaptive utilities (`.cq`, `.adaptive-split/-row/-grid`, priority column-drop, `.touch-target`, RTL-safe logical helpers). §6.5 |
-| `components.css` | CSS classes for all compiled components (`.b-btn`, `.b-badge`, `.b-input`, `.b-select`, `.b-toast`) |
+| `components.css` | CSS classes for all compiled components (`.b-btn`, `.b-badge`, `.b-input`, `.b-select`, `.b-toast`, `.b-card`, `.b-table`, `.b-check`, `.b-switch`, `.b-modal`, `.b-avatar`) |
 | `components/Button/` | `Button.jsx` + `Button.d.ts` — primary, secondary, ghost, danger, link; sm/md/lg; loading state |
 | `components/Badge/` | `Badge.jsx` + `Badge.d.ts` — 10 clinical variants (success, warning, danger, info, controlled, expiring…) |
 | `components/Input/` | `Input.jsx` + `Input.d.ts` — text + textarea, label/hint/error, icons, RTL, all sizes |
@@ -280,8 +281,8 @@ The **five-petal flower mark** (`../logo-vertical.svg`) is the only Balsm-bespok
 | `components/DatePicker/` | `DatePicker.jsx` + `DatePicker.d.ts` — calendar popover; Egypt DD/MM/YYYY; min/max range, today/clear, Mon/Sun week start; ISO value in/out; RTL (Arabic months) |
 | `components/TimePicker/` | `TimePicker.jsx` + `TimePicker.d.ts` — scrollable hour/minute (+AM/PM) columns; 12h or 24h, configurable minute step, min/max range; 24h `HH:MM` value in/out; RTL (ص/م) |
 | `components/AnimatedLogo/` | `AnimatedLogo.jsx` + `AnimatedLogo.d.ts` — the Balsm mark, animated: 15 reveals via `variant` — ordinary (bloom · cascade · pop · wave · unwind · fade · spin-in · iris) and creative (liquid · heartbeat · orbit · fold · develop · magnetic · draw) — then idle (breathe / slow-rotate loader / still); `size`, `speed`, `color` (mono), `glow`, `replay`; reduced-motion safe |
-| `../icon.svg` / `.png` | Standalone five-petal flower, no wordmark. Use with `../wordmark.svg` as two independent elements — own `width`/`height` and gactp — instead of the fixed-ratio `logo-vertical`/`logo-horizontal` lockups, whenever a layout needs icon and text sized or placed independently (e.g. a sidebar with a small fixed icon slot and a wider text column). |
-| `../wordmark.svg` / `.png` | Standalone bilingual wordmark, no flower icon — pine-green "بلسم / Balsm" + gray-blue ".health". Pairs with `../icon.svg` per above, or use alone for contexts too small/narrow for the full lockup. |
+| `brand/icon.svg` / `.png` | Standalone five-petal flower, no wordmark. Use with `brand/wordmark.svg` as two independent elements — own `width`/`height` and gap — instead of the fixed-ratio `logo-vertical`/`logo-horizontal` lockups, whenever a layout needs icon and text sized or placed independently (e.g. a sidebar with a small fixed icon slot and a wider text column). |
+| `brand/wordmark.svg` / `.png` | Standalone bilingual wordmark, no flower icon — navy-slate "بلسم / Balsm" + lighter slate ".health". Pairs with `brand/icon.svg` per above, or use alone for contexts too small/narrow for the full lockup. |
 | `components/Toast/` | `Toast.jsx` + `Toast.d.ts` — Toast, ToastContainer, addToast(), useToast() |
 | `components/Progress/` | `Progress.jsx` + `Progress.d.ts` — linear Progress + circular ProgressRing; determinate/indeterminate; semantic + petal-gradient fills; offline-sync states (syncing/paused/queued) |
 | `components/Spinner/` | `Spinner.jsx` + `Spinner.d.ts` — inline ring Spinner (semantic) + PetalSpinner (five-petal mark, slow 3.6s rotate, brand/full-screen loading) |
@@ -292,10 +293,14 @@ The **five-petal flower mark** (`../logo-vertical.svg`) is the only Balsm-bespok
 | `components/SegmentedProgress/` | `SegmentedProgress.jsx` + `SegmentedProgress.d.ts` — multi-part meter + legend; storage / queue mix / inventory-by-status |
 | `components/LoadingOverlay/` | `LoadingOverlay.jsx` + `LoadingOverlay.d.ts` — full-screen/container loading; cream/scrim/brand; petal mark + message + optional progress |
 | `components/ProSidebar/` | `ProSidebar.jsx` + `ProSidebar.d.ts` — shared left-nav chrome for every Balsm-Pro module; brand mark, workspace switcher, grouped nav, account footer; RTL + Lucide icons |
-| `../` (Balsm-Core/brand/) | Logo SVG, mono reverse/ink PNGs, watercolor background |
-| `../balsm-brand-canvas.md` | Brand Model Canvas — mission, voice, values, positioning (canonical) |
-| `components/` | 26 components incl. Avatar · Card · Checkbox/Radio · Modal · Switch · Table |
-| `fonts/` + `fonts.css` | Self-hosted type — no CDN at runtime |
+| `components/Card/` | `Card.jsx` + `Card.d.ts` — Card + MetricCard; header/body/footer, sm/md/lg padding, interactive + selected states, top-edge clinical accent |
+| `components/Table/` | `Table.jsx` + `Table.d.ts` — dense data table; column definitions as data, priority-based column dropping (§9) with dropped values restated in-row, sortable headers, zebra/sticky/density, row selection |
+| `components/Checkbox/` | `Checkbox.jsx` + `Checkbox.d.ts` — Checkbox (with indeterminate), Radio, CheckGroup; label + hint, error state, sm/md |
+| `components/Switch/` | `Switch.jsx` + `Switch.d.ts` — instant-effect toggle; settings-row layout, sm/md, success tone, RTL-aware thumb travel |
+| `components/Modal/` | `Modal.jsx` + `Modal.d.ts` — dialog; Escape + scrim close, focus trap and restore, scroll lock, severity icon, sm/md/lg/xl, bottom sheet under 520px |
+| `components/Avatar/` | `Avatar.jsx` + `Avatar.d.ts` — Avatar + AvatarGroup; initials or photo, name-derived tone, xs→xl, presence/sync dot, stacked overflow |
+| `brand/` | Logo SVG, mono reverse/ink PNGs, watercolor background |
+| `balsm-brand-canvas.md` | Brand Model Canvas — mission, voice, values, positioning (canonical) |
 
 ---
 
@@ -361,7 +366,7 @@ Breakpoints live as `--bp-*` tokens in `colors_and_type.css`. Because CSS can't 
 3. **Check voice register** before writing copy — clinical or product/care recipient?
 4. **Test against experience standard:** Is every touchpoint frictionless + warm + trustworthy?
 5. **RTL:** set `dir="rtl"` on root; `--font-arabic` swaps automatically via `[dir="rtl"]` selectors.
-6. **Lift components** from `components/` — don't reinvent buttons, cards, inputs, tables, modals.
+6. **Use the components in `components/`** — don't reinvent buttons, badges, inputs, pickers. Product screens (pharmacy POS, the mobile app) live in the Balsm Pro App project, not here.
 
 ---
 
@@ -369,7 +374,7 @@ Breakpoints live as `--bp-*` tokens in `colors_and_type.css`. Because CSS can't 
 
 | Source | Why it's here |
 | --- | --- |
-| `../balsm-brand-canvas.md` | **Canonical brand reference** — locked. Mission, voice, values, positioning. |
+| `balsm-brand-canvas.md` | **Canonical brand reference** — locked. Mission, voice, values, positioning. |
 | `balsm-health/assets/brand/` | Official brand pack — logo, watercolor background |
 | `balsm-health/Balsm-Draft` | Product roadmap, business features, controlled-substance + RTL requirements |
 | AppFlowy-IO/AppFlowy | Offline-sync + workspace patterns reference |
@@ -380,7 +385,7 @@ Breakpoints live as `--bp-*` tokens in `colors_and_type.css`. Because CSS can't 
 
 ## Caveats
 
-- **Fonts:** loaded from Google Fonts CDN. For offline/self-hosted, drop the TTF bundle into `assets/fonts/`.
+- **Fonts:** self-hosted from `fonts/` — 26 faces across Montserrat, IBM Plex Sans, Plex Sans Arabic, Plex Mono, and Cairo. No CDN: the type stack makes no network requests, so an offline clinic renders exactly what a connected one does.
 - **Icons:** Lucide is a deliberate substitute — the brand has no shipped icon set of its own.
 - **Wordmark font:** Montserrat 700 is the closest free analog to the official SVG wordmark. Swap `--font-display` if a custom typeface is later commissioned.
 - **Egypt-specific** (currency, dates, IDs, governorates) is baked in. Expanding to Saudi (NPHIES) or other markets needs a dedicated pass.

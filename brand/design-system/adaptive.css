@@ -49,7 +49,7 @@
 }
 
 /* ── Adaptive split — single column → two-pane once the container
-      passes md (768). Care app phone→tablet, master/detail. ─── */
+      passes md (768). Mobile app phone→tablet, master/detail. ── */
 .adaptive-split {
   display: grid;
   grid-template-columns: 1fr;

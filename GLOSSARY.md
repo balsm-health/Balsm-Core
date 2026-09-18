@@ -119,6 +119,8 @@
 | LMS | Labs Management System | Balsm's module for managing laboratory operations, orders, and results |
 | PMS | Pharmacy Management System | Balsm's module for managing pharmacy operations, dispensation, and inventory |
 | RMS | Radiology Management System | Balsm's module for managing radiology workflows, imaging orders, and reports |
+| Profile QR | Patient Profile QR Token | The patient's permanent scannable identity token (`/t/{jti}`), spec emergency-token v2.0. **Formerly "Emergency QR"** — module, package, and route names (`EmergencyQr`, `emergency_card`, `/emergency-qr/*`) retain the historical name for wire and code compatibility; new writing says *profile QR* |
+| Family Link | Family Account Link | A caregiver connection between two patient accounts, established by scanning the other person's profile QR and approved by them in their own app. Lifecycle: `pending` → `linked` (`FamilyLinkStatus`). Owned by Identity & Access (Caregiver / Guardianship), P002 |
 
 ---
 

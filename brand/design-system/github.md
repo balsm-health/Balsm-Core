@@ -27,17 +27,18 @@ The `--petal-*` design tokens (aqua/emerald/blue/mint/violet — used across but
 ## Screen map
 | Screen/asset | Repo source |
 |---|---|
-| `components/AnimatedLogo/AnimatedLogo.jsx`, `thumbnail.html` | `brand/icon.svg` (petal geometry + colors) |
+| `components/AnimatedLogo/AnimatedLogo.jsx`, `thumbnail.html` | `brand/icon.svg` (mark geometry + colors) |
 | `preview/brand-logo.html` (4 panels) | `brand/logo-vertical.svg`, `brand/logo-vertical-mono-white.png`, `brand/wordmark.svg` |
 | `brand/logo-vertical*.{svg,png}` (incl. `-mono-black/white`, `-on-white`) | `brand/logo-vertical*.{svg,png}` |
 | `brand/logo-horizontal*.{svg,png}` (incl. `-mono-black/white`, `-on-white`) | `brand/logo-horizontal*.{svg,png}` |
 | `brand/icon*.{svg,png}` (incl. `-mono-black/white`) | `brand/icon*.{svg,png}` |
 | `brand/logo.{svg,png}` | `brand/logo.{svg,png}` (alias of logo-horizontal) |
-| `brand/balsm-background.png` | `brand/balsm-background.png` (unchanged) |
+| `brand/balsm-background.png` | `brand/balsm-background.png` |
 | `colors_and_type.css`, `care_app/colors_and_type.css` (wordmark tokens) | `brand/colors_and_type.css` |
 | `balsm-brand-canvas.md` (root, diverged — locked content, not synced) | `brand/balsm-brand-canvas.md` |
 
 ## Sync history
+- 2026-08-29 — **new mark.** The five-petal flower is retired; the mark is now five figures joined in a ring (`brand/icon.svg`, imported from the `circle` concept set). Every other file under `brand/` is now *generated* from `brand/icon.svg` + `brand/wordmark.svg` by `scripts/brand/build-brand-assets.py` — do not hand-edit them. `AnimatedLogo` and `ProSidebar`'s inline mark were redrawn to match; `--petal-*` tokens and the `PetalSpinner` name are unchanged.
 - 2026-08-12T12:21:58Z — wordmark recolor #254B45→#1F2D3D (navy slate) + refreshed logo/wordmark files.
 - 2026-08-12T10:16:22Z — pulled new `icon-social*` and `og-image*` assets; icon geometry/colors confirmed unchanged.
 - 2026-08-06T16:19:46Z — full re-check (repo-wide + brand/ scoped): no changes beyond what's already pulled; github.md consolidated.

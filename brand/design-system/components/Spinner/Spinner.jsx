@@ -1,6 +1,6 @@
 // Balsm DS — Spinner
 // Spinner      — conic ring, the inline loading workhorse.
-// PetalSpinner — the five-petal flower mark, slow 3.6s rotate, for
+// PetalSpinner — the five figures of the Balsm mark, slow 3.6s rotate, for
 //                full-screen + brand loading moments. Five colors,
 //                never one hue. (Mirrors brand/logo-vertical.svg.)
 //

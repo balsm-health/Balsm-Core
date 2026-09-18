@@ -1,5 +1,5 @@
 // Balsm DS — LoadingOverlay
-// Full-screen (or container) loading state: the five-petal mark over a
+// Full-screen (or container) loading state: the Balsm mark over a
 // calm surface, an optional message, and optional progress.
 // variant: cream (warm surface) | scrim (translucent ink) | brand (watercolor)
 // Self-contained markup — no cross-component imports.

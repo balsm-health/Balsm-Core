@@ -12,7 +12,7 @@ export type ProgressState = 'syncing' | 'paused' | 'queued';
 export interface ProgressProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
   /** 0–100. Omit (or null) for an indeterminate loading bar. */
   value?: number | null;
-  /** Semantic fill color. `brand` uses the full five-petal gradient. */
+  /** Semantic fill color. `brand` uses the full brand gradient. */
   variant?: ProgressVariant;
   /** Track + fill height. sm = 5px, md = 8px, lg = 12px. */
   size?: ProgressSize;

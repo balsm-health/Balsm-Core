@@ -211,7 +211,7 @@ balsm_app/          # Flutter melos monorepo — mobile + web targets
 - [ ] T035ak [P] [Flutter] Create `BalsmBottomNav` at `core/lib/src/kit/widgets/balsm_bottom_nav.dart` — P001 5-slot `[Home, Card, Meds, Sessions, Settings]`; active state icon + primary color + 3pt indicator
 - [ ] T035al [P] [Flutter] Create `BalsmIcon` at `core/lib/src/kit/widgets/balsm_icon.dart` — wraps `lucide_icons` (outline 1.75pt default). Add `lucide_icons ^0.x` to core/pubspec
 - [ ] T035am [P] [Flutter] Create `BalsmMoodFace` at `core/lib/src/kit/widgets/balsm_mood_face.dart` — SVG arcs. Not used in P001 (comment "Not wired in P001")
-- [ ] T035an [P] [Flutter] Create `BalsmLogoMark` at `core/lib/src/kit/widgets/balsm_logo_mark.dart` — 5-petal flower via `flutter_svg ^2.0`. Variants small/medium/large/spinner. Add `flutter_svg ^2.0`
+- [ ] T035an [P] [Flutter] Create `BalsmLogoMark` at `core/lib/src/kit/widgets/balsm_logo_mark.dart` — Balsm mark via `flutter_svg ^2.0`. Variants small/medium/large/spinner. Add `flutter_svg ^2.0`
 - [ ] T035ao [Flutter] Update `core/lib/core.dart` to re-export all BalsmKit widgets (T035u..T035an) under barrel `balsm_kit.dart`
 - [ ] T035ap [P] [Flutter] Create golden test per BalsmKit widget at `core/test/kit/<widget>_golden_test.dart` — RTL+LTR × light+dark × en+ar-EG = 8 goldens each (uses `golden_toolkit` from T067)
 

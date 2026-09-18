@@ -18,9 +18,11 @@ Upstream: the Claude Design project `51cdbf29-13b7-4206-9328-125fade14cc3`. Pull
 |---|---|
 | [brand/colors_and_type.css](brand/colors_and_type.css) | **Tier 1–2 source of truth** — global + semantic tokens: petals, neutrals, type, spacing, radii, shadows, motion, breakpoints, containers, gutters. Import this first. |
 | [brand/balsm-brand-canvas.md](brand/balsm-brand-canvas.md) | Brand canvas — mission, voice, values, positioning, experience. Source of truth for tone. |
-| [brand/logo-vertical.svg](brand/logo-vertical.svg) | Official five-petal flower + bilingual wordmark. Use as-is. |
+| [brand/logo-vertical.svg](brand/logo-vertical.svg) | Official mark — five figures joined in a ring — over the bilingual wordmark. Use as-is. |
 | [brand/logo-vertical-mono-white.svg](brand/logo-vertical-mono-white.svg) | Reverse lockup — white ink, for dark surfaces. (`-on-white` files are the opposite: full-colour logo baked onto a white background.) |
-| [brand/balsm-background.png](brand/balsm-background.png) | Watercolor petal pattern — hero/welcome backdrops only. |
+| [brand/balsm-background.png](brand/balsm-background.png) | Watercolor wash of the mark — hero/welcome backdrops only. |
+
+**These files are generated.** `brand/icon.svg` (the mark) and `brand/wordmark.svg` (the type) are the only hand-authored sources; every other lockup, mono variant, social avatar, PNG, OG image, and LinkedIn banner under `brand/` comes out of [scripts/brand/build-brand-assets.py](scripts/brand/build-brand-assets.py) (`npm run brand:build`). Edit a source, re-run the build, commit the result — never hand-edit a derived file.
 
 **Full design system — [brand/design-system/](brand/design-system/).** Holds the long-form `README.md` manual, 26 components in `components/`, the self-hosted type stack (`fonts/` + `fonts.css`), and per-token preview cards (`preview/`). The `balsm-design` skill points here; invoke `/balsm-design` in any Balsm repo that has Core checked out.
 
@@ -49,9 +51,9 @@ A surface that only needs color and type imports tier 1–2 alone. Pull tier 3 w
 ## 3. Brand non-negotiables
 
 1. **Name.** Always `Balsm.health` in product (`.health` one weight lighter, smaller). Arabic: `بلسم` — plain spelling, no diacritics.
-2. **Mark.** Five-petal flower in **five distinct hues** — aqua, emerald, blue, mint, violet. Never recolor to a single hue except in the documented mono / reverse lockups (§7).
+2. **Mark.** Five figures joined in a ring, in **five distinct hues** — aqua, emerald, blue, mint, violet. Never recolor to a single hue except in the documented mono / reverse lockups (§7).
 3. **No medical-cliché iconography** for brand symbols (no cross, syringe, heart). Lucide `pill` / `stethoscope` / `syringe` are fine **inside** the product, never as a logo replacement.
-4. **No emoji in product UI.** The flower is our emoji. Marketing decks may use a single `🌿` sparingly.
+4. **No emoji in product UI.** The mark is our emoji. Marketing decks may use a single `🌿` sparingly.
 5. **Arabic is first-class.** Every surface must work with `dir="rtl"` and `--font-arabic`. `[dir="rtl"]` selectors swap fonts automatically.
 6. **Voice.** Calm, second-person, sentence case. `"Saved locally. Will sync when you reconnect."` — not `"Oops! Saved! ✨"`.
 7. **Egyptian formatting.** Dates `DD/MM/YYYY`, currency `LE 245.00` (non-breaking space), phones `+20 1X XXXX XXXX`, national ID 14-digit grouped `2 9912 22 12345 6`.
@@ -60,7 +62,7 @@ A surface that only needs color and type imports tier 1–2 alone. Pull tier 3 w
 
 ## 4. Color — the five petals
 
-The brand has **no single primary color.** The mark is five petals in five hues; the design system treats them as a categorical palette. Reach for one when you need a category (modules, departments, charts). Use all five together only in brand moments (hero, loading, watermark).
+The brand has **no single primary color.** The mark carries five hues, one per figure; the design system treats them as a categorical palette. Reach for one when you need a category (modules, departments, charts). Use all five together only in brand moments (hero, loading, watermark).
 
 | Token | Hex | Role |
 |---|---|---|
@@ -131,7 +133,7 @@ The `--space-*` scale is intentionally identical to Tailwind's default 4-px scal
 - Hover: tint shift one step, or opacity 0.85. **Never scale-up on hover** for clinical surfaces.
 - Press: primary CTAs tint darker + shrink to 0.98. Secondary just tint-shift.
 - Page transitions: 200ms cross-fade. No slides, no rotations.
-- Brand loader: five-petal mark rotates slowly (4s linear).
+- Brand loader: the mark rotates slowly (4s linear).
 
 **Transparency.** Sticky headers `backdrop-filter: blur(12px)` over 92% white. Modal scrim `rgba(20, 32, 43, 0.4)`. **No glassmorphism / frosted-glass cards** — reads consumer-flashy, not clinical.
 
@@ -191,12 +193,12 @@ Per-stack mapping: Flutter `LayoutBuilder` / `MediaQuery.sizeOf` against these v
 
 | Use | Treatment |
 |---|---|
-| **Primary** — app icon, web, marketing, storefront | Full 5-color flower + bilingual wordmark |
-| **Reverse** — dark UI, splash, photos, signage | All-white knockout (flower + wordmark) |
+| **Primary** — app icon, web, marketing, storefront | Full 5-color mark + bilingual wordmark |
+| **Reverse** — dark UI, splash, photos, signage | All-white knockout (mark + wordmark) |
 | **Mono ink** — receipts watermark, stamps, fax, 16-px favicon | Single `--balsm-wordmark #1F2D3D`, or solid `--petal-blue` |
 | **Mono brand** — single color but on-brand | Solid `--petal-emerald #01C4A2` — closest to historic "Balsm green," most legible single hue |
 
-Flower mark usage: app icon (squircle-clipped, ink or cream bg) · loading spinner (4s linear rotate) · empty-state hero (centered, 96px) · prescription/receipt watermark (8–10% opacity) · hero backdrop (over the watercolor pattern).
+Mark usage: app icon (squircle-clipped, ink or cream bg) · loading spinner (4s linear rotate) · empty-state hero (centered, 96px) · prescription/receipt watermark (8–10% opacity) · hero backdrop (over the watercolor pattern).
 
 **Backgrounds.** Dominant surface = white; cream is the warm complement. Watercolor petal pattern (`brand/balsm-background.png`) is the brand environment — translucent petal blobs in the five hues over a near-white wash. Used on landing hero, local-server welcome screen, full-bleed print covers. **Never inside product chrome.** No repeating geometric patterns. No hand-drawn illustrations. No stock-photo people. No generic medical stock photography.
 
@@ -217,7 +219,7 @@ Flower mark usage: app icon (squircle-clipped, ink or cream bg) · loading spinn
 <script>lucide.createIcons();</script>
 ```
 
-**Emoji policy.** None in product UI. Unicode arrows (`→ ← ↑ ↓`) and bullets (`•`) OK in copy; anything that reads as an icon must be Lucide or the brand flower.
+**Emoji policy.** None in product UI. Unicode arrows (`→ ← ↑ ↓`) and bullets (`•`) OK in copy; anything that reads as an icon must be Lucide or the brand mark.
 
 ---
 

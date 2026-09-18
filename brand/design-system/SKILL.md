@@ -1,6 +1,6 @@
 ---
 name: balsm-design
-description: Use this skill to generate well-branded interfaces and assets for Balsm.health (بلسم) — the community-owned healthcare OS for the Arab world. Includes the official five-petal flower mark, the five-color petal palette, cool navy-slate neutrals, type system (Montserrat / IBM Plex Sans / IBM Plex Sans Arabic / Cairo / IBM Plex Mono), Lucide iconography, a Balsm Pharmacy POS UI kit, and a Balsm Care app prototype. Brand promise: "Your care. Your data. Your system." Three words: Open. Arab. Owned.
+description: Use this skill to generate well-branded interfaces and assets for Balsm.health (بلسم) — the community-owned healthcare OS for the Arab world. Includes the official five-petal flower mark, the five-color petal palette, cool navy-slate neutrals, type system (Montserrat / IBM Plex Sans / IBM Plex Sans Arabic / Cairo / IBM Plex Mono), Lucide iconography, a Balsm Pharmacy POS UI kit, and a Balsm Care app prototype. Brand promise: "Your care. Your data. Your system." Three words: Open. Arab. Trusted.
 user-invocable: true
 ---
 
@@ -24,7 +24,7 @@ For production code, copy `colors_and_type.css` into the codebase — it is the 
 | `README.md` | Design system manual + brand canvas summary. Read first. |
 | `../balsm-brand-canvas.md` | **Canonical brand reference (locked).** Mission, vision, promise, personality, voice, values, positioning, experience standard. |
 | `colors_and_type.css` | Every CSS token — petals, neutrals, type, spacing, radii, shadows, motion. |
-| `../logo-vertical.svg` | Five-petal flower + bilingual wordmark. Use as-is; do not redraw. |
+| `../logo-vertical.svg` | The Balsm mark — five figures joined in a ring — over the bilingual wordmark. Use as-is; do not redraw. |
 | `../balsm-background.png` | Signature watercolor petal pattern — hero/welcome backdrops only. |
 | `components/` | 26 components — Button, Input, Select, Table, Modal, Card, Avatar, Checkbox, Switch, DatePicker, TimePicker, Toast… |
 | `fonts/` + `fonts.css` | Self-hosted webfonts — the type stack never touches the network. |
@@ -37,11 +37,11 @@ For production code, copy `colors_and_type.css` into the codebase — it is the 
 
 2. **Brand name** — `Balsm.health` in product surfaces (`.health` one weight lighter). Arabic: `بلسم` — plain spelling, no diacritics.
 
-3. **The flower mark has FIVE colors** — aqua, emerald, blue, mint, violet. Never recolor to a single hue.
+3. **The mark has FIVE colors** — aqua, emerald, blue, mint, violet. Never recolor to a single hue.
 
 4. **No medical-cliché iconography** for brand symbols (no cross, syringe, heart as logo). Lucide `pill` / `stethoscope` are fine inside the product; never as logo replacement.
 
-5. **No emoji in product UI.** The five-petal flower is our emoji. Unicode arrows/bullets in copy are fine.
+5. **No emoji in product UI.** The Balsm mark is our emoji. Unicode arrows/bullets in copy are fine.
 
 6. **Arabic is first-class.** Every surface must work with `dir="rtl"` and `--font-arabic`. Not localized after the fact — designed Arabic-first.
 

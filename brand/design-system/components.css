@@ -1402,7 +1402,7 @@
 .b-logomark__spin,
 .b-logomark__glow {
   transform-box: view-box;
-  transform-origin: 350px 333px;
+  transform-origin: 349.65px 335.9px;
 }
 .b-logomark__petal { will-change: transform, opacity; }
 .b-logomark__glow  { opacity: 0; }
@@ -1620,7 +1620,7 @@
   .b-logomark__spin,  .b-logomark__glow,   .b-logomark__iris { animation: none !important; }
   .b-logomark__petal, .b-logomark__reveal { opacity: 1 !important; transform: none !important; }
   .b-logomark__glow  { opacity: 1; }
-  .b-logomark__iris  { r: 380px; }
+  .b-logomark__iris  { r: 470px; }
 }
 
 

@@ -1,11 +1,11 @@
 /* ============================================================
    Balsm Design System — Colors & Typography
-   Community-Owned Healthcare OS · Open. Arab. Owned.
+   Community-Owned Healthcare OS · Open. Arab. Trusted.
    Brand promise: "Your care. Your data. Your system."
-   بلسم · مفتوح. عربي. مملوك.
+   بلسم · مفتوح. عربي. موثوق.
 
    Egypt-first · Arabic-RTL native · Offline-default
-   Canonical brand: ../balsm-brand-canvas.md
+   Canonical brand: balsm-brand-canvas.md
    ============================================================ */
 
 /* Webfonts — self-hosted, see fonts.css + fonts/README.md.
@@ -57,7 +57,7 @@
      #6B6B60). It shares a hue with the ".health" TLD — 267° vs 268° —
      so the two are one colour at two lightnesses, not two colours.
      Keep them in step: restating the wordmark means restating the TLD.
-     Matches ../logo-*.svg + ../wordmark.svg. */
+     Matches brand/logo-*.svg + brand/wordmark.svg. */
   --balsm-wordmark:     #1F2D3D;   /* بلسم · Balsm — navy slate, L* 17.9 */
   --balsm-wordmark-tld: #526174;   /* .health — same hue, L* 40.5 */
 
