@@ -14,34 +14,40 @@
 @import url('./fonts.css');
 
 :root {
-  /* ── Brand petals (official 5-color flower mark) ───────────────
-     The Balsm.health flower has five petals. Each is a named hue
-     that can be used independently or together as the signature
-     "petal pattern." Reach for one when you need a category color
-     (modules, departments, charts). Reach for the FULL FIVE only
-     in brand moments (loading, hero, watermark).
+  /* ── Brand hues (the five ribbons of the mark) ─────────────────
+     The Balsm mark is five ribbons joined in a ring. Each carries a
+     named hue: reach for one when you need a category color (modules,
+     departments, charts), and for the FULL FIVE only in brand moments
+     (loading, hero, watermark).
+
+     The --petal-* prefix predates the 2026-08-29 mark change — the
+     five-petal flower it was named for is retired (see github.md) —
+     and is kept because four sibling repos consume these tokens.
+
+     Order below is clockwise from the top, matching brand/icon.svg:
+     aqua is the untransformed copy, each next is rotate(+72).
      ──────────────────────────────────────────────────────────── */
-  --petal-aqua:    #02BBB5;   /* top-left petal */
-  --petal-emerald: #01C4A2;   /* top petal — closest to "Balsm green" */
-  --petal-blue:    #1283FF;   /* top-right petal */
-  --petal-mint:    #55D77F;   /* bottom-right petal */
-  --petal-violet:  #724DD0;   /* bottom-left petal */
+  --petal-aqua:    #02BBB5;   /* top ribbon */
+  --petal-blue:    #1283FF;   /* top-right ribbon */
+  --petal-emerald: #01C4A2;   /* bottom-right ribbon — closest to "Balsm green" */
+  --petal-violet:  #724DD0;   /* bottom-left ribbon */
+  --petal-mint:    #55D77F;   /* top-left ribbon */
 
-  /* Hover / pressed step (≈ -8% L) for each petal */
+  /* Hover / pressed step (≈ -8% L) for each hue */
   --petal-aqua-600:    #029E99;
-  --petal-emerald-600: #019A7F;
   --petal-blue-600:    #0F6BCC;
-  --petal-mint-600:    #3FC366;
+  --petal-emerald-600: #019A7F;
   --petal-violet-600:  #5C3AB0;
+  --petal-mint-600:    #3FC366;
 
-  /* Soft "wash" surface (≈ +50% L) for each petal — backgrounds, chips */
+  /* Soft "wash" surface (≈ +50% L) for each hue — backgrounds, chips */
   --petal-aqua-50:    #E2F8F6;
-  --petal-emerald-50: #E1F8F1;
   --petal-blue-50:    #E4F0FF;
-  --petal-mint-50:    #E8F9EE;
+  --petal-emerald-50: #E1F8F1;
   --petal-violet-50:  #ECE6FA;
+  --petal-mint-50:    #E8F9EE;
 
-  /* ── Aliases for the two most-reached-for petals ──────────────
+  /* ── Aliases for the two most-reached-for hues ────────────────
      PRIMARY = blue  (the action color — CTAs, links, focus)
      ACCENT  = teal  (the calmer healing color — surfaces, success-y moments)
      The brand has no single "primary"; these are convenience aliases. */
@@ -230,7 +236,7 @@
   --cols-tablet:   8; /* @kind other */
   --cols-desktop:  12; /* @kind other */
 
-  /* ── Legacy aliases (point old tokens at new petals) ──────────
+  /* ── Legacy aliases (point old tokens at the brand hues) ──────
      Older preview cards & UI kits may still reference these.
      Don't use in new code — reach for --petal-* or semantic tokens. */
   --balsm-teal-50:  var(--petal-aqua-50);

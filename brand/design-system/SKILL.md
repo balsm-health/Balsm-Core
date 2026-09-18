@@ -25,7 +25,7 @@ For production code, copy `colors_and_type.css` into the codebase — it is the 
 | `../balsm-brand-canvas.md` | **Canonical brand reference (locked).** Mission, vision, promise, personality, voice, values, positioning, experience standard. |
 | `colors_and_type.css` | Every CSS token — petals, neutrals, type, spacing, radii, shadows, motion. |
 | `../logo-vertical.svg` | The Balsm mark — five ribbons joined in a ring — over the bilingual wordmark. Use as-is; do not redraw. |
-| `../balsm-background.png` | Signature watercolor petal pattern — hero/welcome backdrops only. |
+| `../balsm-background.png` | Signature mark wash — hero/welcome backdrops only. |
 | `components/` | 26 components — Button, Input, Select, Table, Modal, Card, Avatar, Checkbox, Switch, DatePicker, TimePicker, Toast… |
 | `fonts/` + `fonts.css` | Self-hosted webfonts — the type stack never touches the network. |
 

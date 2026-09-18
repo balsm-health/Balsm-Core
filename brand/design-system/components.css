@@ -733,7 +733,7 @@
 }
 
 /* ============================================================ */
-/* SPINNER  — petal ring + five-petal rotating mark             */
+/* SPINNER  — ring spinner + rotating five-dot mark             */
 /* ============================================================ */
 
 .b-spin-wrap {
@@ -766,7 +766,7 @@
 .b-ring-spinner--violet  { background: conic-gradient(from 90deg, transparent, var(--petal-violet)); }
 .b-ring-spinner--ink     { background: conic-gradient(from 90deg, transparent, var(--balsm-ink-400)); }
 
-/* ── Five-petal mark spinner (brand / full-screen moments) ──── */
+/* ── Five-dot mark spinner (brand / full-screen moments) ────── */
 .b-petal-spinner {
   position: relative;
   display: inline-block;
@@ -1379,7 +1379,7 @@
 /* ============================================================ */
 /* ANIMATED LOGO — the Balsm mark, many reveals                 */
 /* Hub (rotate/scale pivot) = 350,333 in the 830u viewBox.      */
-/* Petals sit in DOM order clockwise from the top, so --i drives */
+/* Ribbons sit in DOM order clockwise from the top, so --i drives*/
 /* any clockwise stagger straight from source order.            */
 /* Reveal = .b-logomark--v-<variant>; idle = --breathe/--spin.  */
 /* When not playing (thumbnail, no-JS, reduced-motion) the mark  */
