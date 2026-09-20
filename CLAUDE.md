@@ -2,6 +2,19 @@
 
 Read and follow the agent instructions in [AGENTS.md](./agents/rules/AGENTS.md).
 
+## Brand assets — never rebuild unasked
+
+Do **not** regenerate derived brand assets. That means no `scripts/brand/build-brand-assets.py`,
+and no hand-writing of anything it produces, unless I ask for it in that same message. Finishing
+a change to a source file is not permission to rebuild.
+
+Only `brand/icon.svg` and `brand/wordmark.svg` are sources. Everything else under `brand/` is
+output — mono variants, lockups, social avatars, PNG renders, OG images, the background wash,
+the LinkedIn banners.
+
+When a source changes, edit the source, say plainly that the derived assets are now stale, and
+stop there. I decide when they get rebuilt.
+
 ## Active Technologies
 - .NET 10.0 (C#) for backend; TypeScript 5.8 + React 19 for admin UI; Bash / PowerShell for installer hooks + ASP.NET Core 10, Entity Framework Core 10.0.5 (SQLite provider with `Microsoft.Data.Sqlite` online backup API), `Tmds.MDns` or `Zeroconf` for mDNS, `Konscious.Security.Cryptography.Argon2` (or libsodium binding) for password hashing, FluentValidation, Serilog (structured logging), Vite + React + React Router 7 admin SPA (main)
 - SQLite (`balsm.db`) embedded; backups + audit JSONL archives under configurable backup directory (default `<install-dir>/backups/`) (main)
