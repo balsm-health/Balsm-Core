@@ -11,22 +11,30 @@
      FRAME. The viewBox IS the ink box (21.64 15 705.72 x 676.92, aspect 1.0425),
      rounded outward to 0.01: no padding on any side, the heads set all four edges.
      scripts/brand/build-brand-assets.py hard-codes it as MARK_INK: update it if the geometry
-     changes. Square frames centre the ink box. A head-up five-fold mark is always wider than
-     tall, so in a square each vertical margin is 14.4 units (scaled) larger than
-     each horizontal one; only turning the mark 9.00 degrees makes all four equal. The
-     rotation centre sits 29.5 units below the ink box centre; the enclosing circle about
-     it has radius 367.995. Under a circular mask the lower heads stay whole only while the mark
-     width is at most 0.899 of the frame, so pad circular exports.
+     changes. The rotation centre sits 29.5 units below the ink box centre; the enclosing
+     circle about it has radius 367.995. Square and circular frames (build-brand-assets.py)
+     centre the ink box across and, vertically, lift the mark by half of that 29.5 so the
+     ring does not read as sitting low; the top head then clears the frame by about what
+     the sides do. A head-up five-fold mark is always wider than tall; only turning it
+     9.00 degrees makes all four margins equal. Under a circular mask keep the enclosing
+     circle inside the frame: with the half-lift that holds while the mark width is at most
+     0.92 of the frame, so pad circular exports.
 
      JOINS & SEAMS. Where two ribbons abut, the union outline crosses from one copy to the next at
-     two points, both curvature-continuous so the ring reads as one unbroken band:
+     two points: the outer join, where the outer edges meet tangent-continuous so the ring reads
+     as one unbroken band, and the inner join, the corner of the void where one ribbon's inner
+     edge passes under the next:
        outer join, at (251.822 129.569) = rotate(72) of (577.618 188.012)
        inner join, at (240.141 220.338) = rotate(72) of (487.682 204.952)
 
-     SEAM CURVE. Traced and fitted from the original master (assets/circle/4.png) as a pure,
-     smooth C-curve with monotonic curvature (zero inflection), eliminating the blunt straight
-     patch and awkward perpendicular joint. Both ends meet the outer and inner boundaries
-     at shallow tangent wedge tapers matching 4.png. Nothing is stroked and nothing is clipped.
+     SEAM CURVE. Traced from the original master (assets/circle/4.png), then refitted as one
+     cubic with a convex control polygon, so its curvature is single-signed (no inflection;
+     the trace had a slight hook just before the inner join). Its end tangents are the
+     trace's: at the outer join it leaves the outer edge at the 17.15-degree wedge-tip angle,
+     at the inner join it is tangent to the inner edge and matches its curvature (G2), so
+     the wedge tapers out of the inner edge without a break. Fourteen cubics: cap, five
+     inner-edge, wedge, seven outer-edge; every edge junction is exactly G1, including the
+     outer join across copies. Nothing is stroked and nothing is clipped.
 
      COLOUR is the brand hue palette (design-system/colors_and_type.css), clockwise from the top in
      the order of the previous icon.svg: aqua, blue, emerald, violet, mint. The five
@@ -41,7 +49,7 @@
      degrees counter-clockwise from outward). Regenerate with the pipeline (polish.py,
      brandmaster.py) rather than hand-editing hexes. -->
 <defs>
-<path id="ribbon" d="M251.822 129.569C242.000 136.000 230.000 158.000 229.200 177.000C228.611 191.000 235.603 204.058 240.141 220.338C252.798 209.967 271.892 209.180 287.050 213.373C300.470 217.096 312.460 224.481 324.756 230.808C337.680 237.458 351.179 243.121 365.484 246.059C394.382 251.996 424.070 245.067 449.488 230.795C463.109 223.139 474.772 213.522 487.682 204.952C501.762 195.605 512.021 184.920 525.517 181.154C543.835 176.044 568.466 180.658 577.618 188.012C557.997 158.993 527.880 136.693 493.532 128.783C479.520 125.567 464.883 124.887 450.776 127.980C434.356 131.571 421.268 140.460 406.004 146.658C395.451 150.950 384.177 153.329 372.750 152.747C359.914 152.087 347.877 147.802 336.387 142.279C327.659 138.072 319.135 133.396 309.972 130.166C292.146 123.879 275.435 123.998 257.162 128.139C255.374 128.582 253.594 129.059 251.822 129.569Z"/>
+<path id="ribbon" d="M251.822 129.569C225.217 146.988 232.086 191.440 240.141 220.338C252.798 209.967 271.894 209.174 287.050 213.373C300.471 217.091 312.460 224.481 324.756 230.808C337.680 237.458 351.179 243.121 365.484 246.059C394.382 251.995 424.073 245.073 449.488 230.795C463.111 223.142 474.772 213.522 487.682 204.952C512.676 188.361 552.829 168.092 577.618 188.012C557.997 158.993 527.883 136.680 493.532 128.783C479.521 125.562 464.884 124.891 450.776 127.980C434.357 131.575 421.266 140.456 406.004 146.658C395.450 150.947 384.177 153.332 372.750 152.747C359.914 152.090 347.874 147.808 336.387 142.279C327.657 138.077 319.135 133.397 309.972 130.166C291.124 123.520 270.874 124.083 251.822 129.569Z"/>
 <circle id="head" cx="374.5" cy="73.655" r="58.65"/>
 <linearGradient id="ribbon-axis" gradientUnits="userSpaceOnUse" x1="236.232" y1="170.556" x2="557.445" y2="187.401"/>
 <linearGradient id="gradient-aqua" href="#ribbon-axis"><stop offset="0" stop-color="#018985"/><stop offset="0.062" stop-color="#03938F"/><stop offset="0.125" stop-color="#049E99"/><stop offset="0.188" stop-color="#04A7A2"/><stop offset="0.25" stop-color="#04ADA8"/><stop offset="0.312" stop-color="#05B2AD"/><stop offset="0.375" stop-color="#03B7B1"/><stop offset="0.435" stop-color="#02BBB5"/><stop offset="0.5" stop-color="#02C0B9"/><stop offset="0.562" stop-color="#04C4BE"/><stop offset="0.625" stop-color="#04C8C1"/><stop offset="0.688" stop-color="#02CCC5"/><stop offset="0.75" stop-color="#01CFC8"/><stop offset="0.812" stop-color="#03D3CC"/><stop offset="0.875" stop-color="#03D5CE"/><stop offset="0.938" stop-color="#06D6CF"/><stop offset="1" stop-color="#02D4CD"/></linearGradient>
