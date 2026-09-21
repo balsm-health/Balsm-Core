@@ -21,7 +21,7 @@
      JOINS & SEAMS. Where two ribbons abut, the union outline crosses from one copy to the next at
      two points, both curvature-continuous so the ring reads as one unbroken band:
        outer join, at (251.822 129.569) = rotate(72) of (577.618 188.012)
-       inner join, at (240.775 222.571) = rotate(72) of (485.754 206.245)
+       inner join, at (240.141 220.338) = rotate(72) of (487.682 204.952)
 
      SEAM CURVE. Traced and fitted from the original master (assets/circle/4.png) as a pure,
      smooth C-curve with monotonic curvature (zero inflection), eliminating the blunt straight
@@ -41,7 +41,7 @@
      degrees counter-clockwise from outward). Regenerate with the pipeline (polish.py,
      brandmaster.py) rather than hand-editing hexes. -->
 <defs>
-<path id="ribbon" d="M251.822 129.569C234.907 137.543 225.750 156.190 226.430 174.439C227.058 191.333 232.291 207.950 240.775 222.571C240.561 221.828 240.349 221.084 240.141 220.338C252.798 209.967 271.892 209.180 287.050 213.373C300.470 217.096 312.460 224.481 324.756 230.808C337.680 237.458 351.179 243.121 365.484 246.059C394.382 251.996 424.070 245.067 449.488 230.795C462.428 223.522 473.601 214.479 485.754 206.245C497.038 193.657 511.224 183.546 527.097 177.728C544.243 171.443 564.806 174.389 577.618 188.012C557.997 158.993 527.880 136.693 493.532 128.783C479.520 125.567 464.883 124.887 450.776 127.980C434.356 131.571 421.268 140.460 406.004 146.658C395.451 150.950 384.177 153.329 372.750 152.747C359.914 152.087 347.877 147.802 336.387 142.279C327.659 138.072 319.135 133.396 309.972 130.166C292.146 123.879 275.435 123.998 257.162 128.139C255.374 128.582 253.594 129.059 251.822 129.569Z"/>
+<path id="ribbon" d="M251.822 129.569C234.907 137.543 225.750 156.190 226.430 174.439C227.058 191.333 231.657 205.717 240.141 220.338C252.798 209.967 271.892 209.180 287.050 213.373C300.470 217.096 312.460 224.481 324.756 230.808C337.680 237.458 351.179 243.121 365.484 246.059C394.382 251.996 424.070 245.067 449.488 230.795C463.109 223.139 474.772 213.522 487.682 204.952C498.965 192.365 511.224 183.546 527.097 177.728C544.243 171.443 564.806 174.389 577.618 188.012C557.997 158.993 527.880 136.693 493.532 128.783C479.520 125.567 464.883 124.887 450.776 127.980C434.356 131.571 421.268 140.460 406.004 146.658C395.451 150.950 384.177 153.329 372.750 152.747C359.914 152.087 347.877 147.802 336.387 142.279C327.659 138.072 319.135 133.396 309.972 130.166C292.146 123.879 275.435 123.998 257.162 128.139C255.374 128.582 253.594 129.059 251.822 129.569Z"/>
 <circle id="head" cx="374.5" cy="73.655" r="58.65"/>
 <linearGradient id="ribbon-axis" gradientUnits="userSpaceOnUse" x1="236.232" y1="170.556" x2="557.445" y2="187.401"/>
 <linearGradient id="gradient-aqua" href="#ribbon-axis"><stop offset="0" stop-color="#018985"/><stop offset="0.062" stop-color="#03938F"/><stop offset="0.125" stop-color="#049E99"/><stop offset="0.188" stop-color="#04A7A2"/><stop offset="0.25" stop-color="#04ADA8"/><stop offset="0.312" stop-color="#05B2AD"/><stop offset="0.375" stop-color="#03B7B1"/><stop offset="0.435" stop-color="#02BBB5"/><stop offset="0.5" stop-color="#02C0B9"/><stop offset="0.562" stop-color="#04C4BE"/><stop offset="0.625" stop-color="#04C8C1"/><stop offset="0.688" stop-color="#02CCC5"/><stop offset="0.75" stop-color="#01CFC8"/><stop offset="0.812" stop-color="#03D3CC"/><stop offset="0.875" stop-color="#03D5CE"/><stop offset="0.938" stop-color="#06D6CF"/><stop offset="1" stop-color="#02D4CD"/></linearGradient>
