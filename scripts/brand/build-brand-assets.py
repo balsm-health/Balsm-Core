@@ -5,8 +5,9 @@
     brand/wordmark.svg  the type  — بلسم / Balsm.health
 
 Everything else under brand/ is output: mono variants, lockups, social
-avatars, PNG renders, OG images, the background wash, and the LinkedIn
-banner set. Change a source, re-run this, commit the result.
+avatars, the small (favicon) cut, PNG renders, OG images, the background
+wash, and the LinkedIn banner set. Change a source, re-run this, commit the
+result.
 
     python3 scripts/brand/build-brand-assets.py            # everything
     python3 scripts/brand/build-brand-assets.py svg png    # a subset
@@ -19,6 +20,7 @@ Chrome for the two compositions that contain live text (the banners).
 
 from __future__ import annotations
 
+import math
 import re
 import shutil
 import subprocess
@@ -35,13 +37,21 @@ CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 # Ink bounding boxes, measured with getBBox(). Lockups are laid out from
 # the ink box, not the viewBox, so padding stays optical rather than
 # inherited from whatever the source file happened to be exported with.
-MARK_INK = (21.64, 15.0, 705.72, 676.92)         # ink box inside brand/icon.svg
+MARK_INK = (18.24, 11.42, 712.52, 683.39)        # ink box inside brand/icon.svg
 # Rendered ink (rsvg, 16x), not getBBox: the old getBBox box was 0.025 narrow and
 # 0.012 high, which left the lockups 0.06 tighter on the wordmark side.
 WORD_INK = (3.9989, 4.0057, 112.5619, 46.5559)   # inside brand/wordmark.svg
 
-MARK_AR = MARK_INK[2] / MARK_INK[3]              # 1.0425
+MARK_AR = MARK_INK[2] / MARK_INK[3]              # 1.0426
 WORD_AR = WORD_INK[2] / WORD_INK[3]              # 2.4178
+
+# The ring turns about (374.5, 383): 29.88 units below the ink-box centre,
+# because the heads set the box and the top one alone sets its top edge.
+# Framing on the ink box leaves the ring reading low; framing on the ring
+# crowds the top head. Square and circular frames lift the mark by half.
+MARK_RING_CENTRE = (374.5, 383.0)
+MARK_RING_RADIUS = 371.570                       # enclosing circle about that centre
+MARK_OPTICAL_DY = 0.5 * (MARK_RING_CENTRE[1] - (MARK_INK[1] + MARK_INK[3] / 2))  # 14.94
 
 # Lockup metrics carried over from the previous mark so the two lockups
 # keep their established proportions — only the mark's own aspect moved.
@@ -93,23 +103,124 @@ MARK_SRC = _inner((BRAND / "icon.svg").read_text())
 WORD_SRC = _strip_editor_cruft(_inner((BRAND / "wordmark.svg").read_text()))
 
 
+# ── Ribbon geometry ───────────────────────────────────────────────────
+# icon.svg draws one #ribbon path five times, turned 72° about
+# MARK_RING_CENTRE. Its 14 cubics, by role (see JOINS & SEAMS in icon.svg):
+#   0     leading cap     outer join → inner join
+#   1-5   inner edge      inner join → the next copy's inner join
+#   6     trailing wedge  inner join → outer join (= the next copy's cap)
+#   7-13  outer edge      outer join → the previous copy's outer join
+Cubic = tuple[tuple[float, float], ...]
+CAP, INNER, WEDGE, OUTER = slice(0, 1), slice(1, 6), slice(6, 7), slice(7, 14)
+
+
+def _cubics(d: str) -> list[Cubic]:
+    """A 'M x y C … Z' path as (p0, c1, c2, p3) cubics."""
+    n = [float(v) for v in re.findall(r"-?\d+\.?\d*(?:e-?\d+)?", d)]
+    segs: list[Cubic] = []
+    cur = (n[0], n[1])
+    for i in range(2, len(n) - 5, 6):
+        segs.append((cur, (n[i], n[i + 1]), (n[i + 2], n[i + 3]), (n[i + 4], n[i + 5])))
+        cur = segs[-1][3]
+    return segs
+
+
+def _rot(p: tuple[float, float], deg: float) -> tuple[float, float]:
+    cx, cy = MARK_RING_CENTRE
+    t = math.radians(deg)
+    x, y = p[0] - cx, p[1] - cy
+    return (cx + x * math.cos(t) - y * math.sin(t), cy + x * math.sin(t) + y * math.cos(t))
+
+
+def _bez(seg: Cubic, t: float) -> tuple[float, float]:
+    p0, p1, p2, p3 = seg
+    u = 1 - t
+    return (u ** 3 * p0[0] + 3 * u * u * t * p1[0] + 3 * u * t * t * p2[0] + t ** 3 * p3[0],
+            u ** 3 * p0[1] + 3 * u * u * t * p1[1] + 3 * u * t * t * p2[1] + t ** 3 * p3[1])
+
+
+def _path_d(loops: list[list[Cubic]]) -> str:
+    out = []
+    for loop in loops:
+        out.append(f"M{loop[0][0][0]:.3f} {loop[0][0][1]:.3f}")
+        out += [f"C{c1[0]:.3f} {c1[1]:.3f} {c2[0]:.3f} {c2[1]:.3f} {p[0]:.3f} {p[1]:.3f}"
+                for _, c1, c2, p in loop]
+        out.append("Z")
+    return "".join(out)
+
+
+RIBBON = _cubics(re.search(r'<path id="ribbon" d="([^"]+)"', MARK_SRC).group(1))
+assert len(RIBBON) == 14, "icon.svg #ribbon changed shape; update the role slices"
+# The trailing wedge is the next copy's cap, control point for control point.
+for _a, _b in zip([p for s in RIBBON[WEDGE] for p in s],
+                  [_rot(p, 72) for s in reversed(RIBBON[CAP]) for p in reversed(s)]):
+    assert math.dist(_a, _b) < 0.01, "icon.svg seams no longer coincide"
+
+
+def _ring_union_d() -> str:
+    """The five ribbons as one path — an outer loop and an inner loop.
+
+    Each copy's outer edge ends exactly where the previous copy's begins (the
+    outer join) and each inner edge where the next copy's begins (the inner
+    join), so the union outline is those edges chained around the ring; the
+    caps and wedges lie inside it. One path, one fill, no anti-aliased seam.
+    """
+    def turned(k: int, segs: list[Cubic]) -> list[Cubic]:
+        return [tuple(_rot(p, 72 * k) for p in s) for s in segs]
+    outer = [s for k in (0, 4, 3, 2, 1) for s in turned(k, RIBBON[OUTER])]
+    inner = [s for k in (0, 1, 2, 3, 4) for s in turned(k, RIBBON[INNER])]
+    return _path_d([outer, inner])
+
+
+RING_UNION_D = _ring_union_d()
+
+
+def _thick_ribbon_d(grow: float) -> str:
+    """#ribbon with the outer edge pushed `grow` units out and the inner edge
+    `grow` units in, radially. Cap and wedge control points blend from one to
+    the other along the seam — the same blend in both copies, so the seams
+    still coincide exactly."""
+    cx, cy = MARK_RING_CENTRE
+
+    def push(p: tuple[float, float], amt: float) -> tuple[float, float]:
+        r = math.hypot(p[0] - cx, p[1] - cy)
+        return (p[0] + amt * (p[0] - cx) / r, p[1] + amt * (p[1] - cy) / r)
+
+    def along(segs: list[Cubic], start: float, end: float) -> list[Cubic]:
+        n = 3 * len(segs)
+        return [tuple(push(p, start + (end - start) * (3 * i + j) / n) for j, p in enumerate(s))
+                for i, s in enumerate(segs)]
+
+    return _path_d([along(RIBBON[CAP], grow, -grow) + along(RIBBON[INNER], -grow, -grow)
+                    + along(RIBBON[WEDGE], -grow, grow) + along(RIBBON[OUTER], grow, grow)])
+
+
+def _ribbon_base_fills() -> dict[str, str]:
+    """Each ribbon's base colour: the gradient stop at offset 0.435 (see icon.svg)."""
+    return dict(re.findall(
+        r'<linearGradient id="gradient-(\w+)"[^>]*>.*?offset="0\.435" stop-color="(#[0-9A-Fa-f]{6})"',
+        MARK_SRC, flags=re.S))
+
+
 def mark(x: float, y: float, height: float, *, mono: str | None = None,
          prefix: str = "m-", opacity: float | None = None) -> str:
     """The mark, its ink box placed at (x, y) and scaled to `height`."""
     s = height / MARK_INK[3]
-    body = _reprefix(MARK_SRC, prefix)
+    body = MARK_SRC
     if mono:
-        # Drop only the colour gradients — keep clipPath. The ring is
-        # clipped as a group to round its cusps; losing that clip in mono
-        # would leave the raw (pointier) path shapes on show.
-        body = re.sub(r"<(?:linear|radial)Gradient\b.*?</(?:linear|radial)Gradient>",
+        # One colour, one shape. Five abutting <use> ribbons sharing a fill
+        # leave a faint anti-aliased line along every seam, so swap them for
+        # the union outline and drop the gradients.
+        body = re.sub(r'<g id="ring">.*?</g>',
+                      f'<path id="ring" d="{RING_UNION_D}" fill-rule="evenodd" fill="{mono}"/>',
+                      body, flags=re.S)
+        body = re.sub(r'<path id="ribbon"[^>]*/>\s*', "", body)
+        body = re.sub(r"<(?:linear|radial)Gradient\b.*?</(?:linear|radial)Gradient>\s*",
                       "", body, flags=re.S)
         body = re.sub(r'fill="url\([^)]*\)"', f'fill="{mono}"', body)
-        # The mark closes its own seams with a filled #seam sliver, which the
-        # fill swap above already turned to ink. Nothing is stroked, so the
-        # outline stays a single edge and the ink box is the same as in colour.
-        # (Kept for any future stroke paint.)
+        # Nothing is stroked today; kept for any future stroke paint.
         body = re.sub(r'stroke="url\([^)]*\)"', f'stroke="{mono}"', body)
+    body = _reprefix(body, prefix)
     tx, ty = x - s * MARK_INK[0], y - s * MARK_INK[1]
     op = f' opacity="{opacity}"' if opacity is not None else ""
     return (f'<g transform="translate({tx:.4f},{ty:.4f}) scale({s:.6f})"'
@@ -168,26 +279,58 @@ def vertical(mono: str | None = None, prefix: str = "v-") -> str:
                    label="Balsm.health · بلسم")
 
 
+def _lifted(y: float, height: float) -> float:
+    """Ink-box `y` raised by MARK_OPTICAL_DY (scaled) from plain centring."""
+    return y - height / MARK_INK[3] * MARK_OPTICAL_DY
+
+
 def social(white_plate: bool) -> str:
     icon_w = SOCIAL_ICON_H * MARK_AR
+    s = SOCIAL_ICON_H / MARK_INK[3]
+    # Platforms mask this to a circle: the mark's enclosing circle must fit.
+    assert s * (MARK_RING_RADIUS + MARK_OPTICAL_DY) <= SOCIAL_BOX / 2, \
+        "social mark too wide for a circular mask"
     plate = (f'<rect x="0" y="0" width="{SOCIAL_BOX:g}" height="{SOCIAL_BOX:g}" '
              f'fill="#FFFFFF" />\n' if white_plate else "")
-    body = plate + mark((SOCIAL_BOX - icon_w) / 2, (SOCIAL_BOX - SOCIAL_ICON_H) / 2,
+    body = plate + mark((SOCIAL_BOX - icon_w) / 2,
+                        _lifted((SOCIAL_BOX - SOCIAL_ICON_H) / 2, SOCIAL_ICON_H),
                         SOCIAL_ICON_H, prefix="s-" if not white_plate else "sw-")
     return svg_doc(SOCIAL_BOX, SOCIAL_BOX, body)
 
 
 def square_icon(size: float, *, mono: str | None = None, fill_frac: float = 0.96,
                 prefix: str = "q-") -> str:
-    """The mark alone, centred in a square frame — app-icon shaped.
+    """The mark alone in a square frame — app-icon shaped.
 
-    The ink box is centred, so left == right and top == bottom. The mark is
-    wider than tall (MARK_AR), so each top/bottom margin is larger than each
-    side margin by (w - h) / 2; no head-up placement can make them equal.
+    Centred across on the ink box; lifted by MARK_OPTICAL_DY so the ring,
+    not the ink box, sits nearer the middle. At fill_frac 0.96 the top head
+    then clears the frame by about what the sides do (1.9% vs 2%).
     """
     h = size * fill_frac / MARK_AR if MARK_AR > 1 else size * fill_frac
     w = h * MARK_AR
-    body = mark((size - w) / 2, (size - h) / 2, h, mono=mono, prefix=prefix)
+    body = mark((size - w) / 2, _lifted((size - h) / 2, h), h, mono=mono, prefix=prefix)
+    return svg_doc(size, size, body)
+
+
+def small_icon(size: float = 512, *, grow: float = 18.0, fill_frac: float = 0.92) -> str:
+    """The ring alone — thicker, no heads, flat base hues — for favicons and
+    anything under ~48 px, where five heads and the gradients turn to noise.
+
+    `grow` widens the ribbon by 2 × grow (18 → 1.4 × the 91-unit seam width).
+    The frame is centred on the ring's own centre.
+    """
+    d = _thick_ribbon_d(grow)
+    reach = max(max(abs(p[0] - MARK_RING_CENTRE[0]), abs(p[1] - MARK_RING_CENTRE[1]))
+                for k in range(5) for seg in _cubics(d) for t in range(25)
+                for p in [_rot(_bez(seg, t / 24), 72 * k)])
+    s = size * fill_frac / (2 * reach)
+    tx, ty = size / 2 - s * MARK_RING_CENTRE[0], size / 2 - s * MARK_RING_CENTRE[1]
+    fills = _ribbon_base_fills()
+    ring = re.search(r'<g id="ring">(.*?)</g>', MARK_SRC, re.S).group(1).strip()
+    ring = re.sub(r'fill="url\(#gradient-(\w+)\)"', lambda m: f'fill="{fills[m.group(1)]}"', ring)
+    body = (f'<defs><path id="sm-ribbon" d="{d}"/></defs>\n'
+            f'<g transform="translate({tx:.4f},{ty:.4f}) scale({s:.6f})" aria-label="Balsm">\n'
+            f'{ring.replace("#ribbon", "#sm-ribbon")}\n</g>')
     return svg_doc(size, size, body)
 
 
@@ -204,6 +347,7 @@ def build_svg() -> None:
     write(BRAND / "icon-mono-white.svg", square_icon(1024, mono="#FFFFFF", prefix="iw-"))
     write(BRAND / "icon-social.svg", social(False))
     write(BRAND / "icon-social-white.svg", social(True))
+    write(BRAND / "icon-small.svg", small_icon())
 
 
 # ── Rasterising ───────────────────────────────────────────────────────
@@ -269,6 +413,8 @@ def build_png() -> None:
     rsvg_text(square_icon(1024, prefix="p-"), BRAND / "icon.png", width=1024, height=1024)
     rsvg(BRAND / "icon-mono-black.svg", BRAND / "icon-mono-black.png", width=1024, height=1024)
     rsvg(BRAND / "icon-mono-white.svg", BRAND / "icon-mono-white.png", width=1024, height=1024)
+    for px in (16, 32, 48, 64):
+        rsvg(BRAND / "icon-small.svg", BRAND / f"icon-small-{px}.png", width=px, height=px)
 
     for name in ("icon-social", "icon-social-white"):
         rsvg(BRAND / f"{name}.svg", BRAND / f"{name}.png", width=1024, height=1024)

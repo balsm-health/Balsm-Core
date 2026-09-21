@@ -1,19 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="21.64 15 705.72 676.92" width="705.72" height="676.92" role="img" aria-label="Balsm - five identical ribbons joined in a symmetric ring">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="18.24 11.42 712.52 683.39" width="712.52" height="683.39" role="img" aria-label="Balsm - five identical ribbons joined in a symmetric ring">
 <title>Balsm</title>
 <!-- Balsm mark, five-fold symmetric. Source: Balsm-Draft assets/circle/27-vector.svg
      (traced from assets/circle/4.png; pipeline and notes in assets/circle/4-svg/27-pipeline).
 
      ONE RIBBON, ONE HEAD, FIVE TIMES. #ribbon is a single closed path and #head a single
-     circle; every ribbon is a <use> of them turned by rotate(72k 374.5 383). The seam
-     where two ribbons meet is the same curve in both copies (exact to 0.001), so the ring
-     reads as one band.
+     circle; every ribbon is a <use> of them turned by rotate(72k 374.5 383), so the five-fold
+     symmetry is structural — nothing to keep in step by hand. Inside the one path the seam is
+     symmetric too: the trailing wedge is written as the exact rotation of the leading cap
+     (they agree to 5e-7, the limit of the 6-decimal coordinates), so where two copies abut
+     the same curve bounds both and the ring reads as one band. The path closes exactly and
+     the ink box is centred on the rotation axis to within 1e-4.
 
-     FRAME. The viewBox IS the ink box (21.64 15 705.72 x 676.92, aspect 1.0425),
+     FRAME. The viewBox IS the ink box (18.24 11.42 712.52 x 683.39, aspect 1.0426),
      rounded outward to 0.01: no padding on any side, the heads set all four edges.
      scripts/brand/build-brand-assets.py hard-codes it as MARK_INK: update it if the geometry
-     changes. The rotation centre sits 29.5 units below the ink box centre; the enclosing
-     circle about it has radius 367.995. Square and circular frames (build-brand-assets.py)
-     centre the ink box across and, vertically, lift the mark by half of that 29.5 so the
+     changes. The rotation centre sits 29.88 units below the ink box centre; the enclosing
+     circle about it has radius 371.570. Square and circular frames (build-brand-assets.py)
+     centre the ink box across and, vertically, lift the mark by half of that 29.88 so the
      ring does not read as sitting low; the top head then clears the frame by about what
      the sides do. A head-up five-fold mark is always wider than tall; only turning it
      9.00 degrees makes all four margins equal. Under a circular mask keep the enclosing
@@ -26,6 +29,16 @@
      edge passes under the next:
        outer join, at (251.822 129.569) = rotate(72) of (577.618 188.012)
        inner join, at (240.141 220.338) = rotate(72) of (487.682 204.952)
+
+     HEADS. One circle, r 58.65, centre 312.92 from the rotation centre — the master's
+     proportions (assets/circle/4.png, measured: r 60.8, centre 310.2, both in these units).
+     What that buys is the gap between a head and the shoulder below it: 22.88 units here
+     against the master's 23.15. The trace had the head 3.57 units further in, closing the
+     gap to 19.58, which read crowded. Moving the head out rather than shrinking it keeps
+     the head's mass: at a given gap a smaller head reads as a dot, not a figure. #head-axis
+     is centred on the circle and travels with it; at 126.358 long against the 117.30
+     diameter the head spans the middle 0.036 to 0.964 of that ramp, so neither end of the
+     head shading reaches the stop colours.
 
      SEAM CURVE. Traced from the original master (assets/circle/4.png), then refitted as one
      cubic with a convex control polygon, so its curvature is single-signed (no inflection;
@@ -49,15 +62,15 @@
      degrees counter-clockwise from outward). Regenerate with the pipeline (polish.py,
      brandmaster.py) rather than hand-editing hexes. -->
 <defs>
-<path id="ribbon" d="M251.822 129.569C225.217 146.988 232.086 191.440 240.141 220.338C252.798 209.967 271.894 209.174 287.050 213.373C300.471 217.091 312.460 224.481 324.756 230.808C337.680 237.458 351.179 243.121 365.484 246.059C394.382 251.995 424.073 245.073 449.488 230.795C463.111 223.142 474.772 213.522 487.682 204.952C512.676 188.361 552.829 168.092 577.618 188.012C557.997 158.993 527.883 136.680 493.532 128.783C479.521 125.562 464.884 124.891 450.776 127.980C434.357 131.575 421.266 140.456 406.004 146.658C395.450 150.947 384.177 153.332 372.750 152.747C359.914 152.090 347.874 147.808 336.387 142.279C327.657 138.077 319.135 133.397 309.972 130.166C291.124 123.520 270.874 124.083 251.822 129.569Z"/>
-<circle id="head" cx="374.5" cy="73.655" r="58.65"/>
+<path id="ribbon" d="M251.822 129.569C225.217 146.988 232.086 191.44 240.141 220.338C252.798 209.967 271.894 209.174 287.05 213.373C300.471 217.091 312.46 224.481 324.756 230.808C337.68 237.458 351.179 243.121 365.484 246.059C394.382 251.995 424.073 245.073 449.488 230.795C463.111 223.142 474.771541 213.521675 487.681541 204.951675C512.67604 188.360942 552.829767 168.091711 577.617617 188.011803C557.996617 158.992803 527.883 136.68 493.532 128.783C479.521 125.562 464.884 124.891 450.776 127.98C434.357 131.575 421.266 140.456 406.004 146.658C395.45 150.947 384.177 153.332 372.75 152.747C359.914 152.09 347.874 147.808 336.387 142.279C327.657 138.077 319.135 133.397 309.972 130.166C291.124 123.52 270.874 124.083 251.822 129.569Z"/>
+<circle id="head" cx="374.5" cy="70.08" r="58.65"/>
 <linearGradient id="ribbon-axis" gradientUnits="userSpaceOnUse" x1="236.232" y1="170.556" x2="557.445" y2="187.401"/>
 <linearGradient id="gradient-aqua" href="#ribbon-axis"><stop offset="0" stop-color="#018985"/><stop offset="0.062" stop-color="#03938F"/><stop offset="0.125" stop-color="#049E99"/><stop offset="0.188" stop-color="#04A7A2"/><stop offset="0.25" stop-color="#04ADA8"/><stop offset="0.312" stop-color="#05B2AD"/><stop offset="0.375" stop-color="#03B7B1"/><stop offset="0.435" stop-color="#02BBB5"/><stop offset="0.5" stop-color="#02C0B9"/><stop offset="0.562" stop-color="#04C4BE"/><stop offset="0.625" stop-color="#04C8C1"/><stop offset="0.688" stop-color="#02CCC5"/><stop offset="0.75" stop-color="#01CFC8"/><stop offset="0.812" stop-color="#03D3CC"/><stop offset="0.875" stop-color="#03D5CE"/><stop offset="0.938" stop-color="#06D6CF"/><stop offset="1" stop-color="#02D4CD"/></linearGradient>
 <linearGradient id="gradient-blue" href="#ribbon-axis"><stop offset="0" stop-color="#005AB3"/><stop offset="0.062" stop-color="#0563C1"/><stop offset="0.125" stop-color="#0B6CD0"/><stop offset="0.188" stop-color="#1073DD"/><stop offset="0.25" stop-color="#1278E8"/><stop offset="0.312" stop-color="#127CF0"/><stop offset="0.375" stop-color="#1280F8"/><stop offset="0.435" stop-color="#1283FF"/><stop offset="0.5" stop-color="#1F88FF"/><stop offset="0.562" stop-color="#298DFF"/><stop offset="0.625" stop-color="#3191FF"/><stop offset="0.688" stop-color="#3996FF"/><stop offset="0.75" stop-color="#3F9AFF"/><stop offset="0.812" stop-color="#459DFF"/><stop offset="0.875" stop-color="#4AA0FF"/><stop offset="0.938" stop-color="#4AA0FF"/><stop offset="1" stop-color="#479EFF"/></linearGradient>
 <linearGradient id="gradient-emerald" href="#ribbon-axis"><stop offset="0" stop-color="#009178"/><stop offset="0.062" stop-color="#029B80"/><stop offset="0.125" stop-color="#01A689"/><stop offset="0.188" stop-color="#01AF91"/><stop offset="0.25" stop-color="#02B696"/><stop offset="0.312" stop-color="#03BB9B"/><stop offset="0.375" stop-color="#01C09F"/><stop offset="0.435" stop-color="#01C4A2"/><stop offset="0.5" stop-color="#01C9A6"/><stop offset="0.562" stop-color="#03CDAA"/><stop offset="0.625" stop-color="#04D1AD"/><stop offset="0.688" stop-color="#02D5B0"/><stop offset="0.75" stop-color="#02D9B3"/><stop offset="0.812" stop-color="#04DCB6"/><stop offset="0.875" stop-color="#05DFB9"/><stop offset="0.938" stop-color="#07DFB9"/><stop offset="1" stop-color="#03DDB7"/></linearGradient>
 <linearGradient id="gradient-violet" href="#ribbon-axis"><stop offset="0" stop-color="#4A2299"/><stop offset="0.062" stop-color="#512CA2"/><stop offset="0.125" stop-color="#5A37AD"/><stop offset="0.188" stop-color="#613EB7"/><stop offset="0.25" stop-color="#6643BF"/><stop offset="0.312" stop-color="#6B47C5"/><stop offset="0.375" stop-color="#6E4ACB"/><stop offset="0.435" stop-color="#724DD0"/><stop offset="0.5" stop-color="#7652D2"/><stop offset="0.562" stop-color="#7957D3"/><stop offset="0.625" stop-color="#7C5CD5"/><stop offset="0.688" stop-color="#8060D5"/><stop offset="0.75" stop-color="#8464D6"/><stop offset="0.812" stop-color="#8668D8"/><stop offset="0.875" stop-color="#886AD8"/><stop offset="0.938" stop-color="#896BD9"/><stop offset="1" stop-color="#8769D8"/></linearGradient>
 <linearGradient id="gradient-mint" href="#ribbon-axis"><stop offset="0" stop-color="#12A84C"/><stop offset="0.062" stop-color="#26B155"/><stop offset="0.125" stop-color="#35BB5F"/><stop offset="0.188" stop-color="#40C468"/><stop offset="0.25" stop-color="#47CA6F"/><stop offset="0.312" stop-color="#4CCF75"/><stop offset="0.375" stop-color="#51D37B"/><stop offset="0.435" stop-color="#55D77F"/><stop offset="0.5" stop-color="#62DA88"/><stop offset="0.562" stop-color="#6CDC90"/><stop offset="0.625" stop-color="#74DF97"/><stop offset="0.688" stop-color="#7AE29B"/><stop offset="0.75" stop-color="#7EE6A0"/><stop offset="0.812" stop-color="#81E9A2"/><stop offset="0.875" stop-color="#83EBA4"/><stop offset="0.938" stop-color="#84ECA5"/><stop offset="1" stop-color="#82EAA3"/></linearGradient>
-<linearGradient id="head-axis" gradientUnits="userSpaceOnUse" x1="351.006" y1="15.035" x2="397.934" y2="132.355"/>
+<linearGradient id="head-axis" gradientUnits="userSpaceOnUse" x1="351.036" y1="11.420" x2="397.964" y2="128.740"/>
 <linearGradient id="head-aqua" href="#head-axis"><stop offset="0" stop-color="#00CFC9"/><stop offset="1" stop-color="#19B0AB"/></linearGradient>
 <linearGradient id="head-blue" href="#head-axis"><stop offset="0" stop-color="#3D98FF"/><stop offset="1" stop-color="#0076F6"/></linearGradient>
 <linearGradient id="head-emerald" href="#head-axis"><stop offset="0" stop-color="#00D9B3"/><stop offset="1" stop-color="#19B899"/></linearGradient>
