@@ -14,14 +14,15 @@
      FRAME. The viewBox IS the ink box (18.24 11.42 712.52 x 683.39, aspect 1.0426),
      rounded outward to 0.01: no padding on any side, the heads set all four edges.
      scripts/brand/build-brand-assets.py hard-codes it as MARK_INK: update it if the geometry
-     changes. The rotation centre sits 29.88 units below the ink box centre; the enclosing
-     circle about it has radius 371.570. Square and circular frames (build-brand-assets.py)
-     centre the ink box across and, vertically, lift the mark by half of that 29.88 so the
-     ring does not read as sitting low; the top head then clears the frame by about what
-     the sides do. A head-up five-fold mark is always wider than tall; only turning it
-     9.00 degrees makes all four margins equal. Under a circular mask keep the enclosing
-     circle inside the frame: with the half-lift that holds while the mark width is at most
-     0.92 of the frame, so pad circular exports.
+     changes. The rotation centre sits 29.88 units below the ink box centre — the heads set
+     the box, the top one alone sets its top edge — and the enclosing circle about it has
+     radius 371.570. Square and circular frames (build-brand-assets.py) centre the INK BOX,
+     so left equals right and top equals bottom. A head-up five-fold mark is always wider
+     than tall, so in a square each vertical margin is larger than each horizontal one by
+     (w - h) / 2; only turning the mark 9.00 degrees makes all four equal, and that tilts
+     the heads. Under a circular mask keep the enclosing circle inside the frame: centred on
+     the ink box that holds while the mark width is at most 0.887 of the frame, so pad
+     circular exports.
 
      JOINS & SEAMS. Where two ribbons abut, the union outline crosses from one copy to the next at
      two points: the outer join, where the outer edges meet tangent-continuous so the ring reads
