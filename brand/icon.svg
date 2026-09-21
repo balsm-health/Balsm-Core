@@ -26,13 +26,7 @@
      SEAM CURVE. Traced and fitted from the original master (assets/circle/4.png) as a pure,
      smooth C-curve with monotonic curvature (zero inflection), eliminating the blunt straight
      patch and awkward perpendicular joint. Both ends meet the outer and inner boundaries
-     at shallow tangent wedge tapers matching 4.png.
-
-     SEAM SLIVER. Two abutting antialiased fills leave about a quarter of the background showing
-     down their shared edge. #seam is a closed sliver along that shared curve (the ribbon's head
-     seam) trimmed one unit short of each corner and tapered from 1.6 at the ends to 6.0 in the
-     center, filled under the ribbons with each ribbon's own gradient. Nothing is stroked and
-     nothing is clipped.
+     at shallow tangent wedge tapers matching 4.png. Nothing is stroked and nothing is clipped.
 
      COLOUR is the brand hue palette (design-system/colors_and_type.css), clockwise from the top in
      the order of the previous icon.svg: aqua, blue, emerald, violet, mint. The five
@@ -48,7 +42,6 @@
      brandmaster.py) rather than hand-editing hexes. -->
 <defs>
 <path id="ribbon" d="M251.822 129.569C234.907 137.543 225.750 156.190 226.430 174.439C227.058 191.333 232.291 207.950 240.775 222.571C240.561 221.828 240.349 221.084 240.141 220.338C252.798 209.967 271.892 209.180 287.050 213.373C300.470 217.096 312.460 224.481 324.756 230.808C337.680 237.458 351.179 243.121 365.484 246.059C394.382 251.996 424.070 245.067 449.488 230.795C462.428 223.522 473.601 214.479 485.754 206.245C497.038 193.657 511.224 183.546 527.097 177.728C544.243 171.443 564.806 174.389 577.618 188.012C557.997 158.993 527.880 136.693 493.532 128.783C479.520 125.567 464.883 124.887 450.776 127.980C434.356 131.571 421.268 140.460 406.004 146.658C395.451 150.950 384.177 153.329 372.750 152.747C359.914 152.087 347.877 147.802 336.387 142.279C327.659 138.072 319.135 133.396 309.972 130.166C292.146 123.879 275.435 123.998 257.162 128.139C255.374 128.582 253.594 129.059 251.822 129.569Z"/>
-<path id="seam" d="M250.544 129.302L248.453 130.272L246.297 131.188L244.124 132.131L241.979 133.179L239.921 134.394L238.023 135.827L236.355 137.505L234.827 139.305L233.392 141.178L232.050 143.116L230.802 145.115L229.649 147.171L228.591 149.278L227.629 151.433L226.763 153.629L225.995 155.863L225.324 158.131L224.752 160.426L224.278 162.746L223.906 165.086L223.633 167.441L223.463 169.806L223.396 172.178L223.431 174.533L223.535 176.686L223.685 178.816L223.882 180.942L224.124 183.062L224.411 185.176L224.743 187.283L225.119 189.381L225.538 191.471L226.000 193.552L226.504 195.623L227.050 197.684L227.637 199.733L228.264 201.770L228.932 203.794L229.638 205.805L230.383 207.802L231.173 209.781L232.144 211.683L233.301 213.495L234.576 215.237L235.904 216.936L237.221 218.622L238.467 220.330L239.578 222.092L240.976 221.315L240.073 219.456L239.370 217.504L238.807 215.494L238.324 213.461L237.858 211.439L237.345 209.454L236.719 207.528L235.984 205.650L235.279 203.762L234.612 201.861L233.981 199.948L233.389 198.024L232.835 196.089L232.320 194.145L231.844 192.192L231.409 190.231L231.014 188.262L230.660 186.287L230.348 184.305L230.077 182.318L229.850 180.326L229.665 178.329L229.524 176.330L229.428 174.346L229.395 172.218L229.456 170.107L229.607 168.001L229.850 165.903L230.182 163.818L230.603 161.752L231.113 159.708L231.710 157.691L232.393 155.705L233.161 153.756L234.013 151.848L234.948 149.985L235.965 148.172L237.063 146.413L238.241 144.711L239.497 143.073L240.831 141.501L242.194 139.952L243.493 138.315L244.798 136.624L246.179 134.940L247.694 133.335L249.386 131.896L251.302 130.711Z"/>
 <circle id="head" cx="374.5" cy="73.655" r="58.65"/>
 <linearGradient id="ribbon-axis" gradientUnits="userSpaceOnUse" x1="236.232" y1="170.556" x2="557.445" y2="187.401"/>
 <linearGradient id="gradient-aqua" href="#ribbon-axis"><stop offset="0" stop-color="#018985"/><stop offset="0.062" stop-color="#03938F"/><stop offset="0.125" stop-color="#049E99"/><stop offset="0.188" stop-color="#04A7A2"/><stop offset="0.25" stop-color="#04ADA8"/><stop offset="0.312" stop-color="#05B2AD"/><stop offset="0.375" stop-color="#03B7B1"/><stop offset="0.435" stop-color="#02BBB5"/><stop offset="0.5" stop-color="#02C0B9"/><stop offset="0.562" stop-color="#04C4BE"/><stop offset="0.625" stop-color="#04C8C1"/><stop offset="0.688" stop-color="#02CCC5"/><stop offset="0.75" stop-color="#01CFC8"/><stop offset="0.812" stop-color="#03D3CC"/><stop offset="0.875" stop-color="#03D5CE"/><stop offset="0.938" stop-color="#06D6CF"/><stop offset="1" stop-color="#02D4CD"/></linearGradient>
@@ -64,21 +57,6 @@
 <linearGradient id="head-mint" href="#head-axis"><stop offset="0" stop-color="#75E598"/><stop offset="1" stop-color="#3CCC6C"/></linearGradient>
 </defs>
 <g id="ring">
-<use href="#seam" fill="url(#gradient-aqua)"/>
-<use href="#seam" transform="rotate(72 374.5 383)" fill="url(#gradient-blue)"/>
-<use href="#seam" transform="rotate(144 374.5 383)" fill="url(#gradient-emerald)"/>
-<use href="#seam" transform="rotate(216 374.5 383)" fill="url(#gradient-violet)"/>
-<use href="#seam" transform="rotate(288 374.5 383)" fill="url(#gradient-mint)"/>
-<use href="#seam" fill="url(#gradient-aqua)"/>
-<use href="#seam" transform="rotate(72 374.5 383)" fill="url(#gradient-blue)"/>
-<use href="#seam" transform="rotate(144 374.5 383)" fill="url(#gradient-emerald)"/>
-<use href="#seam" transform="rotate(216 374.5 383)" fill="url(#gradient-violet)"/>
-<use href="#seam" transform="rotate(288 374.5 383)" fill="url(#gradient-mint)"/>
-<use href="#seam" fill="url(#gradient-aqua)"/>
-<use href="#seam" transform="rotate(72 374.5 383)" fill="url(#gradient-blue)"/>
-<use href="#seam" transform="rotate(144 374.5 383)" fill="url(#gradient-emerald)"/>
-<use href="#seam" transform="rotate(216 374.5 383)" fill="url(#gradient-violet)"/>
-<use href="#seam" transform="rotate(288 374.5 383)" fill="url(#gradient-mint)"/>
 <use href="#ribbon" fill="url(#gradient-aqua)"/>
 <use href="#ribbon" transform="rotate(72 374.5 383)" fill="url(#gradient-blue)"/>
 <use href="#ribbon" transform="rotate(144 374.5 383)" fill="url(#gradient-emerald)"/>
