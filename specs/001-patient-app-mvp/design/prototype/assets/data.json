@@ -499,7 +499,7 @@
       "layout": "List + on-track chips + controlled badge + FAB",
       "a11y": "Each med announces name + schedule + status",
       "rtl": "List mirrors; FAB on trailing edge in RTL",
-      "rules": ["Controlled flag uses petal-violet", "On-track / behind / paused state chips", "FAB always reachable above bottom nav"]
+      "rules": ["Controlled flag uses hue-violet", "On-track / behind / paused state chips", "FAB always reachable above bottom nav"]
     },
     "meds-add": {
       "title": "Add medication",

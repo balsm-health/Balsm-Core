@@ -16,7 +16,7 @@
 - [ ] Primary CTA is visually dominant; exactly one per screen
 - [ ] Secondary actions are subordinate (ghost, smaller, lower contrast)
 - [ ] Tertiary/destructive actions spatially separated from primary
-- [ ] Balsm petals used semantically (blue=action, mint=success, danger=error); never all 5 outside hero
+- [ ] Balsm hues used semantically (blue=action, mint=success, danger=error); never all 5 outside hero
 - [ ] Logo, wordmark, brand colors match `brand/colors_and_type.css` exactly
 - [ ] No AI-purple/pink gradients; no neon
 - [ ] Eyebrow text used sparingly, never above h1

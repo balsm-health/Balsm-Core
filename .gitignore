@@ -59,3 +59,6 @@ node_modules/
 # Rebuildable knowledge-graph artifact. Caches hold absolute, machine-local
 # paths and churn every run. Rebuild with `/graphify` or `graphify extract`.
 graphify-out/
+### Python
+__pycache__/
+*.py[cod]

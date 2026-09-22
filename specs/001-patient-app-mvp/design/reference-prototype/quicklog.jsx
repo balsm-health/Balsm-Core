@@ -2,11 +2,11 @@
    Each flow: primary input → note + photo → save                     */
 
 const QL_METRICS = [
-  { id: 'bp',       icon: 'activity',    color: 'var(--petal-violet)',   bg: 'var(--petal-violet-50)',  labelKey: 'm_bp'      },
-  { id: 'glucose',  icon: 'droplet',     color: 'var(--petal-mint-600)', bg: 'var(--petal-mint-50)',    labelKey: 'm_glucose' },
-  { id: 'mood',     icon: 'smile',       color: 'var(--petal-aqua)',     bg: 'var(--petal-aqua-50)',    labelKey: 'm_mood'    },
+  { id: 'bp',       icon: 'activity',    color: 'var(--hue-violet)',   bg: 'var(--hue-violet-50)',  labelKey: 'm_bp'      },
+  { id: 'glucose',  icon: 'droplet',     color: 'var(--hue-mint-600)', bg: 'var(--hue-mint-50)',    labelKey: 'm_glucose' },
+  { id: 'mood',     icon: 'smile',       color: 'var(--hue-aqua)',     bg: 'var(--hue-aqua-50)',    labelKey: 'm_mood'    },
   { id: 'pain',     icon: 'zap',         color: 'var(--balsm-danger)',   bg: 'var(--balsm-danger-bg)',  labelKey: 'm_pain'    },
-  { id: 'weight',   icon: 'scale',       color: 'var(--petal-blue)',     bg: 'var(--petal-blue-50)',    labelKey: 'm_weight'  },
+  { id: 'weight',   icon: 'scale',       color: 'var(--hue-blue)',     bg: 'var(--hue-blue-50)',    labelKey: 'm_weight'  },
   { id: 'symptoms', icon: 'stethoscope', color: '#9A6E00',               bg: '#FDF5DC',                 labelKey: 'symptoms'  },
 ];
 

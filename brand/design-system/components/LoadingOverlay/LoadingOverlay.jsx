@@ -4,16 +4,16 @@
 // variant: cream (warm surface) | scrim (translucent ink) | brand (watercolor)
 // Self-contained markup — no cross-component imports.
 
-function _OverlayPetals({ size = 'lg' }) {
-  const sizeCls = typeof size === 'string' ? `b-petal-spinner--${size}` : '';
+function _OverlayMark({ size = 'lg' }) {
+  const sizeCls = typeof size === 'string' ? `b-mark-spinner--${size}` : '';
   const sizeStyle = typeof size === 'number' ? { width: size, height: size } : undefined;
   return (
-    <span className={['b-petal-spinner', sizeCls].filter(Boolean).join(' ')} style={sizeStyle} aria-hidden="true">
-      <span className="b-petal-spinner__petal" />
-      <span className="b-petal-spinner__petal" />
-      <span className="b-petal-spinner__petal" />
-      <span className="b-petal-spinner__petal" />
-      <span className="b-petal-spinner__petal" />
+    <span className={['b-mark-spinner', sizeCls].filter(Boolean).join(' ')} style={sizeStyle} aria-hidden="true">
+      <span className="b-mark-spinner__dot" />
+      <span className="b-mark-spinner__dot" />
+      <span className="b-mark-spinner__dot" />
+      <span className="b-mark-spinner__dot" />
+      <span className="b-mark-spinner__dot" />
     </span>
   );
 }
@@ -29,7 +29,7 @@ export function LoadingOverlay({
   submessage,
   progress,                   // 0–100 → shows a progress bar
   indeterminate = false,      // shows an indeterminate bar
-  spinner = 'petal',          // 'petal' | 'ring'
+  spinner = 'mark',          // 'mark' | 'ring'
   contained = false,          // absolute (positioned parent) vs fixed (viewport)
   backgroundImage,            // for variant="brand" — the watercolor pattern
   className = '',
@@ -53,7 +53,7 @@ export function LoadingOverlay({
   return (
     <div className={cls} style={st} role="status" aria-live="polite" {...rest}>
       <div className="b-overlay__inner">
-        {spinner === 'ring' ? <_OverlayRing /> : <_OverlayPetals size="lg" />}
+        {spinner === 'ring' ? <_OverlayRing /> : <_OverlayMark size="lg" />}
         {message && <div className="b-overlay__msg">{message}</div>}
         {submessage && <div className="b-overlay__sub">{submessage}</div>}
         {showBar && (

@@ -285,7 +285,7 @@ function useUsername(initial) {
 
 function UsernameField({ handle, setHandle, status, t, lang }) {
   const icon = { idle: null, checking: 'loader', available: 'check-circle-2', taken: 'x-circle', invalid: 'alert-circle' }[status];
-  const col  = { idle: 'var(--fg4)', checking: 'var(--fg3)', available: 'var(--petal-mint-600)', taken: 'var(--balsm-danger)', invalid: 'var(--balsm-sun-500)' }[status];
+  const col  = { idle: 'var(--fg4)', checking: 'var(--fg3)', available: 'var(--hue-mint-600)', taken: 'var(--balsm-danger)', invalid: 'var(--balsm-sun-500)' }[status];
   const msg  = { idle: '', checking: t('un_checking'), available: t('un_avail'), taken: t('un_taken'), invalid: t('un_invalid') }[status];
   return (
     <div className="field">

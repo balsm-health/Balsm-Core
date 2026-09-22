@@ -1,6 +1,6 @@
 # Balsm Design
 
-> **Balsm.health · بلسم** — open-source healthcare for Egypt and the Arabic-speaking world. Five petals · five colors · one promise: healing, locally.
+> **Balsm.health · بلسم** — open-source healthcare for Egypt and the Arabic-speaking world. Five ribbons · five colors · one promise: healing, locally.
 
 This file is the **design contract** for every Balsm surface (Pharmacy, Care app, Doctor encounter, marketing, print). The canonical brand primitives — design tokens, logos, watercolor pattern, brand canvas — live flat in [brand/](brand/) in this repo. The full design *system* (long-form manual, UI kits, preview cards, care-app prototype) lives beside them in [brand/design-system/](brand/design-system/). The **`balsm-design` skill** in the shared `balsm-ai` plugin points at that directory and carries no copy of its own, so `/balsm-design` works from any Balsm repo that has Core checked out.
 
@@ -16,9 +16,9 @@ Upstream: the Claude Design project `51cdbf29-13b7-4206-9328-125fade14cc3`. Pull
 
 | Path | Role |
 |---|---|
-| [brand/colors_and_type.css](brand/colors_and_type.css) | **Tier 1–2 source of truth** — global + semantic tokens: petals, neutrals, type, spacing, radii, shadows, motion, breakpoints, containers, gutters. Import this first. |
+| [brand/colors_and_type.css](brand/colors_and_type.css) | **Tier 1–2 source of truth** — global + semantic tokens: brand hues, neutrals, type, spacing, radii, shadows, motion, breakpoints, containers, gutters. Import this first. |
 | [brand/balsm-brand-canvas.md](brand/balsm-brand-canvas.md) | Brand canvas — mission, voice, values, positioning, experience. Source of truth for tone. |
-| [brand/logo-vertical.svg](brand/logo-vertical.svg) | Official mark — five figures joined in a ring — over the bilingual wordmark. Use as-is. |
+| [brand/logo-vertical.svg](brand/logo-vertical.svg) | Official mark — five ribbons joined in a ring — over the bilingual wordmark. Use as-is. |
 | [brand/logo-vertical-mono-white.svg](brand/logo-vertical-mono-white.svg) | Reverse lockup — white ink, for dark surfaces. (`-on-white` files are the opposite: full-colour logo baked onto a white background.) |
 | [brand/balsm-background.png](brand/balsm-background.png) | Watercolor wash of the mark — hero/welcome backdrops only. |
 
@@ -30,7 +30,7 @@ Upstream: the Claude Design project `51cdbf29-13b7-4206-9328-125fade14cc3`. Pull
 
 | Tier | File | Holds |
 |---|---|---|
-| 1–2 · global + semantic | `brand/colors_and_type.css` | petals, ink, cream, type scale, spacing, radii, shadows, motion, breakpoints, containers, gutters |
+| 1–2 · global + semantic | `brand/colors_and_type.css` | brand hues, ink, cream, type scale, spacing, radii, shadows, motion, breakpoints, containers, gutters |
 | 3 · component | `component-tokens.css` | elevation `--elev-0…4`, row density, and per-component sizing for button / input / badge / select / toast / modal |
 | 4 · adaptive | `adaptive.css` | container-query helpers (`.cq*`, `.adaptive-row`, `.adaptive-split`, `.adaptive-grid`), priority column drop, touch targets, logical spacing |
 
@@ -51,7 +51,7 @@ A surface that only needs color and type imports tier 1–2 alone. Pull tier 3 w
 ## 3. Brand non-negotiables
 
 1. **Name.** Always `Balsm.health` in product (`.health` one weight lighter, smaller). Arabic: `بلسم` — plain spelling, no diacritics.
-2. **Mark.** Five figures joined in a ring, in **five distinct hues** — aqua, emerald, blue, mint, violet. Never recolor to a single hue except in the documented mono / reverse lockups (§7).
+2. **Mark.** Five ribbons joined in a ring, in **five distinct hues** — aqua, emerald, blue, mint, violet. Never recolor to a single hue except in the documented mono / reverse lockups (§7).
 3. **No medical-cliché iconography** for brand symbols (no cross, syringe, heart). Lucide `pill` / `stethoscope` / `syringe` are fine **inside** the product, never as a logo replacement.
 4. **No emoji in product UI.** The mark is our emoji. Marketing decks may use a single `🌿` sparingly.
 5. **Arabic is first-class.** Every surface must work with `dir="rtl"` and `--font-arabic`. `[dir="rtl"]` selectors swap fonts automatically.
@@ -60,19 +60,19 @@ A surface that only needs color and type imports tier 1–2 alone. Pull tier 3 w
 
 ---
 
-## 4. Color — the five petals
+## 4. Color — the five brand hues
 
-The brand has **no single primary color.** The mark carries five hues, one per figure; the design system treats them as a categorical palette. Reach for one when you need a category (modules, departments, charts). Use all five together only in brand moments (hero, loading, watermark).
+The brand has **no single primary color.** The mark carries five hues, one per ribbon; the design system treats them as a categorical palette. Reach for one when you need a category (modules, departments, charts). Use all five together only in brand moments (hero, loading, watermark).
 
 | Token | Hex | Role |
 |---|---|---|
-| `--petal-aqua` | `#02BBB5` | Accent · healing surfaces · "Balsm-feeling" moments |
-| `--petal-emerald` | `#01C4A2` | Eyebrow labels · success-adjacent affordances |
-| `--petal-blue` | `#1283FF` | **Primary action** — CTAs, links, focus rings |
-| `--petal-mint` | `#55D77F` | **Success** — sale completed, vitals normal, synced |
-| `--petal-violet` | `#724DD0` | **Controlled substance** — Schedule II/III flags |
+| `--hue-aqua` | `#02BBB5` | Accent · healing surfaces · "Balsm-feeling" moments |
+| `--hue-emerald` | `#01C4A2` | Eyebrow labels · success-adjacent affordances |
+| `--hue-blue` | `#1283FF` | **Primary action** — CTAs, links, focus rings |
+| `--hue-mint` | `#55D77F` | **Success** — sale completed, vitals normal, synced |
+| `--hue-violet` | `#724DD0` | **Controlled substance** — Schedule II/III flags |
 
-Each petal has `-600` (hover/pressed) and `-50` (soft wash background) siblings. Aliases: `--balsm-primary` (blue), `--balsm-accent` (aqua).
+Each hue has `-600` (hover/pressed) and `-50` (soft wash background) siblings. Aliases: `--balsm-primary` (blue), `--balsm-accent` (aqua).
 
 **Wordmark color:** `--balsm-wordmark #1F2D3D` — navy slate, matching `brand/logo-*.svg` and `brand/wordmark.svg`. The `.health` TLD sits one weight lighter in `--balsm-wordmark-tld #526174` — the same hue at a second lightness, so the two always move together. On dark surfaces the wordmark knocks out to white per the reverse lockup (§7) — navy slate scores ≈1.5:1 on ink and must never be used there.
 
@@ -81,11 +81,11 @@ Each petal has `-600` (hover/pressed) and `-50` (soft wash background) siblings.
 **Cream:** `--balsm-cream-100 #F4F3EC` — warm document surface for receipts, prescriptions, marketing decks, print. Never substitute cool gray.
 
 **Semantic clinical state:**
-- Success = `--petal-mint`
+- Success = `--hue-mint`
 - Warning = `#E5B428` (sun) — low stock, approval needed
 - Danger = `#D44A3C` (warm desaturated red — never fire-engine, which reads as panic)
-- Info = `--petal-blue`
-- Controlled substance = `--petal-violet`
+- Info = `--hue-blue`
+- Controlled substance = `--hue-violet`
 - Expiring soon = `#D97A20`
 
 Full token list: [brand/colors_and_type.css](brand/colors_and_type.css).
@@ -104,8 +104,8 @@ Full token list: [brand/colors_and_type.css](brand/colors_and_type.css).
 - Scale: `--fs-xs` 12 → `--fs-6xl` 72 (16px base, ~1.25 modular).
 - Classes: `.h-display`, `.h1`–`.h5`, `.p`, `.p-sm`, `.meta`, `.code`, `.eyebrow`, `.wordmark`, `.wordmark-ar`.
 - Eyebrows: `text-transform: uppercase; letter-spacing: 0.16em`.
-  **⚠ The specified emerald fails WCAG AA.** `--petal-emerald #01C4A2` at the 12-px eyebrow size scores **2.23:1 on white** and **2.00:1 on cream** — against a 4.5:1 requirement. Use a darkened emerald for eyebrow *text*: `#017560` clears AA on white (5.65), cream (5.08) and `#FAFAF7` (5.41). On dark surfaces the full-strength `#01C4A2` is the accessible one (7.68:1) and `#017560` fails (3.03:1) — so this token must flip by theme, not be a single value.
-  This applies to the petals generally: they are calibrated as *fills*, not as text colors. Drawing small text in any raw petal on a light surface will fail AA.
+  **⚠ The specified emerald fails WCAG AA.** `--hue-emerald #01C4A2` at the 12-px eyebrow size scores **2.23:1 on white** and **2.00:1 on cream** — against a 4.5:1 requirement. Use a darkened emerald for eyebrow *text*: `#017560` clears AA on white (5.65), cream (5.08) and `#FAFAF7` (5.41). On dark surfaces the full-strength `#01C4A2` is the accessible one (7.68:1) and `#017560` fails (3.03:1) — so this token must flip by theme, not be a single value.
+  This applies to the brand hues generally: they are calibrated as *fills*, not as text colors. Drawing small text in any raw hue on a light surface will fail AA.
 - **RTL eyebrows:** Arabic has no uppercase (so `text-transform` is a no-op) and letter-spacing **breaks the cursive joins**. Under `[dir="rtl"]`, eyebrows must reset `letter-spacing: 0`, `text-transform: none`, and swap to `--font-arabic` — an explicit `font-family` on the class otherwise beats the inherited RTL swap.
 - Wordmark default: Montserrat 700 (closest free analog to the custom-set SVG wordmark). Swap `--font-display` if a custom wordmark face is later commissioned.
 
@@ -126,7 +126,7 @@ The `--space-*` scale is intentionally identical to Tailwind's default 4-px scal
 **Shadows.** Warm, soft `rgba(20, 32, 43, 0.06–0.10)` — never crisp drop shadows.
 - `--shadow-sm` default · `--shadow-md` hero · `--shadow-lg` modal
 - `--shadow-brand` (blue-tinted) for primary CTAs
-- `--shadow-petal` (violet-tinted) for controlled-substance surfaces and brand moments
+- `--shadow-brand` (violet-tinted) for controlled-substance surfaces and brand moments
 
 **Motion.** Default ease `cubic-bezier(0.16, 1, 0.3, 1)` — calm, never bouncy. Healthcare deserves stillness.
 - Durations 120 / 200 / 320 ms.
@@ -195,12 +195,12 @@ Per-stack mapping: Flutter `LayoutBuilder` / `MediaQuery.sizeOf` against these v
 |---|---|
 | **Primary** — app icon, web, marketing, storefront | Full 5-color mark + bilingual wordmark |
 | **Reverse** — dark UI, splash, photos, signage | All-white knockout (mark + wordmark) |
-| **Mono ink** — receipts watermark, stamps, fax, 16-px favicon | Single `--balsm-wordmark #1F2D3D`, or solid `--petal-blue` |
-| **Mono brand** — single color but on-brand | Solid `--petal-emerald #01C4A2` — closest to historic "Balsm green," most legible single hue |
+| **Mono ink** — receipts watermark, stamps, fax, 16-px favicon | Single `--balsm-wordmark #1F2D3D`, or solid `--hue-blue` |
+| **Mono brand** — single color but on-brand | Solid `--hue-emerald #01C4A2` — closest to historic "Balsm green," most legible single hue |
 
 Mark usage: app icon (squircle-clipped, ink or cream bg) · loading spinner (4s linear rotate) · empty-state hero (centered, 96px) · prescription/receipt watermark (8–10% opacity) · hero backdrop (over the watercolor pattern).
 
-**Backgrounds.** Dominant surface = white; cream is the warm complement. Watercolor petal pattern (`brand/balsm-background.png`) is the brand environment — translucent petal blobs in the five hues over a near-white wash. Used on landing hero, local-server welcome screen, full-bleed print covers. **Never inside product chrome.** No repeating geometric patterns. No hand-drawn illustrations. No stock-photo people. No generic medical stock photography.
+**Backgrounds.** Dominant surface = white; cream is the warm complement. The mark wash (`brand/balsm-background.png`) is the brand environment — five blurred, rotated repeats of the ring mark at 5–11% opacity, scattered right-weighted over a near-white gradient (`#FBFCFD` → `#F2F8FF`). Generated by `scripts/brand/build-brand-assets.py background`. Used on landing hero, local-server welcome screen, full-bleed print covers. **Never inside product chrome.** No repeating geometric patterns. No hand-drawn illustrations. No stock-photo people. No generic medical stock photography.
 
 ---
 
@@ -255,7 +255,7 @@ Calm · professional · human · second-person. Balsm is the care recipient's qu
    <link rel="stylesheet" href="brand/colors_and_type.css">
    <link rel="icon" type="image/svg+xml" href="brand/logo-vertical.svg">
    ```
-2. **Use semantic tokens** (`var(--fg1)`, `var(--balsm-primary)`, `var(--balsm-success)`) in component code, not raw petal hex. Petals are the palette; semantic tokens are the contract.
+2. **Use semantic tokens** (`var(--fg1)`, `var(--balsm-primary)`, `var(--balsm-success)`) in component code, not raw hue hex. The five hues are the palette; semantic tokens are the contract.
 3. **Headings:** `.h1`–`.h5`. Body inherits from `<body>`.
 4. **Arabic / RTL:** set `dir="rtl"` on the root; font swap happens via `[dir="rtl"]`.
 5. **Lift components** from [brand/design-system/components/](brand/design-system/components/) — 26 of them, covering pharmacy/admin surfaces and care-recipient mobile alike.

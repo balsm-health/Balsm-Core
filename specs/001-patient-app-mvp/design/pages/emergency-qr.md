@@ -4,7 +4,7 @@
 
 ## Tokens
 
-- **QR module color**: `#14202B` (`--balsm-ink-900`), NOT `--petal-blue` (Q3 resolution: scanability beats brand)
+- **QR module color**: `#14202B` (`--balsm-ink-900`), NOT `--hue-blue` (Q3 resolution: scanability beats brand)
 - **QR quiet-zone**: pure white `#FFFFFF` even in dark mode (camera reliability — never tint)
 - **Card padding**: 24px on the QR card (`--space-6`), not standard 20px — extra breathing room
 - **Countdown color shift**: `--fg1` → `--balsm-danger` when remaining < 5 min, not 30s like other screens
@@ -12,7 +12,7 @@
 ## Components
 
 - `BalsmQrCode` variant `large`: 240×240pt canvas with center logo 48×48 + 4px white halo
-- Brand mark uses `--grad-petal` core (not the full ring; QR center hole is small)
+- Brand mark uses `--grad-brand` core (not the full ring; QR center hole is small)
 
 ## Motion
 

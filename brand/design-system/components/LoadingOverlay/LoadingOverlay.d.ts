@@ -12,7 +12,7 @@ export interface LoadingOverlayProps extends Omit<React.HTMLAttributes<HTMLDivEl
   /** Renders an indeterminate bar instead. */
   indeterminate?: boolean;
   /** Loader style. */
-  spinner?: 'petal' | 'ring';
+  spinner?: 'mark' | 'ring';
   /** Cover a positioned parent (absolute) instead of the viewport (fixed). */
   contained?: boolean;
   /** Background image URL for variant="brand" (the watercolor pattern). */

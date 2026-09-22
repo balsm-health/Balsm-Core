@@ -164,7 +164,7 @@ The product ships in three slices:
 | **Slice 2** | Care recipient app · Doctor encounter · Full care loop | Mobile app prototyped — lives in the Balsm Pro App project |
 | **Slice 3** | Balsm Network (paid cloud tier) | Not yet designed |
 
-**Differentiators:** Arabic-first / full RTL · Offline-default · Egypt-localized (EGP, NID, Law 182/1960, 27 governorates, DD/MM/YYYY) · Calm clinical aesthetic — five-petal mark, no medical-cliché iconography.
+**Differentiators:** Arabic-first / full RTL · Offline-default · Egypt-localized (EGP, NID, Law 182/1960, 27 governorates, DD/MM/YYYY) · Calm clinical aesthetic — ring mark, no medical-cliché iconography.
 
 ---
 
@@ -186,7 +186,7 @@ The product ships in three slices:
 - Arabic: **`بلسم`** without diacritics — plain spelling, no fatha marks.
 - Short form: `Balsm` alone is acceptable in running prose after first mention.
 
-**Emoji:** None in product UI. The five-petal flower is our emoji.
+**Emoji:** None in product UI. The mark is our emoji.
 
 **Numbers/dates/currency:** `DD/MM/YYYY` · `LE 245.00` · `+20 1X XXXX XXXX` · NID 14-digit grouped `2 9912 22 12345 6`.
 
@@ -194,19 +194,19 @@ The product ships in three slices:
 
 ## Visual Foundations
 
-### Color — the five petals
+### Color — the five brand hues
 
-The brand has **no single primary color.** Five petals, five hues. Reach for one when you need a category color. Use all five only in brand moments.
+The brand has **no single primary color.** Five ribbons, five hues. Reach for one when you need a category color. Use all five only in brand moments.
 
 | Token | Hex | Role |
 | --- | --- | --- |
-| `--petal-aqua` | `#02BBB5` | Healing surfaces · "Balsm-feeling" moments |
-| `--petal-emerald` | `#01C4A2` | Eyebrow labels · success-adjacent |
-| `--petal-blue` | `#1283FF` | **Primary action** — CTAs, links, focus rings |
-| `--petal-mint` | `#55D77F` | **Success** — dispensed, synced, vitals normal |
-| `--petal-violet` | `#724DD0` | **Controlled substance** — Schedule II/III flags |
+| `--hue-aqua` | `#02BBB5` | Healing surfaces · "Balsm-feeling" moments |
+| `--hue-emerald` | `#01C4A2` | Eyebrow labels · success-adjacent |
+| `--hue-blue` | `#1283FF` | **Primary action** — CTAs, links, focus rings |
+| `--hue-mint` | `#55D77F` | **Success** — dispensed, synced, vitals normal |
+| `--hue-violet` | `#724DD0` | **Controlled substance** — Schedule II/III flags |
 
-Aliases: `--balsm-primary` (blue) · `--balsm-accent` (aqua). Each petal has `-600` (hover/pressed) and `-50` (soft wash) siblings.
+Aliases: `--balsm-primary` (blue) · `--balsm-accent` (aqua). Each hue has `-600` (hover/pressed) and `-50` (soft wash) siblings.
 
 **Wordmark:** `--balsm-wordmark #1F2D3D` — navy slate (`--balsm-wordmark-tld #526174`, same hue lighter, for the ".health" TLD). The `--balsm-ink-*` neutral scale is keyed to it: `ink-800` is the wordmark, `ink-600` the TLD. Creams stay warm on purpose — cool ink on warm paper.
 
@@ -241,9 +241,9 @@ Scale: `--fs-xs` 12px → `--fs-6xl` 72px (\~1.25 modular ratio). Lives in `colo
 
 ### Backgrounds & Imagery
 
-- The signature watercolor petal pattern (`brand/balsm-background.png`) — hero backdrops, welcome screens, full-bleed print covers. **Never inside product chrome.**
+- The signature mark wash (`brand/balsm-background.png`) — hero backdrops, welcome screens, full-bleed print covers. **Never inside product chrome.**
 - **No hand-drawn illustrations. No stock-photo people.** When imagery is needed: the flower, the watercolor pattern, or a placeholder.
-- **No repeating geometric patterns.** The watercolor petal pattern is the only pattern.
+- **No repeating geometric patterns.** The mark wash is the only pattern.
 - No glassmorphism. No frosted-glass cards — reads as consumer-flashy, not clinical.
 
 ---
@@ -252,7 +252,7 @@ Scale: `--fs-xs` 12px → `--fs-6xl` 72px (\~1.25 modular ratio). Lives in `colo
 
 **Lucide** ([lucide.dev](https://lucide.dev)) — outline, geometric, calm. Stroke weight 1.75px default / 2px emphasis. Size 16 / 20 / 24px.
 
-The **five-petal flower mark** (`brand/logo-vertical.svg`) is the only Balsm-bespoke icon. Use as app icon, loading spinner (4s slow rotate), empty-state hero, or watermark on prescriptions (8–10% opacity). **Never redraw it.**
+The **ring mark** (`brand/logo-vertical.svg`) is the only Balsm-bespoke icon. Use as app icon, loading spinner (4s slow rotate), empty-state hero, or watermark on prescriptions (8–10% opacity). **Never redraw it.**
 
 ```html
 <script src="https://unpkg.com/lucide@latest"></script>
@@ -281,17 +281,17 @@ The **five-petal flower mark** (`brand/logo-vertical.svg`) is the only Balsm-bes
 | `components/DatePicker/` | `DatePicker.jsx` + `DatePicker.d.ts` — calendar popover; Egypt DD/MM/YYYY; min/max range, today/clear, Mon/Sun week start; ISO value in/out; RTL (Arabic months) |
 | `components/TimePicker/` | `TimePicker.jsx` + `TimePicker.d.ts` — scrollable hour/minute (+AM/PM) columns; 12h or 24h, configurable minute step, min/max range; 24h `HH:MM` value in/out; RTL (ص/م) |
 | `components/AnimatedLogo/` | `AnimatedLogo.jsx` + `AnimatedLogo.d.ts` — the Balsm mark, animated: 15 reveals via `variant` — ordinary (bloom · cascade · pop · wave · unwind · fade · spin-in · iris) and creative (liquid · heartbeat · orbit · fold · develop · magnetic · draw) — then idle (breathe / slow-rotate loader / still); `size`, `speed`, `color` (mono), `glow`, `replay`; reduced-motion safe |
-| `brand/icon.svg` / `.png` | Standalone five-petal flower, no wordmark. Use with `brand/wordmark.svg` as two independent elements — own `width`/`height` and gap — instead of the fixed-ratio `logo-vertical`/`logo-horizontal` lockups, whenever a layout needs icon and text sized or placed independently (e.g. a sidebar with a small fixed icon slot and a wider text column). |
+| `brand/icon.svg` / `.png` | Standalone ring mark, no wordmark. Use with `brand/wordmark.svg` as two independent elements — own `width`/`height` and gap — instead of the fixed-ratio `logo-vertical`/`logo-horizontal` lockups, whenever a layout needs icon and text sized or placed independently (e.g. a sidebar with a small fixed icon slot and a wider text column). |
 | `brand/wordmark.svg` / `.png` | Standalone bilingual wordmark, no flower icon — navy-slate "بلسم / Balsm" + lighter slate ".health". Pairs with `brand/icon.svg` per above, or use alone for contexts too small/narrow for the full lockup. |
 | `components/Toast/` | `Toast.jsx` + `Toast.d.ts` — Toast, ToastContainer, addToast(), useToast() |
-| `components/Progress/` | `Progress.jsx` + `Progress.d.ts` — linear Progress + circular ProgressRing; determinate/indeterminate; semantic + petal-gradient fills; offline-sync states (syncing/paused/queued) |
-| `components/Spinner/` | `Spinner.jsx` + `Spinner.d.ts` — inline ring Spinner (semantic) + PetalSpinner (five-petal mark, slow 3.6s rotate, brand/full-screen loading) |
+| `components/Progress/` | `Progress.jsx` + `Progress.d.ts` — linear Progress + circular ProgressRing; determinate/indeterminate; semantic + brand-gradient fills; offline-sync states (syncing/paused/queued) |
+| `components/Spinner/` | `Spinner.jsx` + `Spinner.d.ts` — inline ring Spinner (semantic) + MarkSpinner (ring mark, slow 3.6s rotate, brand/full-screen loading) |
 | `components/Skeleton/` | `Skeleton.jsx` + `Skeleton.d.ts` — shimmer placeholders; text/title/circle/pill/card presets + multi-line |
 | `components/Steps/` | `Steps.jsx` + `Steps.d.ts` — stepper; numbered/dot, horizontal/vertical, done/active/upcoming; onboarding & dispense flows |
 | `components/ProgressButton/` | `ProgressButton.jsx` + `ProgressButton.d.ts` — button with determinate surface fill, indeterminate sheen, or inline spinner |
 | `components/TopLoadingBar/` | `TopLoadingBar.jsx` + `TopLoadingBar.d.ts` — route/page top bar; controlled value or auto-trickle on `loading`; determinate/indeterminate |
 | `components/SegmentedProgress/` | `SegmentedProgress.jsx` + `SegmentedProgress.d.ts` — multi-part meter + legend; storage / queue mix / inventory-by-status |
-| `components/LoadingOverlay/` | `LoadingOverlay.jsx` + `LoadingOverlay.d.ts` — full-screen/container loading; cream/scrim/brand; petal mark + message + optional progress |
+| `components/LoadingOverlay/` | `LoadingOverlay.jsx` + `LoadingOverlay.d.ts` — full-screen/container loading; cream/scrim/brand; mark + message + optional progress |
 | `components/ProSidebar/` | `ProSidebar.jsx` + `ProSidebar.d.ts` — shared left-nav chrome for every Balsm-Pro module; brand mark, workspace switcher, grouped nav, account footer; RTL + Lucide icons |
 | `components/Card/` | `Card.jsx` + `Card.d.ts` — Card + MetricCard; header/body/footer, sm/md/lg padding, interactive + selected states, top-edge clinical accent |
 | `components/Table/` | `Table.jsx` + `Table.d.ts` — dense data table; column definitions as data, priority-based column dropping (§9) with dropped values restated in-row, sortable headers, zebra/sticky/density, row selection |

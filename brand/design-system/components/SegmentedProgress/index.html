@@ -17,7 +17,7 @@
 <body>
 <div id="root"></div>
 <script type="text/babel">
-  const METER_VAR={aqua:'var(--petal-aqua)',blue:'var(--petal-blue)',mint:'var(--petal-mint)',violet:'var(--petal-violet)',emerald:'var(--petal-emerald)',sun:'var(--balsm-warning)',danger:'var(--balsm-danger)',ink:'var(--balsm-ink-300)'};
+  const METER_VAR={aqua:'var(--hue-aqua)',blue:'var(--hue-blue)',mint:'var(--hue-mint)',violet:'var(--hue-violet)',emerald:'var(--hue-emerald)',sun:'var(--balsm-warning)',danger:'var(--balsm-danger)',ink:'var(--balsm-ink-300)'};
   function SegmentedProgress({ segments=[], total, title, showTotal=false, showLegend=true, showValues=true, size='md', gap=false, format=(v)=>v, totalLabel, className='', ...rest }) {
     const sum=segments.reduce((a,s)=>a+(s.value||0),0); const max=total??sum;
     const cls=['b-meter', size!=='md'&&`b-meter--${size}`, gap&&'b-meter--gap', className].filter(Boolean).join(' ');

@@ -17,7 +17,7 @@ This document is the **single source of truth** for visual design and interactio
 | **Arabic-first** | RTL is the default for `ar-*` locales — not a toggle, not an afterthought. Tabular numerals for prices/timers. Arabic-Indic digit normalization on input (FR-213). | Audience is primarily Arabic-speaking. LTR design with RTL bolted on = broken. |
 | **Offline-resilient** | Every screen has an offline state. Medication reminders work offline ≥7 days (SC-004). Sync banners replace error toasts. | Connectivity in EG/KSA/UAE is uneven. Graceful degradation = product reliability. |
 | **Accessible to elderly + chronic care recipients** | Body min 16px on mobile, Dynamic Type up to 200%, focus rings 3-4px, touch targets ≥44pt, never color-only state. | Real users include 65+ chronic-condition care recipients with poor vision. |
-| **Brand petals as semantic, not decorative** | 5 petals = 5 categories: blue=action, aqua=info/calm, mint=success, emerald=health-positive, violet=controlled/scheduled meds. Never use all 5 outside hero/loading. | Brand identity (FR brand canvas) + semantic clarity in one. |
+| **Brand hues as semantic, not decorative** | 5 hues = 5 categories: blue=action, aqua=info/calm, mint=success, emerald=health-positive, violet=controlled/scheduled meds. Never use all 5 outside hero/loading. | Brand identity (FR brand canvas) + semantic clarity in one. |
 
 ---
 
@@ -25,20 +25,20 @@ This document is the **single source of truth** for visual design and interactio
 
 **Source of truth**: `Balsm-Core/brand/colors_and_type.css` (DO NOT fork). All P001 surfaces import this file directly. The snapshot at `design/tokens.css` is a build-time copy for offline review and CI diffing; it never overrides the brand source.
 
-### 2.1 Color Roles (Semantic, mapped to Balsm Petals)
+### 2.1 Color Roles (Semantic, mapped to Balsm Hues)
 
-| Role | Light Token | Dark Token | Petal Source | Use |
+| Role | Light Token | Dark Token | Hue Source | Use |
 |---|---|---|---|---|
-| **Primary action** | `--petal-blue` `#1283FF` | `#5FA0FF` (`balsm-blue-300`) | Blue petal | CTA buttons, links, focus ring, active nav |
-| **Primary action pressed** | `--petal-blue-600` `#0F6BCC` | `--petal-blue` | Blue petal -8% L | Press state |
-| **Accent (calm)** | `--petal-aqua` `#02BBB5` | `#2FC0B9` (`balsm-teal-400`) | Aqua petal | Secondary CTA, info chips, calm surfaces |
-| **Success / health-positive** | `--petal-mint` `#55D77F` | `#86E5A4` | Mint petal | Dose taken, vitals normal, claim succeeded |
-| **Healing (brand moment)** | `--petal-emerald` `#01C4A2` | `#3DDABA` | Emerald petal | Eyebrow text, brand loading swirl, accents |
-| **Controlled meds** | `--petal-violet` `#724DD0` | `#9F84E5` | Violet petal | Schedule II/III meds flag (FR-medication category) |
+| **Primary action** | `--hue-blue` `#1283FF` | `#5FA0FF` (`balsm-blue-300`) | Blue | CTA buttons, links, focus ring, active nav |
+| **Primary action pressed** | `--hue-blue-600` `#0F6BCC` | `--hue-blue` | Blue -8% L | Press state |
+| **Accent (calm)** | `--hue-aqua` `#02BBB5` | `#2FC0B9` (`balsm-teal-400`) | Aqua | Secondary CTA, info chips, calm surfaces |
+| **Success / health-positive** | `--hue-mint` `#55D77F` | `#86E5A4` | Mint | Dose taken, vitals normal, claim succeeded |
+| **Healing (brand moment)** | `--hue-emerald` `#01C4A2` | `#3DDABA` | Emerald | Eyebrow text, brand loading swirl, accents |
+| **Controlled meds** | `--hue-violet` `#724DD0` | `#9F84E5` | Violet | Schedule II/III meds flag (FR-medication category) |
 | **Surface** | `#FFFFFF` (`--balsm-surface`) | `#1A1A14` (custom dark, see §2.4) | — | Cards, sheets |
 | **Surface alt (warm)** | `#F4F3EC` (`--balsm-cream-100`) | `#14202B` (`--balsm-ink-900`) | — | Background, screen body |
 | **Border** | `#DBDFE3` (`--balsm-ink-200`) | `#1F2D3D` (`--balsm-ink-800`) | — | Dividers, input borders |
-| **Border focus** | `--petal-blue` | `#5FA0FF` | Blue | Focus ring, 3px solid |
+| **Border focus** | `--hue-blue` | `#5FA0FF` | Blue | Focus ring, 3px solid |
 | **Foreground primary** | `#14202B` (`--balsm-ink-900`) | `#F5F6F8` (`--balsm-ink-50`) | — | Body text |
 | **Foreground secondary** | `#384756` (`--balsm-ink-700`) | `#C0C6CC` (`--balsm-ink-300`) | — | Captions, meta |
 | **Foreground tertiary** | `#526174` (`--balsm-ink-600` · wordmark) | `#9BA4AD` (`--balsm-ink-400`) | — | Placeholders, disabled labels |
@@ -48,7 +48,7 @@ This document is the **single source of truth** for visual design and interactio
 **Contrast pairs verified (WCAG)**:
 - Primary text on surface (light): `#14202B` on `#FFFFFF` = **15.6:1** (AAA)
 - Primary text on surface (dark): `#F5F6F8` on `#1A1A14` = **14.8:1** (AAA)
-- Primary button text on `--petal-blue`: `#FFFFFF` on `#1283FF` = **4.6:1** (AA, AAA-large)
+- Primary button text on `--hue-blue`: `#FFFFFF` on `#1283FF` = **4.6:1** (AA, AAA-large)
 - Body text on cream surface: `#384756` on `#F4F3EC` = **6.2:1** (AA, AAA-large)
 - Danger button text on danger bg: `#FFFFFF` on `#D44A3C` = **4.9:1** (AA)
 
@@ -72,7 +72,7 @@ Anchor: `--font-display` (Montserrat) for h1-h5, `--font-body` (IBM Plex Sans) f
 - Never go below 16px on mobile body (iOS auto-zoom risk + readability for elderly).
 - Arabic numerals (Arabic-Indic ٠١٢٣) **must** be normalized to Western on form submission per FR-213; display in user's preferred form.
 - Mono for prices, dosages, timers, OTP codes, JTI handles — prevents layout shift.
-- Eyebrow text colored `--petal-emerald`. Use sparingly (above h2, never above h1).
+- Eyebrow text colored `--hue-emerald`. Use sparingly (above h2, never above h1).
 
 ### 2.3 Spacing, Radii, Elevation, Motion
 
@@ -91,7 +91,7 @@ Imported directly from brand tokens:
 - Surface elevated: `#252520` (modals, sheets — visible above surface)
 - Surface alt: `#14202B` (`--balsm-ink-900`) — alternating list rows
 
-**Petal tones**: shift +1 lightness step for visibility (e.g. dark-mode primary = `--balsm-blue-300` `#5FA0FF`, not the saturated `--petal-blue`).
+**Hue tones**: shift +1 lightness step for visibility (e.g. dark-mode primary = `--balsm-blue-300` `#5FA0FF`, not the saturated `--hue-blue`).
 
 **Critical rule**: dark mode is **not** inverted light mode. Test contrast independently. Borders use `--balsm-ink-800` (`#1F2D3D`), not low-opacity white.
 
@@ -123,25 +123,25 @@ All in `core/kit/shared_widgets.dart` (T064). Token bindings + states locked her
 
 | Widget | States | Tokens | Notes |
 |---|---|---|---|
-| **BalsmButton.primary** | default / hover (web) / pressed / disabled / loading | bg `--petal-blue` → `--petal-blue-600` pressed; text `#FFFFFF`; radius `lg`; padding `12 24`; height 48 (mobile) / 56 (CTA) | Loading: spinner replaces label, button stays width, `aria-busy` |
-| **BalsmButton.secondary** | same | bg transparent; border 1.5px `--petal-blue`; text `--petal-blue` → bg `--petal-blue-50` pressed | |
+| **BalsmButton.primary** | default / hover (web) / pressed / disabled / loading | bg `--hue-blue` → `--hue-blue-600` pressed; text `#FFFFFF`; radius `lg`; padding `12 24`; height 48 (mobile) / 56 (CTA) | Loading: spinner replaces label, button stays width, `aria-busy` |
+| **BalsmButton.secondary** | same | bg transparent; border 1.5px `--hue-blue`; text `--hue-blue` → bg `--hue-blue-50` pressed | |
 | **BalsmButton.danger** | same | bg `--balsm-danger`; text `#FFFFFF` | Always paired with confirm dialog. Spatially separated from primary CTA. |
 | **BalsmButton.ghost** | same | text `--fg2`; bg transparent → `--balsm-surface-muted` pressed | Tertiary actions only |
-| **BalsmTextField** | default / focused / filled / error / disabled / read-only | border 1.5px `--balsm-border` → `--petal-blue` focused → `--balsm-danger` error; bg `--balsm-surface`; label floats above with `--fg3` color; helper text 12px `--fg3`; error text 12px `--balsm-danger` | Height 56pt. Floating label, never placeholder-only. Auto-direction by input value (Arabic typed = RTL). |
-| **BalsmCountryPicker** | default / open / selected | row 56pt with flag SVG (24×16) + country name (localized) + dial code mono; checkmark `--petal-mint` on selected | List virtualized (40+ countries). Search bar pinned top. |
+| **BalsmTextField** | default / focused / filled / error / disabled / read-only | border 1.5px `--balsm-border` → `--hue-blue` focused → `--balsm-danger` error; bg `--balsm-surface`; label floats above with `--fg3` color; helper text 12px `--fg3`; error text 12px `--balsm-danger` | Height 56pt. Floating label, never placeholder-only. Auto-direction by input value (Arabic typed = RTL). |
+| **BalsmCountryPicker** | default / open / selected | row 56pt with flag SVG (24×16) + country name (localized) + dial code mono; checkmark `--hue-mint` on selected | List virtualized (40+ countries). Search bar pinned top. |
 | **BalsmCard** | resting / pressed (if tappable) | bg `--balsm-surface`; border 1px `--balsm-border`; radius `xl`; padding `16 20`; shadow `sm`; pressed: scale 0.98 + shadow inset | Never nested >2 deep. |
 | **BalsmListItem** | default / pressed / selected | bg transparent → `--balsm-surface-muted` pressed; chevron right (LTR) / left (RTL) `--fg3`; leading icon 24pt; padding `12 16`; min-height 56pt | |
 | **BalsmDialog** (alert) | — | scrim `rgba(20, 32, 43,0.55)`; sheet `--balsm-surface` radius `2xl`; padding `24`; max-width 320pt centered; title h3; body p; actions horizontal (cancel ghost + primary or danger) | Escape via backdrop tap (non-destructive) or Cancel. |
 | **BalsmBottomSheet** | — | drag handle 36×4 `--balsm-ink-300` top center; bg `--balsm-surface`; radius `2xl 2xl 0 0`; max-height 85vh; swipe-down to dismiss | Confirm before dismiss if unsaved (FR pattern). |
 | **BalsmAppBar** | default / scrolled (elevated) | bg `--balsm-surface`; border-bottom 1px transparent → `--balsm-border` on scroll; back chevron 24pt `--fg1`; title centered h4; action icons trailing | Safe-area top inset. |
-| **BalsmBottomNav** | — | 5 items max; each: icon 24pt + label 12px; active: icon filled + label color `--petal-blue` + top indicator 3pt; inactive: icon outline + label `--fg3` | Labels always visible (no icon-only). |
-| **BalsmFab** | default / pressed | bg `--petal-blue`; icon `#FFFFFF` 24pt; size 56×56; shadow `md`; pressed scale 0.95 | Used only on MedicationListScreen (add) — never two FABs per screen. |
-| **BalsmChip** | default / selected / removable | bg `--balsm-surface-muted`; text `--fg2`; radius `pill`; padding `6 12`; selected: bg `--petal-blue-50` text `--petal-blue` border 1px `--petal-blue` | For filter chips, tags |
+| **BalsmBottomNav** | — | 5 items max; each: icon 24pt + label 12px; active: icon filled + label color `--hue-blue` + top indicator 3pt; inactive: icon outline + label `--fg3` | Labels always visible (no icon-only). |
+| **BalsmFab** | default / pressed | bg `--hue-blue`; icon `#FFFFFF` 24pt; size 56×56; shadow `md`; pressed scale 0.95 | Used only on MedicationListScreen (add) — never two FABs per screen. |
+| **BalsmChip** | default / selected / removable | bg `--balsm-surface-muted`; text `--fg2`; radius `pill`; padding `6 12`; selected: bg `--hue-blue-50` text `--hue-blue` border 1px `--hue-blue` | For filter chips, tags |
 | **BalsmEmergencyBadge** | default | bg `--balsm-danger-bg`; border 1.5px `--balsm-danger`; icon (cross) `--balsm-danger`; text `--balsm-danger` 600 weight | Only on emergency surfaces. |
 | **BalsmLockIcon** | default | 16pt icon `--fg3`; tooltip "On-device only" | Inline next to PHI section headers. |
-| **BalsmShieldIcon** | encrypted variant | 16pt icon `--petal-aqua`; tooltip "Encrypted on server" | Only next to `date_of_birth` per FR-047 Path-ii. |
-| **BalsmLoadingIndicator** | small / large | small: 20pt circular spinner `--petal-blue` 2px stroke; large: 48pt brand swirl using `--grad-petal` | Brand swirl only on full-screen loading (boot, sync). |
-| **BalsmErrorBanner** | error / offline / warning | error: bg `--balsm-danger-bg` text `--balsm-danger`; offline: bg `--balsm-info-bg` text `--petal-blue`; icon leading; dismiss trailing | Inline, near the field/section. Never as toast for critical errors. |
+| **BalsmShieldIcon** | encrypted variant | 16pt icon `--hue-aqua`; tooltip "Encrypted on server" | Only next to `date_of_birth` per FR-047 Path-ii. |
+| **BalsmLoadingIndicator** | small / large | small: 20pt circular spinner `--hue-blue` 2px stroke; large: 48pt brand swirl using `--grad-brand` | Brand swirl only on full-screen loading (boot, sync). |
+| **BalsmErrorBanner** | error / offline / warning | error: bg `--balsm-danger-bg` text `--balsm-danger`; offline: bg `--balsm-info-bg` text `--hue-blue`; icon leading; dismiss trailing | Inline, near the field/section. Never as toast for critical errors. |
 | **BalsmToast** | info / success / error | bottom-anchored above bottom-nav; auto-dismiss 3s info / 5s success / 6s error; `aria-live="polite"` info, `role="alert"` error | Never block input. |
 | **BalsmOtpInput** | default / filled / error / loading | 6 boxes, each 48×56pt, radius `md`, mono font 24px center; auto-advance; paste fills all; error: shake animation 4 left-right pulses 200ms | Auto-focus first on mount. iOS one-time-code keyboard. |
 | **BalsmQrCode** | default | 240×240pt canvas; module color `--balsm-ink-900`; quiet zone `#FFFFFF`; Balsm logo center 48×48 with white halo | Stable layout. Refresh on revoke without flicker. |
@@ -253,8 +253,8 @@ All in `core/kit/shared_widgets.dart` (T064). Token bindings + states locked her
 
 | Anti-Pattern | Why Banned | What to Do Instead |
 |---|---|---|
-| **AI purple/pink gradients** | Misaligned with healthcare trust; reads as B2C SaaS | Use Balsm petal palette for category color; brand gradient only on hero moments |
-| **Bright neon colors** | Causes anxiety in medical context | Calm petal palette with restraint |
+| **AI purple/pink gradients** | Misaligned with healthcare trust; reads as B2C SaaS | Use Balsm hue palette for category color; brand gradient only on hero moments |
+| **Bright neon colors** | Causes anxiety in medical context | Calm hue palette with restraint |
 | **Decorative-only animation** | Distracts from action; fails reduced-motion | Every animation expresses cause→effect |
 | **Emoji as structural icons** | Inconsistent across platforms, breaks brand | Lucide SVG icons |
 | **Placeholder-only labels** | Inaccessible (vanishes on input), bad for screen readers | Always-visible label above input |
@@ -266,7 +266,7 @@ All in `core/kit/shared_widgets.dart` (T064). Token bindings + states locked her
 | **Pure-black dark mode** | Breaks warm Balsm brand; harsh in low light | `#1A1A14` surface, warm-tinted dark |
 | **Smaller-than-44pt touch targets** | Fails WCAG + iOS HIG | 44pt min, 48dp on Android |
 | **Hover-dependent affordances** | Breaks on touch | All info reachable via tap |
-| **All 5 petals on non-brand surface** | Visual noise; dilutes brand moments | 5 petals only in loading swirl, hero, watermark |
+| **All 5 hues on non-brand surface** | Visual noise; dilutes brand moments | 5 hues only in loading swirl, hero, watermark |
 
 ---
 
@@ -291,8 +291,8 @@ Source of voice: `Balsm-Core/brand/balsm-brand-canvas.md`. Bilingual UX writing 
 ## 11. Open Design Questions (To Resolve in Review)
 
 - [ ] **Q1**: Bottom nav order in RTL — does "Home" stay leftmost (mirrored UX) or rightmost (logical RTL)? Recommend: **rightmost in RTL** (matches reading flow).
-- [ ] **Q2**: Should the brand petal-sweep gradient appear on the Home app bar, or reserve it for loading + emergency QR background only? Recommend: **reserve** to keep app bar calm.
-- [ ] **Q3**: Emergency QR code module color — pure ink-900 black, or `--petal-blue`? Brand wants blue; scanability prefers black. Recommend: **pure black for reliability**.
+- [ ] **Q2**: Should the brand sweep gradient appear on the Home app bar, or reserve it for loading + emergency QR background only? Recommend: **reserve** to keep app bar calm.
+- [ ] **Q3**: Emergency QR code module color — pure ink-900 black, or `--hue-blue`? Brand wants blue; scanability prefers black. Recommend: **pure black for reliability**.
 - [ ] **Q4**: Public emergency Flutter Web page — show Balsm logo prominently, or keep minimal "Balsm Emergency Card" text header to reduce branding-during-emergency? Recommend: **small mark + text**.
 - [ ] **Q5**: Dynamic Type at 200% — does bottom nav drop labels, scroll horizontally, or switch to single-column hamburger? Recommend: **labels wrap to 2 lines, increase nav height to 80pt**.
 

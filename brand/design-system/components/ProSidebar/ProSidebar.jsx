@@ -9,10 +9,10 @@
 // or any React node. Self-contained: inline Balsm mark fallback,
 // token vars with hard-coded fallbacks, no stylesheet dependency.
 
-// Clockwise from the top: teal, blue, mint, violet, emerald — matches brand/icon.svg.
-const _MARK_HUES = ['#00C8D2', '#0083FA', '#00D69E', '#8350DE', '#5FD470'];
+// Clockwise from the top: aqua, blue, emerald, violet, mint — generated from the mark.
+const _MARK_HUES = ['#02BBB5', '#1283FF', '#01C4A2', '#724DD0', '#55D77F'];
 
-// Inline Balsm mark — five figures joined in a ring, simplified to a head
+// Inline Balsm mark — five ribbons joined in a ring, simplified to a head
 // and a body arc each so it survives being drawn at 28px. Always on-brand,
 // no asset path needed.
 const _RING_R = 10.0;
@@ -165,7 +165,7 @@ export function ProSidebar({
                   style={{
                     all: 'unset', boxSizing: 'border-box', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10,
                     padding: '9px 10px', borderRadius: 10, transition: 'background 160ms ease',
-                    background: on ? 'var(--petal-blue-50, #E6F0F9)' : 'transparent',
+                    background: on ? 'var(--hue-blue-50, #E6F0F9)' : 'transparent',
                     color: on ? 'var(--balsm-primary, #0083FA)' : 'var(--balsm-ink-700, #384756)',
                   }}>
                   <span style={{ width: 18, height: 18, flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', color: on ? 'var(--balsm-primary, #0083FA)' : 'var(--balsm-ink-600, #526174)' }}>

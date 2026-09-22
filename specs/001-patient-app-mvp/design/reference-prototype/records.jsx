@@ -292,7 +292,7 @@ function ManageStorageSheet({ rec, onClose, onAction }) {
         {/* Toast */}
         {toast && (
           <div style={{ position:'absolute', bottom:36, left:20, right:20, background:'var(--balsm-ink-900)', color:'#fff', borderRadius:'var(--radius-lg)', padding:'12px 16px', display:'flex', alignItems:'center', gap:10, zIndex:60, animation:'msSlideUp 0.2s var(--ease-out) both' }}>
-            <Icon name="check-circle" size={18} style={{ color:'var(--petal-mint)', flexShrink:0 }} />
+            <Icon name="check-circle" size={18} style={{ color:'var(--hue-mint)', flexShrink:0 }} />
             <span style={{ fontSize:'var(--pt-sm)', fontWeight:600 }}>{toast}</span>
           </div>
         )}

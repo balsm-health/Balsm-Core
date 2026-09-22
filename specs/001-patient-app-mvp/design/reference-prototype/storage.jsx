@@ -92,9 +92,9 @@ function StorageSyncSheet({ onClose }) {
   };
 
   const breakdown = [
-    { key: 'store_checkins', used: 12.4,  icon: 'activity',  color: 'var(--petal-aqua)'    },
-    { key: 'store_records',  used: 38.7,  icon: 'folder',    color: 'var(--petal-blue)'    },
-    { key: 'store_rx',       used:  4.1,  icon: 'file-text', color: 'var(--petal-violet)'  },
+    { key: 'store_checkins', used: 12.4,  icon: 'activity',  color: 'var(--hue-aqua)'    },
+    { key: 'store_records',  used: 38.7,  icon: 'folder',    color: 'var(--hue-blue)'    },
+    { key: 'store_rx',       used:  4.1,  icon: 'file-text', color: 'var(--hue-violet)'  },
   ];
   const totalUsed = breakdown.reduce((s, b) => s + b.used, 0);
 
@@ -246,7 +246,7 @@ function StorageSyncSheet({ onClose }) {
                   return (
                     <div key={i} style={{ display:'flex', alignItems:'center', gap:10, padding:'9px 12px', borderRadius:'var(--radius-md)', background: act ? targetCfg.bg : 'transparent', transition:'background 0.3s' }}>
                       {done
-                        ? <Icon name="check-circle-2" size={17} style={{ color:'var(--petal-mint-600)', flexShrink:0 }} />
+                        ? <Icon name="check-circle-2" size={17} style={{ color:'var(--hue-mint-600)', flexShrink:0 }} />
                         : act
                           ? <Icon name="loader" size={17} style={{ color:targetCfg.color, flexShrink:0, animation:'spin 0.9s linear infinite' }} />
                           : <Icon name="circle" size={17} style={{ color:'var(--balsm-ink-200)', flexShrink:0 }} />}
@@ -427,7 +427,7 @@ function ManageStorageSheet({ rec, onClose, onAction }) {
 
         {toast && (
           <div style={{ position:'absolute', bottom:36, left:20, right:20, background:'var(--balsm-ink-900)', color:'#fff', borderRadius:'var(--radius-lg)', padding:'12px 16px', display:'flex', alignItems:'center', gap:10, zIndex:60, animation:'msSlideUp 0.2s var(--ease-out) both' }}>
-            <Icon name="check-circle" size={18} style={{ color:'var(--petal-mint)', flexShrink:0 }} />
+            <Icon name="check-circle" size={18} style={{ color:'var(--hue-mint)', flexShrink:0 }} />
             <span style={{ fontSize:'var(--pt-sm)', fontWeight:600 }}>{toast}</span>
           </div>
         )}

@@ -1,6 +1,6 @@
 // Balsm DS — Spinner
 // Spinner      — conic ring, the inline loading workhorse.
-// PetalSpinner — the five figures of the Balsm mark, slow 3.6s rotate, for
+// MarkSpinner — the five ribbons of the Balsm mark, slow 3.6s rotate, for
 //                full-screen + brand loading moments. Five colors,
 //                never one hue. (Mirrors brand/logo-vertical.svg.)
 //
@@ -41,29 +41,29 @@ export function Spinner({
   );
 }
 
-export function PetalSpinner({
+export function MarkSpinner({
   size = 'md',          // 'sm' | 'md' | 'lg' | number(px)
   label,
   className = '',
   style,
   ...rest
 }) {
-  const sizeCls = typeof size === 'string' ? `b-petal-spinner--${size}` : '';
+  const sizeCls = typeof size === 'string' ? `b-mark-spinner--${size}` : '';
   const sizeStyle = typeof size === 'number' ? { width: size, height: size } : undefined;
 
   const node = (
     <span
-      className={['b-petal-spinner', sizeCls, className].filter(Boolean).join(' ')}
+      className={['b-mark-spinner', sizeCls, className].filter(Boolean).join(' ')}
       style={{ ...sizeStyle, ...style }}
       role="status"
       aria-label={label || 'Loading'}
       {...rest}
     >
-      <span className="b-petal-spinner__petal" />
-      <span className="b-petal-spinner__petal" />
-      <span className="b-petal-spinner__petal" />
-      <span className="b-petal-spinner__petal" />
-      <span className="b-petal-spinner__petal" />
+      <span className="b-mark-spinner__dot" />
+      <span className="b-mark-spinner__dot" />
+      <span className="b-mark-spinner__dot" />
+      <span className="b-mark-spinner__dot" />
+      <span className="b-mark-spinner__dot" />
     </span>
   );
 

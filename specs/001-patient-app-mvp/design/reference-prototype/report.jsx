@@ -9,8 +9,8 @@ const SYMPTOMS = [
 ];
 
 function painInfo(t, n) {
-  if (n === 0) return { lbl: t('pain_0'), color: 'var(--petal-mint)' };
-  if (n <= 3) return { lbl: t('pain_mild'), color: 'var(--petal-mint-600)' };
+  if (n === 0) return { lbl: t('pain_0'), color: 'var(--hue-mint)' };
+  if (n <= 3) return { lbl: t('pain_mild'), color: 'var(--hue-mint-600)' };
   if (n <= 6) return { lbl: t('pain_mod'), color: 'var(--balsm-sun-600)' };
   if (n <= 9) return { lbl: t('pain_sev'), color: 'var(--balsm-expiring)' };
   return { lbl: t('pain_worst'), color: 'var(--balsm-danger)' };
@@ -263,8 +263,8 @@ function Summary({ mood, bpSys, bpDia, bpSkip, glu, gluCtx, gluSkip, meds, pain,
     symList.length > 0 && { icon: 'stethoscope', tone: 'neutral', lab: t('q_sym_t'), val: symList.join(lang === 'ar' ? '، ' : ', ') },
   ].filter(Boolean);
 
-  const toneBg = { info: 'var(--petal-blue-50)', violet: 'var(--petal-violet-50)', success: 'var(--petal-mint-50)', warn: '#FDF5DC', neutral: 'var(--balsm-ink-100)' };
-  const toneFg = { info: 'var(--petal-blue)', violet: 'var(--petal-violet)', success: 'var(--petal-mint-600)', warn: 'var(--balsm-sun-600)', neutral: 'var(--balsm-ink-600)' };
+  const toneBg = { info: 'var(--hue-blue-50)', violet: 'var(--hue-violet-50)', success: 'var(--hue-mint-50)', warn: '#FDF5DC', neutral: 'var(--balsm-ink-100)' };
+  const toneFg = { info: 'var(--hue-blue)', violet: 'var(--hue-violet)', success: 'var(--hue-mint-600)', warn: 'var(--balsm-sun-600)', neutral: 'var(--balsm-ink-600)' };
 
   return (
     <div className="flow" style={{ background: '#fff' }}>

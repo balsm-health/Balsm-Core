@@ -106,7 +106,7 @@ function PrescriptionDetail({ rx, onBack }) {
         <div className="card" style={{ margin: '0 20px' }}>
           {rx.meds.map((m, i) => (
             <div key={i} className="med-row">
-              <div className="med-ico" style={{ background: 'var(--petal-blue-50)', color: 'var(--petal-blue)' }}>
+              <div className="med-ico" style={{ background: 'var(--hue-blue-50)', color: 'var(--hue-blue)' }}>
                 <Icon name="pill" size={20} />
               </div>
               <div className="grow">

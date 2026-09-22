@@ -1,6 +1,6 @@
 ---
 name: balsm-design
-description: Use this skill to generate well-branded interfaces and assets for Balsm.health (بلسم) — the community-owned healthcare OS for the Arab world. Includes the official five-petal flower mark, the five-color petal palette, cool navy-slate neutrals, type system (Montserrat / IBM Plex Sans / IBM Plex Sans Arabic / Cairo / IBM Plex Mono), Lucide iconography, a Balsm Pharmacy POS UI kit, and a Balsm Care app prototype. Brand promise: "Your care. Your data. Your system." Three words: Open. Arab. Trusted.
+description: Use this skill to generate well-branded interfaces and assets for Balsm.health (بلسم) — the community-owned healthcare OS for the Arab world. Includes the official five-ribbon ring mark, the five-color hue palette, cool navy-slate neutrals, type system (Montserrat / IBM Plex Sans / IBM Plex Sans Arabic / Cairo / IBM Plex Mono), Lucide iconography, a Balsm Pharmacy POS UI kit, and a Balsm Care app prototype. Brand promise: "Your care. Your data. Your system." Three words: Open. Arab. Trusted.
 user-invocable: true
 ---
 
@@ -23,9 +23,9 @@ For production code, copy `colors_and_type.css` into the codebase — it is the 
 |---|---|
 | `README.md` | Design system manual + brand canvas summary. Read first. |
 | `../balsm-brand-canvas.md` | **Canonical brand reference (locked).** Mission, vision, promise, personality, voice, values, positioning, experience standard. |
-| `colors_and_type.css` | Every CSS token — petals, neutrals, type, spacing, radii, shadows, motion. |
-| `../logo-vertical.svg` | The Balsm mark — five figures joined in a ring — over the bilingual wordmark. Use as-is; do not redraw. |
-| `../balsm-background.png` | Signature watercolor petal pattern — hero/welcome backdrops only. |
+| `colors_and_type.css` | Every CSS token — brand hues, neutrals, type, spacing, radii, shadows, motion. |
+| `../logo-vertical.svg` | The Balsm mark — five ribbons joined in a ring — over the bilingual wordmark. Use as-is; do not redraw. |
+| `../balsm-background.png` | Signature mark wash — hero/welcome backdrops only. |
 | `components/` | 26 components — Button, Input, Select, Table, Modal, Card, Avatar, Checkbox, Switch, DatePicker, TimePicker, Toast… |
 | `fonts/` + `fonts.css` | Self-hosted webfonts — the type stack never touches the network. |
 

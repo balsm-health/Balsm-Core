@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Regenerate every derived file in brand/ from the two canonical sources.
 
-    brand/icon.svg      the mark  — five figures joined in a ring
+    brand/icon.svg      the mark  — five ribbons joined in a ring
     brand/wordmark.svg  the type  — بلسم / Balsm.health
 
 Everything else under brand/ is output: mono variants, lockups, social
@@ -10,8 +10,9 @@ banner set. Change a source, re-run this, commit the result.
 
     python3 scripts/brand/build-brand-assets.py            # everything
     python3 scripts/brand/build-brand-assets.py svg png    # a subset
+    python3 scripts/brand/build-brand-assets.py --check    # verify, write nothing
 
-Groups: svg png og background linkedin
+Groups: svg png og background linkedin components
 
 Requires rsvg-convert (brew install librsvg) for SVG→PNG, and Google
 Chrome for the two compositions that contain live text (the banners).
@@ -19,6 +20,7 @@ Chrome for the two compositions that contain live text (the banners).
 
 from __future__ import annotations
 
+import math
 import re
 import shutil
 import subprocess
@@ -35,13 +37,22 @@ CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 # Ink bounding boxes, measured with getBBox(). Lockups are laid out from
 # the ink box, not the viewBox, so padding stays optical rather than
 # inherited from whatever the source file happened to be exported with.
-MARK_INK = (21.64, 15.0, 705.72, 676.92)         # ink box inside brand/icon.svg
+MARK_INK = (18.24, 11.42, 712.52, 683.39)        # ink box inside brand/icon.svg
 # Rendered ink (rsvg, 16x), not getBBox: the old getBBox box was 0.025 narrow and
 # 0.012 high, which left the lockups 0.06 tighter on the wordmark side.
 WORD_INK = (3.9989, 4.0057, 112.5619, 46.5559)   # inside brand/wordmark.svg
 
-MARK_AR = MARK_INK[2] / MARK_INK[3]              # 1.0425
+MARK_AR = MARK_INK[2] / MARK_INK[3]              # 1.0426
 WORD_AR = WORD_INK[2] / WORD_INK[3]              # 2.4178
+
+# The ring turns about (374.5, 383), which is 29.88 below the ink-box centre:
+# the heads set the box, the top one alone sets its top edge, and the two lower
+# ones sit closer to the horizontal. Frames centre the INK BOX, so the padding
+# is equal on each axis; centring the rotation axis instead would give the top
+# head less room than the sides and read as a mistake.
+MARK_RING_CENTRE = (374.5, 383.0)
+MARK_RING_RADIUS = 371.570                       # enclosing circle about that centre
+MARK_RING_OFFSET = MARK_RING_CENTRE[1] - (MARK_INK[1] + MARK_INK[3] / 2)        # 29.88
 
 # Lockup metrics carried over from the previous mark so the two lockups
 # keep their established proportions — only the mark's own aspect moved.
@@ -55,16 +66,35 @@ CREAM_100 = "#F4F3EC"
 WORDMARK_INK = "#1F2D3D"
 WORDMARK_TLD = "#526174"
 
-# The mark's five hues, at their most saturated stop.
-PALETTE = {
-    "teal": "#00C8D2",
-    "blue": "#0083FA",
-    "emerald": "#5FD470",
-    "mint": "#00D69E",
-    "violet": "#8350DE",
-}
+# The mark's five hues, clockwise from the top, read straight out of
+# icon.svg so they cannot drift from it: each ribbon's base stop (the
+# gradient's zero, at offset 0.435) and its head's two ends.
+HUE_ORDER = ["aqua", "blue", "emerald", "violet", "mint"]
 
-BAR_ORDER = ["teal", "blue", "emerald", "mint", "violet"]
+
+def _hues() -> dict[str, str]:
+    found = dict(re.findall(
+        r'<linearGradient id="gradient-(\w+)"[^>]*>.*?offset="0\.435" '
+        r'stop-color="(#[0-9A-Fa-f]{6})"', MARK_SRC, flags=re.S))
+    assert set(found) == set(HUE_ORDER), f"icon.svg hues changed: {sorted(found)}"
+    return {k: found[k] for k in HUE_ORDER}
+
+
+def _head_hues() -> dict[str, tuple[str, str]]:
+    """Each head's gradient, light end first — the dot colours."""
+    found = {name: (light, dark) for name, light, dark in re.findall(
+        r'<linearGradient id="head-(\w+)"[^>]*>\s*<stop offset="0" stop-color="(#[0-9A-Fa-f]{6})"/>'
+        r'\s*<stop offset="1" stop-color="(#[0-9A-Fa-f]{6})"/>', MARK_SRC)}
+    assert set(found) == set(HUE_ORDER), f"icon.svg head gradients changed: {sorted(found)}"
+    return found
+
+
+def _toward_white(hex_colour: str, t: float) -> str:
+    c = [int(hex_colour[i:i + 2], 16) for i in (1, 3, 5)]
+    return "#" + "".join(f"{round(v + (255 - v) * t):02X}" for v in c)
+
+
+BAR_ORDER = HUE_ORDER
 
 
 # ── Source parsing ────────────────────────────────────────────────────
@@ -89,27 +119,104 @@ def _strip_editor_cruft(markup: str) -> str:
     return re.sub(r"<(?:inkscape|sodipodi):[^>]*>", "", markup)
 
 
-MARK_SRC = _inner((BRAND / "icon.svg").read_text())
-WORD_SRC = _strip_editor_cruft(_inner((BRAND / "wordmark.svg").read_text()))
+def _strip_comments(markup: str) -> str:
+    """Drop XML comments.
+
+    icon.svg carries a long block explaining the mark to whoever edits it.
+    That belongs in the source, not copied into every generated file — the
+    background wash alone would embed it six times.
+    """
+    return re.sub(r"<!--.*?-->\s*", "", markup, flags=re.S)
+
+
+MARK_SRC = _strip_comments(_inner((BRAND / "icon.svg").read_text()))
+WORD_SRC = _strip_comments(_strip_editor_cruft(_inner((BRAND / "wordmark.svg").read_text())))
+
+
+# ── Ribbon geometry ───────────────────────────────────────────────────
+# icon.svg draws one #ribbon path five times, turned 72° about
+# MARK_RING_CENTRE. Its 14 cubics, by role (see JOINS & SEAMS in icon.svg):
+#   0     leading cap     outer join → inner join
+#   1-5   inner edge      inner join → the next copy's inner join
+#   6     trailing wedge  inner join → outer join (= the next copy's cap)
+#   7-13  outer edge      outer join → the previous copy's outer join
+Cubic = tuple[tuple[float, float], ...]
+CAP, INNER, WEDGE, OUTER = slice(0, 1), slice(1, 6), slice(6, 7), slice(7, 14)
+
+
+def _cubics(d: str) -> list[Cubic]:
+    """A 'M x y C … Z' path as (p0, c1, c2, p3) cubics."""
+    n = [float(v) for v in re.findall(r"-?\d+\.?\d*(?:e-?\d+)?", d)]
+    segs: list[Cubic] = []
+    cur = (n[0], n[1])
+    for i in range(2, len(n) - 5, 6):
+        segs.append((cur, (n[i], n[i + 1]), (n[i + 2], n[i + 3]), (n[i + 4], n[i + 5])))
+        cur = segs[-1][3]
+    return segs
+
+
+def _rot(p: tuple[float, float], deg: float) -> tuple[float, float]:
+    cx, cy = MARK_RING_CENTRE
+    t = math.radians(deg)
+    x, y = p[0] - cx, p[1] - cy
+    return (cx + x * math.cos(t) - y * math.sin(t), cy + x * math.sin(t) + y * math.cos(t))
+
+
+def _path_d(loops: list[list[Cubic]]) -> str:
+    out = []
+    for loop in loops:
+        out.append(f"M{loop[0][0][0]:.3f} {loop[0][0][1]:.3f}")
+        out += [f"C{c1[0]:.3f} {c1[1]:.3f} {c2[0]:.3f} {c2[1]:.3f} {p[0]:.3f} {p[1]:.3f}"
+                for _, c1, c2, p in loop]
+        out.append("Z")
+    return "".join(out)
+
+
+RIBBON = _cubics(re.search(r'<path id="ribbon" d="([^"]+)"', MARK_SRC).group(1))
+assert len(RIBBON) == 14, "icon.svg #ribbon changed shape; update the role slices"
+# The trailing wedge is the next copy's cap, control point for control point.
+for _a, _b in zip([p for s in RIBBON[WEDGE] for p in s],
+                  [_rot(p, 72) for s in reversed(RIBBON[CAP]) for p in reversed(s)]):
+    assert math.dist(_a, _b) < 0.01, "icon.svg seams no longer coincide"
+
+
+def _ring_union_d() -> str:
+    """The five ribbons as one path — an outer loop and an inner loop.
+
+    Each copy's outer edge ends exactly where the previous copy's begins (the
+    outer join) and each inner edge where the next copy's begins (the inner
+    join), so the union outline is those edges chained around the ring; the
+    caps and wedges lie inside it. One path, one fill, no anti-aliased seam.
+    """
+    def turned(k: int, segs: list[Cubic]) -> list[Cubic]:
+        return [tuple(_rot(p, 72 * k) for p in s) for s in segs]
+    outer = [s for k in (0, 4, 3, 2, 1) for s in turned(k, RIBBON[OUTER])]
+    inner = [s for k in (0, 1, 2, 3, 4) for s in turned(k, RIBBON[INNER])]
+    return _path_d([outer, inner])
+
+
+RING_UNION_D = _ring_union_d()
 
 
 def mark(x: float, y: float, height: float, *, mono: str | None = None,
          prefix: str = "m-", opacity: float | None = None) -> str:
     """The mark, its ink box placed at (x, y) and scaled to `height`."""
     s = height / MARK_INK[3]
-    body = _reprefix(MARK_SRC, prefix)
+    body = MARK_SRC
     if mono:
-        # Drop only the colour gradients — keep clipPath. The ring is
-        # clipped as a group to round its cusps; losing that clip in mono
-        # would leave the raw (pointier) path shapes on show.
-        body = re.sub(r"<(?:linear|radial)Gradient\b.*?</(?:linear|radial)Gradient>",
+        # One colour, one shape. Five abutting <use> ribbons sharing a fill
+        # leave a faint anti-aliased line along every seam, so swap them for
+        # the union outline and drop the gradients.
+        body = re.sub(r'<g id="ring">.*?</g>',
+                      f'<path id="ring" d="{RING_UNION_D}" fill-rule="evenodd" fill="{mono}"/>',
+                      body, flags=re.S)
+        body = re.sub(r'<path id="ribbon"[^>]*/>\s*', "", body)
+        body = re.sub(r"<(?:linear|radial)Gradient\b.*?</(?:linear|radial)Gradient>\s*",
                       "", body, flags=re.S)
-        body = re.sub(r'fill="url\([^)]*\)"', f'fill="{mono}"', body)
-        # The mark closes its own seams with a filled #seam sliver, which the
-        # fill swap above already turned to ink. Nothing is stroked, so the
-        # outline stays a single edge and the ink box is the same as in colour.
-        # (Kept for any future stroke paint.)
-        body = re.sub(r'stroke="url\([^)]*\)"', f'stroke="{mono}"', body)
+        body = re.sub(r'fill="url\([^)]*\)[^"]*"', f'fill="{mono}"', body)
+        # Nothing is stroked today; kept for any future stroke paint.
+        body = re.sub(r'stroke="url\([^)]*\)[^"]*"', f'stroke="{mono}"', body)
+    body = _reprefix(body, prefix)
     tx, ty = x - s * MARK_INK[0], y - s * MARK_INK[1]
     op = f' opacity="{opacity}"' if opacity is not None else ""
     return (f'<g transform="translate({tx:.4f},{ty:.4f}) scale({s:.6f})"'
@@ -127,12 +234,17 @@ def wordmark(x: float, y: float, height: float, *, mono: str | None = None) -> s
     return f'<g transform="translate({tx:.4f},{ty:.4f}) scale({s:.6f})">\n{body}\n</g>'
 
 
+GENERATED_NOTE = ("<!-- Generated from brand/icon.svg and brand/wordmark.svg by "
+                  "scripts/brand/build-brand-assets.py. Do not edit: edit a source "
+                  "and re-run. -->")
+
+
 def svg_doc(w: float, h: float, body: str, *, px_w: float | None = None,
             px_h: float | None = None, label: str = "Balsm") -> str:
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{px_w or w:g}" '
         f'height="{px_h or h:g}" viewBox="0 0 {w:g} {h:g}" version="1.1" '
-        f'role="img" aria-label="{label}">\n{body}\n</svg>\n'
+        f'role="img" aria-label="{label}">\n{GENERATED_NOTE}\n{body}\n</svg>\n'
     )
 
 
@@ -170,6 +282,12 @@ def vertical(mono: str | None = None, prefix: str = "v-") -> str:
 
 def social(white_plate: bool) -> str:
     icon_w = SOCIAL_ICON_H * MARK_AR
+    s = SOCIAL_ICON_H / MARK_INK[3]
+    # Platforms mask this to a circle. The ink box is centred, so the ring
+    # centre sits MARK_RING_OFFSET below the frame centre: the enclosing
+    # circle has to fit from there.
+    assert s * (MARK_RING_RADIUS + MARK_RING_OFFSET) <= SOCIAL_BOX / 2, \
+        "social mark too wide for a circular mask"
     plate = (f'<rect x="0" y="0" width="{SOCIAL_BOX:g}" height="{SOCIAL_BOX:g}" '
              f'fill="#FFFFFF" />\n' if white_plate else "")
     body = plate + mark((SOCIAL_BOX - icon_w) / 2, (SOCIAL_BOX - SOCIAL_ICON_H) / 2,
@@ -179,11 +297,11 @@ def social(white_plate: bool) -> str:
 
 def square_icon(size: float, *, mono: str | None = None, fill_frac: float = 0.96,
                 prefix: str = "q-") -> str:
-    """The mark alone, centred in a square frame — app-icon shaped.
+    """The mark alone in a square frame — app-icon shaped.
 
     The ink box is centred, so left == right and top == bottom. The mark is
     wider than tall (MARK_AR), so each top/bottom margin is larger than each
-    side margin by (w - h) / 2; no head-up placement can make them equal.
+    side margin by (w - h) / 2; no head-up placement can make all four equal.
     """
     h = size * fill_frac / MARK_AR if MARK_AR > 1 else size * fill_frac
     w = h * MARK_AR
@@ -191,19 +309,30 @@ def square_icon(size: float, *, mono: str | None = None, fill_frac: float = 0.96
     return svg_doc(size, size, body)
 
 
+def _svg_outputs() -> dict[Path, str]:
+    """Every SVG this script generates, path -> the exact text it should hold.
+
+    Kept as data so `--check` can compare without writing anything.
+    """
+    return {
+        BRAND / "logo-horizontal.svg": horizontal(),
+        BRAND / "logo-horizontal-mono-black.svg": horizontal(INK_900, "hb-"),
+        BRAND / "logo-horizontal-mono-white.svg": horizontal("#FFFFFF", "hw-"),
+        BRAND / "logo.svg": horizontal(prefix="l-"),      # alias of horizontal
+        BRAND / "logo-vertical.svg": vertical(),
+        BRAND / "logo-vertical-mono-black.svg": vertical(INK_900, "vb-"),
+        BRAND / "logo-vertical-mono-white.svg": vertical("#FFFFFF", "vw-"),
+        BRAND / "icon-mono-black.svg": square_icon(1024, mono=INK_900, prefix="ib-"),
+        BRAND / "icon-mono-white.svg": square_icon(1024, mono="#FFFFFF", prefix="iw-"),
+        BRAND / "icon-social.svg": social(False),
+        BRAND / "icon-social-white.svg": social(True),
+    }
+
+
 def build_svg() -> None:
     print("svg")
-    write(BRAND / "logo-horizontal.svg", horizontal())
-    write(BRAND / "logo-horizontal-mono-black.svg", horizontal(INK_900, "hb-"))
-    write(BRAND / "logo-horizontal-mono-white.svg", horizontal("#FFFFFF", "hw-"))
-    write(BRAND / "logo.svg", horizontal(prefix="l-"))  # alias of horizontal
-    write(BRAND / "logo-vertical.svg", vertical())
-    write(BRAND / "logo-vertical-mono-black.svg", vertical(INK_900, "vb-"))
-    write(BRAND / "logo-vertical-mono-white.svg", vertical("#FFFFFF", "vw-"))
-    write(BRAND / "icon-mono-black.svg", square_icon(1024, mono=INK_900, prefix="ib-"))
-    write(BRAND / "icon-mono-white.svg", square_icon(1024, mono="#FFFFFF", prefix="iw-"))
-    write(BRAND / "icon-social.svg", social(False))
-    write(BRAND / "icon-social-white.svg", social(True))
+    for path, text in _svg_outputs().items():
+        write(path, text)
 
 
 # ── Rasterising ───────────────────────────────────────────────────────
@@ -370,7 +499,7 @@ def build_background() -> None:
 BANNERS = [
     {
         "slug": "1-identity",
-        "accent": "teal",
+        "accent": "aqua",
         "eyebrow": "Community-Owned Healthcare OS",
         "arabic": "مفتوح. عربي. موثوق.",
         "english": "Healthcare infrastructure built here, for here — and shared freely with the world.",
@@ -474,8 +603,9 @@ def build_linkedin() -> None:
     out_dir = BRAND / "linkedin"
     out_dir.mkdir(parents=True, exist_ok=True)
     bar_widths = [200, 168, 200, 150, 182]
+    hues = _hues()
     bars = "".join(
-        f'<i style="width:{w}px;background:{PALETTE[k]}"></i>'
+        f'<i style="width:{w}px;background:{hues[k]}"></i>'
         for k, w in zip(BAR_ORDER, bar_widths)
     )
     mark_svg = svg_doc(MARK_INK[2], MARK_INK[3],
@@ -489,13 +619,13 @@ def build_linkedin() -> None:
             html = BANNER_HTML.format(
                 w=BANNER_W, h=BANNER_H, cream=CREAM_100,
                 fonts=FONTS.as_uri(), wordmark=(BRAND / "wordmark.svg").as_uri(),
-                accent=PALETTE[spec["accent"]], blue=PALETTE["blue"],
+                accent=hues[spec["accent"]], blue=hues["blue"],
                 mark=mark_svg, bars=bars, eyebrow=spec["eyebrow"],
                 arabic=spec["arabic"], english=spec["english"], foot=spec["foot"],
             )
             page = tmpd / f"{spec['slug']}.html"
             page.write_text(html)
-            out = out_dir / f"{BANNER_W}x{BANNER_H}-banner-{spec['slug']}.png"
+            out = out_dir / f"banner-{spec['slug']}.png"
             shot = tmpd / "shot.png"
             subprocess.run(
                 [CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars",
@@ -510,17 +640,162 @@ def build_linkedin() -> None:
 
 
 # ── Entry ─────────────────────────────────────────────────────────────
+# ── Design-system components ──────────────────────────────────────────
+# Two components draw the mark in JSX rather than loading an SVG, because
+# they animate its parts: AnimatedLogo moves each ribbon separately, and
+# ProSidebar draws a 40 px stylisation. Their geometry and colour are
+# generated from icon.svg here so they cannot drift from it again.
+COMPONENTS = BRAND / "design-system" / "components"
+RIBBON_ROLES = ["top", "right", "lower-right", "lower-left", "left"]
+LOGO_PAD = 32.0          # viewBox padding, so the reveal transforms have room
+LOGO_REACH = 220.0       # 'magnetic' fly-in distance, unchanged from before
+
+
+def _animated_logo_data() -> str:
+    hues, heads = _hues(), _head_hues()
+    head = re.search(r'<circle id="head" cx="([\d.]+)" cy="([\d.]+)" r="([\d.]+)"', MARK_SRC)
+    hc = (float(head.group(1)), float(head.group(2)))
+    hr = float(head.group(3))
+
+    rows = []
+    for k, (role, hue) in enumerate(zip(RIBBON_ROLES, HUE_ORDER)):
+        d = _path_d([[tuple(_rot(p, 72 * k) for p in s) for s in RIBBON]])
+        dot = _rot(hc, 72 * k)
+        rows.append(f"  {{ name: '{role}', grad: '{hue}', "
+                    f"dot: [{dot[0]:.2f}, {dot[1]:.2f}, {hr:g}], d: '{d}' }},")
+
+    dirs = []
+    for k in range(5):
+        p = _rot(hc, 72 * k)
+        vx, vy = p[0] - MARK_RING_CENTRE[0], p[1] - MARK_RING_CENTRE[1]
+        L = math.hypot(vx, vy)
+        dirs.append(f"  [{vx / L * LOGO_REACH:.0f}, {vy / L * LOGO_REACH:.0f}],"
+                    f"   // {RIBBON_ROLES[k]}")
+
+    vb = (MARK_INK[0] - LOGO_PAD, MARK_INK[1] - LOGO_PAD,
+          MARK_INK[2] + 2 * LOGO_PAD, MARK_INK[3] + 2 * LOGO_PAD)
+    grad = "\n".join(
+        f"  {h}:{' ' * (8 - len(h))}['{hues[h]}', '{_toward_white(hues[h], 0.30)}', "
+        f"'{_toward_white(hues[h], 0.78)}']," for h in HUE_ORDER)
+    dots = "\n".join(
+        f"  {h}:{' ' * (8 - len(h))}['{heads[h][0]}', '{heads[h][1]}']," for h in HUE_ORDER)
+
+    return f"""const B_LOGO_RING_CLIP = '{RING_UNION_D}';
+
+// DOM order clockwise from the top — {', '.join(RIBBON_ROLES)}.
+// Each d is #ribbon from icon.svg turned by rotate(72k); every dot is the
+// one #head circle turned the same way, so all five are identical.
+const B_LOGO_RIBBONS = [
+{chr(10).join(rows)}
+];
+
+// Ribbon fill: the hue's base stop, then mixed 30% and 78% toward white.
+const B_LOGO_GRAD_STOPS = {{
+{grad}
+}};
+// Dot fill: the head gradient's two ends, straight from icon.svg.
+const B_LOGO_DOT_STOPS = {{
+{dots}
+}};
+const B_LOGO_GLOW = ['{hues["aqua"]}', '{hues["blue"]}'];
+
+// Hub = the mark's rotation centre. viewBox = its ink box padded {LOGO_PAD:g}
+// units a side, so a ribbon flying in from off-mark is not clipped.
+const B_LOGO_HUB = [{MARK_RING_CENTRE[0]:g}, {MARK_RING_CENTRE[1]:g}];
+const B_LOGO_VIEWBOX = '{vb[0]:.2f} {vb[1]:.2f} {vb[2]:.2f} {vb[3]:.2f}';
+
+// Each ribbon's outward unit-vector × {LOGO_REACH:g}, DOM order — used by the
+// 'magnetic' reveal so every ribbon flies in from its own side.
+const B_LOGO_DIRS = [
+{chr(10).join(dirs)}
+];"""
+
+
+BEGIN = "// ── generated from brand/icon.svg — do not edit by hand ──"
+END = "// ── end generated ──"
+
+
+def _spliced(text: str, block: str, first_anchor: str, last_anchor: str) -> str:
+    """Return `text` with the generated region replaced, marking it if absent."""
+    body = f"{BEGIN}\n// Re-run: python3 scripts/brand/build-brand-assets.py components\n{block}\n{END}"
+    if BEGIN in text:
+        return re.sub(re.escape(BEGIN) + r".*?" + re.escape(END), lambda _: body, text, flags=re.S)
+    start = text.index(first_anchor)
+    end = text.index(last_anchor, start) + len(last_anchor)
+    text = text[:start] + body + text[end:]
+    # on that first splice the old DIRS array's closing bracket is left behind
+    return re.sub(re.escape(END) + r"\n(?:\s*\[-?[\d.]+, -?[\d.]+\],.*\n)*\];\n", END + "\n", text)
+
+
+def _component_outputs() -> dict[Path, str]:
+    """Each JSX component, path -> the text it should hold.
+
+    Pure: reads the files but writes nothing, so `--check` can compare. Applying
+    it to an already-generated file reproduces that file exactly.
+    """
+    logo = COMPONENTS / "AnimatedLogo" / "AnimatedLogo.jsx"
+    text = _spliced(logo.read_text(), _animated_logo_data(),
+                    "const B_LOGO_RING_CLIP", "const B_LOGO_DIRS = [")
+    # the glow's fallback stops are outside the generated block, so patch them
+    text = text.replace("stopColor={color || '#00C8D2'}", "stopColor={color || B_LOGO_GLOW[0]}")
+    text = text.replace("stopColor={color || '#1283FF'}", "stopColor={color || B_LOGO_GLOW[1]}")
+
+    hues = _hues()
+    sidebar = COMPONENTS / "ProSidebar" / "ProSidebar.jsx"
+    sidebar_text = re.sub(
+        r"// Clockwise from the top:[^\n]*\nconst _MARK_HUES = \[[^\]]*\];",
+        "// Clockwise from the top: " + ", ".join(HUE_ORDER) + " — generated from the mark.\n"
+        "const _MARK_HUES = [" + ", ".join(f"'{hues[h]}'" for h in HUE_ORDER) + "];",
+        sidebar.read_text(), count=1)
+    return {logo: text, sidebar: sidebar_text}
+
+
+def build_components() -> None:
+    print("components")
+    for path, text in _component_outputs().items():
+        write(path, text)
+
+
+def check() -> None:
+    """Fail if any generated text file is out of date with the mark.
+
+    Covers the SVGs and the two JSX components — everything whose content is
+    derived and deterministic. PNGs are left out: they go through a rasteriser
+    (and, for the banners, a browser), so byte equality is not a fair test.
+    """
+    print("check")
+    stale: list[Path] = []
+    for path, expected in {**_svg_outputs(), **_component_outputs()}.items():
+        actual = path.read_text() if path.exists() else None
+        rel = path.relative_to(ROOT)
+        if actual == expected:
+            print(f"  ok     {rel}")
+        else:
+            stale.append(path)
+            why = "missing" if actual is None else "out of date"
+            print(f"  STALE  {rel}  ({why})")
+    if stale:
+        sys.exit(f"\n{len(stale)} file(s) no longer match brand/icon.svg. "
+                 f"Run: python3 {Path(__file__).relative_to(ROOT)}")
+    print("  all generated files match the mark")
+
+
 GROUPS = {
     "svg": build_svg,
     "png": build_png,
     "og": build_og,
     "background": build_background,
     "linkedin": build_linkedin,
+    "components": build_components,
 }
 
 
 def main(argv: list[str]) -> None:
-    wanted = argv[1:] or list(GROUPS)
+    args = argv[1:]
+    if "--check" in args:
+        check()
+        return
+    wanted = args or list(GROUPS)
     unknown = [g for g in wanted if g not in GROUPS]
     if unknown:
         sys.exit(f"unknown group(s): {', '.join(unknown)}\nknown: {', '.join(GROUPS)}")

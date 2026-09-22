@@ -207,7 +207,7 @@ balsm_app/          # Flutter melos monorepo — mobile + web targets
 - [ ] T035ag [P] [Flutter] Create `BalsmMedRow` at `core/lib/src/kit/widgets/balsm_med_row.dart` — icon + name + dose + status pill/action. Tone enum: info/controlled(violet FR-020)/success
 - [ ] T035ah [P] [Flutter] Create `BalsmAvatar` at `core/lib/src/kit/widgets/balsm_avatar.dart` — circle with initials (no photo avatars per 2026-06-14)
 - [ ] T035ai [P] [Flutter] Create `BalsmTrustStrip` at `core/lib/src/kit/widgets/balsm_trust_strip.dart` — 3 trust icons: shield-check (on-device), user-check (private), wifi-off (offline-ready)
-- [ ] T035aj [P] [Flutter] Create `BalsmWelcomeBackground` at `core/lib/src/kit/widgets/balsm_welcome_background.dart` — watercolor petal; copy `Balsm-Core/brand/balsm-background.png` → `core/assets/brand/`
+- [ ] T035aj [P] [Flutter] Create `BalsmWelcomeBackground` at `core/lib/src/kit/widgets/balsm_welcome_background.dart` — mark wash; copy `Balsm-Core/brand/balsm-background.png` → `core/assets/brand/`
 - [ ] T035ak [P] [Flutter] Create `BalsmBottomNav` at `core/lib/src/kit/widgets/balsm_bottom_nav.dart` — P001 5-slot `[Home, Card, Meds, Sessions, Settings]`; active state icon + primary color + 3pt indicator
 - [ ] T035al [P] [Flutter] Create `BalsmIcon` at `core/lib/src/kit/widgets/balsm_icon.dart` — wraps `lucide_icons` (outline 1.75pt default). Add `lucide_icons ^0.x` to core/pubspec
 - [ ] T035am [P] [Flutter] Create `BalsmMoodFace` at `core/lib/src/kit/widgets/balsm_mood_face.dart` — SVG arcs. Not used in P001 (comment "Not wired in P001")

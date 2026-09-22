@@ -255,7 +255,7 @@ function App() {
               <div dir={dir} style={{ height: '100%', position: 'absolute', inset: 0 }}>
                 {route === 'app' ? <MainApp /> : <AuthScreen />}
                 {devOpen && <DevConfigOverlay onClose={() => setDevOpen(false)} screenshot={devShot} />}
-                <DSLoadingOverlay open={booting} variant="brand" spinner="petal"
+                <DSLoadingOverlay open={booting} variant="brand" spinner="mark"
                   backgroundImage="assets/balsm-background.png"
                   message={lang === 'ar' ? 'نُجهّز سجلّك الصحي' : 'Preparing your health record'}
                   submessage={lang === 'ar' ? 'على جهازك، بالتصميم.' : 'On your device, by design.'} />
@@ -330,7 +330,7 @@ function App() {
           <div dir={dir} style={{ position: 'absolute', inset: 0, background: 'var(--balsm-surface, #fff)' }}>
             {route === 'app' ? <MainApp /> : <AuthScreen />}
             {devOpen && <DevConfigOverlay onClose={() => setDevOpen(false)} screenshot={devShot} />}
-            <DSLoadingOverlay open={booting} variant="brand" spinner="petal"
+            <DSLoadingOverlay open={booting} variant="brand" spinner="mark"
               backgroundImage="assets/balsm-background.png"
               message={lang === 'ar' ? 'نُجهّز سجلّك الصحي' : 'Preparing your health record'}
               submessage={lang === 'ar' ? 'على جهازك، بالتصميم.' : 'On your device, by design.'} />
@@ -360,7 +360,7 @@ function App() {
         <TweakSection label={t('p_lang')} />
         <TweakRadio label="Language" value={lang === 'ar' ? 'العربية' : 'English'} options={['English', 'العربية']}
           onChange={(v) => setTweak('lang', v === 'العربية' ? 'ar' : 'en')} />
-        <TweakSection label="Accent petal" />
+        <TweakSection label="Accent hue" />
         <TweakColor label="Accent" value={A.main}
           options={Object.values(ACCENTS).map(a => a.main)}
           onChange={(hex) => setTweak('accent', hexToKey(hex))} />

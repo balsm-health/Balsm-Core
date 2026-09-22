@@ -34,11 +34,11 @@
     if(!label) return ring;
     return <span className="b-spin-wrap">{ring}<span className="b-spin-wrap__label">{label}</span></span>;
   }
-  function PetalSpinner({ size='md', label, className='', style, ...rest }) {
-    const sizeCls = typeof size==='string'?`b-petal-spinner--${size}`:'';
+  function MarkSpinner({ size='md', label, className='', style, ...rest }) {
+    const sizeCls = typeof size==='string'?`b-mark-spinner--${size}`:'';
     const sizeStyle = typeof size==='number'?{width:size,height:size}:undefined;
-    const node = <span className={['b-petal-spinner',sizeCls,className].filter(Boolean).join(' ')} style={{...sizeStyle,...style}} role="status" aria-label={label||'Loading'} {...rest}>
-      <span className="b-petal-spinner__petal"/><span className="b-petal-spinner__petal"/><span className="b-petal-spinner__petal"/><span className="b-petal-spinner__petal"/><span className="b-petal-spinner__petal"/>
+    const node = <span className={['b-mark-spinner',sizeCls,className].filter(Boolean).join(' ')} style={{...sizeStyle,...style}} role="status" aria-label={label||'Loading'} {...rest}>
+      <span className="b-mark-spinner__dot"/><span className="b-mark-spinner__dot"/><span className="b-mark-spinner__dot"/><span className="b-mark-spinner__dot"/><span className="b-mark-spinner__dot"/>
     </span>;
     if(!label) return node;
     return <span className="b-spin-wrap">{node}<span className="b-spin-wrap__label">{label}</span></span>;
@@ -51,9 +51,9 @@
           <div className="sect">
             <div className="lbl">Brand mark · brand loading</div>
             <div className="row" style={{gap:30,alignItems:'flex-end'}}>
-              <div className="cell"><PetalSpinner size="sm"/><span className="cap">sm</span></div>
-              <div className="cell"><PetalSpinner size="md"/><span className="cap">md</span></div>
-              <div className="cell"><PetalSpinner size="lg"/><span className="cap">lg</span></div>
+              <div className="cell"><MarkSpinner size="sm"/><span className="cap">sm</span></div>
+              <div className="cell"><MarkSpinner size="md"/><span className="cap">md</span></div>
+              <div className="cell"><MarkSpinner size="lg"/><span className="cap">lg</span></div>
             </div>
           </div>
           <div className="sect">
@@ -69,7 +69,7 @@
         </div>
 
         <div className="brand-card">
-          <PetalSpinner size={56}/>
+          <MarkSpinner size={56}/>
           <div className="brand-txt">
             <span className="brand-ttl">Preparing your health record</span>
             <span className="brand-sub">On your device, by design.</span>

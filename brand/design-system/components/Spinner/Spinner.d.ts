@@ -14,7 +14,7 @@ export interface SpinnerProps extends Omit<React.HTMLAttributes<HTMLSpanElement>
 
 export declare function Spinner(props: SpinnerProps): React.ReactElement;
 
-export interface PetalSpinnerProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, 'children'> {
+export interface MarkSpinnerProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, 'children'> {
   /** 'sm' (28) · 'md' (48) · 'lg' (72) · or a px number. */
   size?: 'sm' | 'md' | 'lg' | number;
   /** Optional caption rendered beneath the mark. */
@@ -22,4 +22,4 @@ export interface PetalSpinnerProps extends Omit<React.HTMLAttributes<HTMLSpanEle
 }
 
 /** The Balsm mark, slowly rotating — brand / full-screen loading. */
-export declare function PetalSpinner(props: PetalSpinnerProps): React.ReactElement;
+export declare function MarkSpinner(props: MarkSpinnerProps): React.ReactElement;
