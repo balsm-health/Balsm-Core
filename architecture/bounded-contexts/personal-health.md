@@ -6,7 +6,7 @@
 | **Classification** | **Core Domain** — viral hooks (emergency card, lock-screen widget) and the patient-owned-data privacy story are Balsm's consumer differentiation |
 | **Phases** | P001 (profile, reminders, emergency card), P002 (records, timeline, cloud sync), P021 (triage, PROs) |
 | **Repo mapping** | `balsm_app`: `profile`, `medications`, `emergency_card` packages; Supabase: `public.emergency_qr_tokens` (token surface only) |
-| **PHI posture** | Full PHI on device (SQLCipher drift) + optional user-owned Drive/iCloud sync. Balsm servers hold zero PHI — sole exception: `date_of_birth` cloud field, pgcrypto-encrypted + audit-logged (FR-047/FR-048, UAE rows on UAE-resident Supabase per FR-049). |
+| **PHI posture** | Full PHI on device (SQLCipher drift) + optional user-owned Drive/iCloud sync. Balsm servers hold **two** PHI categories only: (1) `date_of_birth`, encrypted + audit-logged (FR-047/FR-048); (2) the patient's **care team** (`care_provider` rows), AES-256-GCM encrypted per column under a dedicated key and audit-logged on every decryption (FR-502/FR-504, spec 003 — see [ADR-10 amendment](../decisions/ADR-10-amendment-care-team.md)). Everything else — records, medications, dose history, check-ins, allergies, conditions, emergency contacts — stays device-only, and the device remains the write path (ADR-11). Both cloud categories are EU-resident today: FR-049 residency routing does not exist (RR-003/RR-005). Unlike the emergency QR, the care-team key is server-side, so Balsm **can** read it. |
 
 ## Purpose
 
