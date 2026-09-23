@@ -59,6 +59,12 @@ MARK_RING_OFFSET = MARK_RING_CENTRE[1] - (MARK_INK[1] + MARK_INK[3] / 2)        
 H_PAD, H_GAP, H_ICON_H, H_WORD_H = 16.0, 30.0, 174.168, 139.680
 V_CANVAS, V_GAP, V_ICON_H, V_WORD_H = 270.93331, 12.595, 174.166, 63.322
 SOCIAL_BOX, SOCIAL_ICON_H = 512.0, 336.85
+# The vertical lockup as an avatar: everything has to survive a circular mask,
+# so the content is sized against the frame's inscribed circle rather than its
+# edges. 0.90 leaves a tenth of the radius as margin — enough that the mark's
+# top head and the wordmark's corners never graze the crop, without shrinking
+# the type past reading size at the 400 px render.
+V_SOCIAL_FILL = 0.90
 
 INK_900 = "#14202B"
 PINE = "#254B45"        # OG plate — the one surface still on retired pine
@@ -295,6 +301,72 @@ def social(white_plate: bool) -> str:
     return svg_doc(SOCIAL_BOX, SOCIAL_BOX, body)
 
 
+def _vertical_social_layout() -> tuple[float, float, float, float]:
+    """Lay the vertical lockup out for a circular mask.
+
+    Returns (scale, mark_y, word_y, radius) in SOCIAL_BOX units, with the
+    content centred horizontally on the frame.
+
+    Two shapes have to stay inside the circle, and neither is the ink box:
+
+      * the mark, whose own enclosing circle is known — MARK_RING_RADIUS about
+        a centre sitting MARK_RING_OFFSET below its ink-box centre;
+      * the wordmark, a rectangle whose four corners are what reach furthest.
+
+    Fitting the ink box's diagonal instead would cost 11% of the mark's size
+    for nothing: the mark's corners are empty, the ring rounds them off.
+
+    The enclosing radius is a convex function of the circle's centre (a max of
+    one V-shape and two hyperbolas, all in cy), so a ternary search finds the
+    centre that makes it smallest. At the optimum both constraints bind — the
+    mark presses on the top of the circle and the wordmark's lower corners on
+    the bottom — which is the tightest the lockup can be drawn round.
+    """
+    icon_w = V_ICON_H * MARK_AR
+    word_w = V_WORD_H * WORD_AR
+    s_mark = V_ICON_H / MARK_INK[3]
+    # Content laid out from its own top edge: mark, gap, wordmark.
+    mark_circle_cy = V_ICON_H / 2 + s_mark * MARK_RING_OFFSET
+    mark_circle_r = s_mark * MARK_RING_RADIUS
+    word_top, word_bottom = V_ICON_H + V_GAP, V_ICON_H + V_GAP + V_WORD_H
+
+    def radius(cy: float) -> float:
+        return max(
+            abs(cy - mark_circle_cy) + mark_circle_r,
+            math.hypot(word_w / 2, max(abs(cy - word_top), abs(cy - word_bottom))),
+        )
+
+    lo, hi = 0.0, word_bottom
+    for _ in range(200):
+        a, b = lo + (hi - lo) / 3, hi - (hi - lo) / 3
+        if radius(a) < radius(b):
+            hi = b
+        else:
+            lo = a
+    centre_y = (lo + hi) / 2
+    target = SOCIAL_BOX / 2 * V_SOCIAL_FILL
+    scale = target / radius(centre_y)
+    # Put the enclosing circle's centre on the frame's centre.
+    top = SOCIAL_BOX / 2 - centre_y * scale
+    return scale, top, top + (V_ICON_H + V_GAP) * scale, radius(centre_y) * scale
+
+
+def vertical_social(white_plate: bool) -> str:
+    """The full vertical lockup in a square frame, safe under a circular crop."""
+    scale, mark_y, word_y, radius = _vertical_social_layout()
+    icon_w = V_ICON_H * MARK_AR * scale
+    word_w = V_WORD_H * WORD_AR * scale
+    assert radius <= SOCIAL_BOX / 2, "vertical social lockup escapes the circle"
+    plate = (f'<rect x="0" y="0" width="{SOCIAL_BOX:g}" height="{SOCIAL_BOX:g}" '
+             f'fill="#FFFFFF" />\n' if white_plate else "")
+    prefix = "vsw-" if white_plate else "vs-"
+    body = plate + "\n".join([
+        mark((SOCIAL_BOX - icon_w) / 2, mark_y, V_ICON_H * scale, prefix=prefix),
+        wordmark((SOCIAL_BOX - word_w) / 2, word_y, V_WORD_H * scale),
+    ])
+    return svg_doc(SOCIAL_BOX, SOCIAL_BOX, body, label="Balsm.health · بلسم")
+
+
 def square_icon(size: float, *, mono: str | None = None, fill_frac: float = 0.96,
                 prefix: str = "q-") -> str:
     """The mark alone in a square frame — app-icon shaped.
@@ -326,6 +398,8 @@ def _svg_outputs() -> dict[Path, str]:
         BRAND / "icon-mono-white.svg": square_icon(1024, mono="#FFFFFF", prefix="iw-"),
         BRAND / "icon-social.svg": social(False),
         BRAND / "icon-social-white.svg": social(True),
+        BRAND / "logo-vertical-social.svg": vertical_social(False),
+        BRAND / "logo-vertical-social-white.svg": vertical_social(True),
     }
 
 
@@ -399,7 +473,8 @@ def build_png() -> None:
     rsvg(BRAND / "icon-mono-black.svg", BRAND / "icon-mono-black.png", width=1024, height=1024)
     rsvg(BRAND / "icon-mono-white.svg", BRAND / "icon-mono-white.png", width=1024, height=1024)
 
-    for name in ("icon-social", "icon-social-white"):
+    for name in ("icon-social", "icon-social-white",
+                 "logo-vertical-social", "logo-vertical-social-white"):
         rsvg(BRAND / f"{name}.svg", BRAND / f"{name}.png", width=1024, height=1024)
         rsvg(BRAND / f"{name}.svg", BRAND / f"{name}-400.png", width=400, height=400)
 
