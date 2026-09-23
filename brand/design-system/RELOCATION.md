@@ -85,13 +85,59 @@ Two upstream bugs were fixed in passing and should be pushed back:
 and a truncated bundle is worse than none), `thumbnail.html`,
 `brand/logo-animation.html`, and `uploads/BUSINESS_FEATURES.md`.
 
-**Consequence:** four preview harnesses `<script src="../../_ds_bundle.js">` and
+**Consequence:** eleven preview harnesses `<script src="../../_ds_bundle.js">` and
 so will not run from a local file open —
-`components/{AnimatedLogo,DatePicker,ProSidebar,TimePicker}/index.html`. Every
-other local link in this directory resolves (67 checked). To run those four,
-export `_ds_bundle.js` from the design project into this directory; it is
-gitignored-by-absence, not tracked. The components themselves (`*.jsx`, `*.d.ts`)
-are complete and unaffected.
+`components/{AnimatedLogo,Avatar,Card,Checkbox,DatePicker,Modal,ProSidebar,Switch,Table,TimePicker}/index.html`
+and `preview/responsive/stage.html`. Every other local link in this directory
+resolves. To run those, export `_ds_bundle.js` from the design project into this
+directory; it is gitignored-by-absence, not tracked. The components themselves
+(`*.jsx`, `*.d.ts`) are complete and unaffected.
+
+As of the 2026-09-23 pull the 256 KiB cap is no longer the blocker — the bundle
+comes down whole (109 559 B) when the project files are zipped in-browser and
+downloaded in one file. It is still not mirrored, for a different reason: the
+upstream bundle is built from pre-rename sources and carries 42 `--petal-*`
+references, so dropping it in would render the harnesses against tokens this
+directory no longer defines. Re-export it only after upstream is caught up.
+
+## Refresh — 2026-09-23
+
+Pulled all 175 upstream paths' hashes and the 92 non-`brand/`, non-`uploads/`
+files that differed or were missing. **The direction of drift has reversed: for
+every file that differs, this directory is ahead of upstream, not behind.**
+Upstream's newest edit to these files is 2026-09-15; the repo took the
+2026-08-29 mark change and the 2026-09-18 `petal` → `ribbon`/`hue` rename after
+that (see `github.md`). So the 49 differing files were **not** overwritten —
+copying them down would have reinstated `--petal-*`, "five-petal flower" and
+the warm-olive vocabulary.
+
+**Taken from upstream (36 files, all additions this directory did not have):**
+
+| What | Files |
+|---|---|
+| Tier-5 window-class layer | `responsive.css`, `RESPONSIVE.md`, `preview/responsive-{shell,content,panes,overlay,input,density,rtl}.html`, `preview/responsive/stage.html` |
+| Component contracts + harnesses | `components/{Avatar,Card,Checkbox,Modal,Switch,Table}/{<Name>.d.ts,index.html}` — the `.jsx` sources were already here and byte-identical |
+| Webfonts | `fonts/IBMPlexMono-*.ttf` (15 faces) + `fonts/README.md` |
+
+Two edits applied on the way in, same spirit as the path rewrites above:
+`preview/responsive/stage.html`'s four `--petal-blue*` refs → `--hue-blue*`, and
+`RESPONSIVE.md`'s "five-petal mark" → "ring mark". One line was merged into
+`styles.css` by hand — `@import url('./responsive.css')` — rather than taking
+upstream's copy of that file.
+
+**Deliberately skipped:** `preview/colors-petals.html` (superseded here by
+`preview/colors-hues.html`), `balsm-brand-canvas.md` (the repo copy at `../` is
+canonical and differs), `_ds_bundle.js` (see above), `thumbnail.html`,
+`.thumbnail`, `_thumbnail.state.json`.
+
+**Owed upstream.** The project still has to receive the mark change and the
+rename. Until it does, every pull will look like this one. The largest
+divergences, by upstream-only lines that are *not* petal vocabulary:
+`_adherence.oxlintrc.json` (126), `components/AnimatedLogo/AnimatedLogo.jsx`
+(93 — upstream still draws the retired flower), `github.md` (38),
+`preview/type-display.html` (34), `preview/brand-logo.html` (13),
+`preview/loading-and-progress.html` (13). `care_app/` and `ui_kits/` no longer
+exist upstream, so delta 3 below is moot.
 
 ## Verification
 
