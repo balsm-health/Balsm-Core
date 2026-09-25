@@ -48,6 +48,7 @@ PHI categories at risk: prescriptions, allergies, diagnoses (ICD-10), lab result
 | S06 | Prescription QR-code forgery                                        | Attacker generates a QR code that mimics the digital-prescription format and presents it at a pharmacy that does not validate signature/state                 | CRITICAL       | MEDIUM       | HIGH      | CRITICAL |
 | S07 | Telemedicine prescriber credential spoofing                         | Doctor without licence in the patient's jurisdiction issues a cross-border prescription; uploaded "credentials" are forged                                    | CRITICAL       | LOW          | HIGH      | HIGH     |
 | S08 | Self-hosted server impersonation in federation                      | Compromised or attacker-controlled self-hosted instance joins the federation graph and impersonates a partner pharmacy/clinic                                 | MEDIUM         | CRITICAL     | HIGH      | HIGH     |
+| S09 | Test-only auth bypass reaching a real environment                   | A fixed OTP (`Otp:DevCode`) configured for staging is accepted for any address, or leaks into production config, letting anyone sign in as — or reset the password of — an account knowing only its email | HIGH           | CRITICAL     | CRITICAL  | CRITICAL |
 
 ### Tampering (T) — Unauthorised Modification
 
@@ -158,6 +159,26 @@ Mitigations are grouped by threat. `BLOCKING` controls must be in place before t
 * breached-password screening (HIBP-style k-anonymity check) at signup and password change
 * MFA must be available for all roles and **mandatory for Owner/Admin and any role with controlled-substance, prescription, or financial-write permissions**
 * the auth endpoint must not differentiate timing or response between "user not found" and "wrong password"
+
+### S09 — Test-Only Auth Bypass (BLOCKING)
+
+`Otp:DevCode` lets a fixed code stand in for a delivered one so staging is
+testable without a mailbox. It is an authentication bypass, and `DevOtpCodePolicy`
+fences it on three sides — all must hold, or the code is refused:
+
+1. **Never in production.** Gated on `IHostEnvironment.IsProduction()`, in code.
+   Configuration discipline is not a control; a stray key must fail closed.
+2. **Allowlisted addresses only.** `Otp:DevCodeEmails` lists address suffixes
+   testing owns. With no allowlist configured the bypass is refused outright, so
+   the unfenced form cannot exist. Never list an address a real patient uses:
+   anyone who knows the fixed code can sign in as it or reset its password.
+3. **A code must have been requested.** Both `VerifyOtpHandler` and
+   `ResetPasswordHandler` resolve the live challenge first and accept the fixed
+   code only in place of the delivered one, so rate limits, lockouts and
+   single-use consumption all still apply.
+
+Every acceptance logs at warning with the environment name. Both keys are
+`forbidden_in: [production]` in `config/manifest.yaml`.
 
 ### S02 — Stolen Token / Device Impersonation (BLOCKING)
 
