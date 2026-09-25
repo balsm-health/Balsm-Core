@@ -166,8 +166,12 @@ Mitigations are grouped by threat. `BLOCKING` controls must be in place before t
 testable without a mailbox. It is an authentication bypass, and `DevOtpCodePolicy`
 fences it on three sides — all must hold, or the code is refused:
 
-1. **Never in production.** Gated on `IHostEnvironment.IsProduction()`, in code.
-   Configuration discipline is not a control; a stray key must fail closed.
+1. **Staging or a developer machine only.** Gated on `Deployment:Environment`,
+   which must read `staging` — not on `ASPNETCORE_ENVIRONMENT`, which
+   `docker-compose.yml` sets to `Production` for every deployment and therefore
+   cannot tell staging from production. Unset, misspelt, or `production` all
+   fail closed. Configuration discipline is not a control; a stray key must
+   land on the safe side.
 2. **Allowlisted addresses only.** `Otp:DevCodeEmails` lists address suffixes
    testing owns. With no allowlist configured the bypass is refused outright in
    any deployed environment, so the unfenced form cannot exist there; a
