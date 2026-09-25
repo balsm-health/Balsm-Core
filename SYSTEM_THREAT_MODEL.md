@@ -169,9 +169,12 @@ fences it on three sides — all must hold, or the code is refused:
 1. **Never in production.** Gated on `IHostEnvironment.IsProduction()`, in code.
    Configuration discipline is not a control; a stray key must fail closed.
 2. **Allowlisted addresses only.** `Otp:DevCodeEmails` lists address suffixes
-   testing owns. With no allowlist configured the bypass is refused outright, so
-   the unfenced form cannot exist. Never list an address a real patient uses:
-   anyone who knows the fixed code can sign in as it or reset its password.
+   testing owns. With no allowlist configured the bypass is refused outright in
+   any deployed environment, so the unfenced form cannot exist there; a
+   `Development` host is the one exemption, being a laptop with no users on it.
+   Never list an address a real patient uses: anyone who knows the fixed code
+   can sign in as it or reset its password. A reserved TLD (`@balsm.test`) can
+   never be a real mailbox, which makes it the safest thing to list.
 3. **A code must have been requested.** Both `VerifyOtpHandler` and
    `ResetPasswordHandler` resolve the live challenge first and accept the fixed
    code only in place of the delivered one, so rate limits, lockouts and
