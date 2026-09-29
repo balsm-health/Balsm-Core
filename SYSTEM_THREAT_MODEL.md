@@ -631,7 +631,7 @@ Each phase spec must reference the threats below in its own threat-modelling sec
 * Regulatory/legal obligations (PDPL, EHDR, Pharmacy Law, SFDA, MOH licensing, anti-kickback): see [COMPLIANCE_REVIEW.md](../Balsm-Draft/COMPLIANCE_REVIEW.md).
 * Non-functional baselines (rate limits, encryption suites, RTO/RPO numbers): see [NON_FUNCTIONAL_REQUIREMENTS.md](./NON_FUNCTIONAL_REQUIREMENTS.md).
 * AI governance process (model approval, evaluation cadence, deprecation policy): see [AI_GOVERNANCE.md](./AI_GOVERNANCE.md). The threats and mitigations themselves are in this document.
-* Architectural invariants (offline-first, entity-isolation, append-only clinical records): see [constitution.md](/Volumes/Code/Balsm/.specify/memory/constitution.md).
+* Architectural invariants (offline-first, entity-isolation, append-only clinical records): see [constitution.md](.specify/memory/constitution.md).
 
 ***
 

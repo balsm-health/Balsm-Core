@@ -93,3 +93,9 @@ the per-project standards files.
   - TS/JS → the repo's Prettier config
 - **a `pre-commit` hook enforces it** — the hook runs the formatter in check mode (`--set-exit-if-changed` for dart) over staged files and blocks the commit on any drift. Ship it in a versioned hooks dir and enable per clone with `git config core.hooksPath .githooks`; CI runs the same check.
 - **keep pure-format commits separate** from semantic changes so review stays legible, and tag them `[skip-docs]` (mechanical → no doc impact).
+- **never commit a machine-specific absolute path** — `/Volumes/...`, `/Users/<name>/...`, `/home/<name>/...`, `C:\Users\...`, `~/Dev/...`. A checkout location is one developer's accident, not a fact about the repo: it is wrong in every other clone and on CI, and it publishes the author's directory layout. This binds docs and plans as much as code — a runbook nobody else can paste is not a runbook.
+  - `cd /Volumes/Dev/Balsm/<repo>` → `cd "$(git rev-parse --show-toplevel)"`, or write commands as run from the repo root
+  - a path inside this repo → repo-relative (`app/lib/...`, `src/...`)
+  - another repo in the workspace → `../<repo>`; the workspace itself → "the parent directory of this repo"
+  - the same `pre-commit` hook blocks it on added lines, and CI greps the tracked tree for the `--no-verify` case and for clones that never enabled hooks
+  - when the path IS the subject — a test asserting a path is redacted, a mounted DMG, an illustrative CLI transcript — put `machine-path-ok` on that line; vendored third-party skills are exempt

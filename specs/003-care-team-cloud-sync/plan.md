@@ -34,7 +34,7 @@ These are input classes the spec implies but that no task's happy-path tests exe
 
 ---
 
-# Part A — API (`/Volumes/Dev/Balsm/Balsm-API-DotNet`)
+# Part A — API (`../Balsm-API-DotNet`)
 
 ## File Structure — API
 
@@ -88,7 +88,7 @@ tests/Modules/Balsm.CareTeam.Tests/
 - [ ] **Step 1: Create the test project**
 
 ```bash
-cd /Volumes/Dev/Balsm/Balsm-API-DotNet
+cd ../Balsm-API-DotNet
 mkdir -p tests/Modules/Balsm.CareTeam.Tests
 cp tests/Modules/Balsm.EmergencyQr.Tests/Balsm.EmergencyQr.Tests.csproj \
    tests/Modules/Balsm.CareTeam.Tests/Balsm.CareTeam.Tests.csproj
@@ -308,7 +308,7 @@ independent. FR-502."
 - [ ] **Step 1: Create the project files**
 
 ```bash
-cd /Volumes/Dev/Balsm/Balsm-API-DotNet
+cd ../Balsm-API-DotNet
 mkdir -p src/Modules/CareTeam/Balsm.CareTeam.Domain/Entities
 cp src/Modules/EmergencyQr/Balsm.EmergencyQr.Domain/Balsm.EmergencyQr.Domain.csproj \
    src/Modules/CareTeam/Balsm.CareTeam.Domain/Balsm.CareTeam.Domain.csproj
@@ -684,7 +684,7 @@ Expected: FAIL — `CareTeamDbContext` does not exist (CS0246).
 - [ ] **Step 3: Create the infrastructure project**
 
 ```bash
-cd /Volumes/Dev/Balsm/Balsm-API-DotNet
+cd ../Balsm-API-DotNet
 mkdir -p src/Modules/CareTeam/Balsm.CareTeam.Infrastructure/{Data,Configuration,Handlers}
 cp src/Modules/EmergencyQr/Balsm.EmergencyQr.Infrastructure/Balsm.EmergencyQr.Infrastructure.csproj \
    src/Modules/CareTeam/Balsm.CareTeam.Infrastructure/Balsm.CareTeam.Infrastructure.csproj
@@ -1114,7 +1114,7 @@ Expected: FAIL — command/query/handler types do not exist (CS0246).
 - [ ] **Step 3: Create the Application project and contracts**
 
 ```bash
-cd /Volumes/Dev/Balsm/Balsm-API-DotNet
+cd ../Balsm-API-DotNet
 mkdir -p src/Modules/CareTeam/Balsm.CareTeam.Application/{Commands,Queries}
 cp src/Modules/EmergencyQr/Balsm.EmergencyQr.Application/Balsm.EmergencyQr.Application.csproj \
    src/Modules/CareTeam/Balsm.CareTeam.Application/Balsm.CareTeam.Application.csproj
@@ -2072,7 +2072,7 @@ with them. FR-512."
 
 ---
 
-# Part B — App (`/Volumes/Dev/Balsm/balsm_app`)
+# Part B — App (`../balsm_app`)
 
 ## File Structure — App
 
@@ -3605,7 +3605,7 @@ exhaustive list was inaccurate as written. FR-513."
 
 ---
 
-# Part C — Governance (`/Volumes/Dev/Balsm/Balsm-Core`)
+# Part C — Governance (this repo)
 
 ## Task 14: Amend the constitution
 

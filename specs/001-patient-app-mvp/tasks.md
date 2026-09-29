@@ -43,7 +43,7 @@ This file is the canonical, phase-ordered master list. For agents focused on one
 
 Phase boundaries + `[P]` parallelism rules apply. A task's ID is globally unique — pull dependencies across files by ID.
 
-**Repo layout** (two repos — `..` resolves to the `/Volumes/Dev/Balsm/` dev root):
+**Repo layout** (two repos — `..` resolves to the workspace root that holds them both):
 
 ```
 Balsm-Core/                 # .NET backend (this repo)

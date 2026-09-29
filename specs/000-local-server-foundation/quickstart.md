@@ -32,7 +32,7 @@ Runs `packaging/windows/install.ps1`; registers one Windows Service: `BalsmApi`.
 macOS:
 ```bash
 hdiutil attach balsm-<version>.dmg
-sudo installer -pkg /Volumes/Balsm/balsm-<version>.pkg -target /
+sudo installer -pkg /Volumes/Balsm/balsm-<version>.pkg -target /   # machine-path-ok: the mounted DMG
 ```
 Runs `packaging/macos/build-pkg.sh` postinstall scripts; loads `com.balsm.api.plist` LaunchDaemon into the system domain via `launchctl bootstrap system /Library/LaunchDaemons/com.balsm.api.plist`.
 

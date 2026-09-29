@@ -50,7 +50,7 @@ JSON envelope on `--json`:
   "command": "backup",
   "status": "ok",
   "result": {
-    "file": "/Users/owner/balsm/backups/balsm-20260530-104511.db",
+    "file": "~/balsm/backups/balsm-20260530-104511.db",
     "size_bytes": 4321088,
     "sha256": "…"
   },

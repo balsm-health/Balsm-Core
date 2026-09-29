@@ -12,7 +12,7 @@ Filtered from `../tasks.md`. Phase + section headers preserved. Only `[DotNet]` 
 > **Replaces the former `tasks/supabase.md`** (2026-06-17 pivot). Backend is ASP.NET Core 10 + EF Core 10 + Npgsql. Auth = custom JWT + OTP + Google/Apple OIDC. Authorization = ASP.NET Core policies (no RLS). DOB = AES-256-GCM at the application layer. See `../research.md §26–§33` + `../contracts/dotnet-api-endpoints.md`.
 
 > **Repo (2026-06-17 clarification): the .NET backend lives in the sibling repo `Balsm-API-DotNet`, NOT inside `Balsm-Core`.**
-> Paths: `../Balsm-API-DotNet/` is `/Volumes/Dev/Balsm/Balsm-API-DotNet/`. `../data-model.md`, `../research.md`, `../contracts/` resolve inside this spec folder (`/Volumes/Dev/Balsm/Balsm-Core/specs/001-patient-app-mvp/`).
+> Paths: `../Balsm-API-DotNet/` is the API repo, a sibling of this one in the workspace. `../data-model.md`, `../research.md`, `../contracts/` resolve inside this spec folder (`specs/001-patient-app-mvp/`).
 
 Format: `[ID] [P?] [Story?] [DotNet] Description with file path`
 
